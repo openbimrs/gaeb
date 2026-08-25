@@ -169,7 +169,7 @@ PROBES = (
         "empty-quantity-state",
         "openbim-gaeb/src/parser.rs",
         "                        if direct_item_child(&path, item.item_depth) {\n                            item.invalidate_quantity_value();\n                        }",
-        "                        if direct_item_child(&path, item.item_depth) {\n                            item.start_quantity();\n                        }",
+        "                        if false && direct_item_child(&path, item.item_depth) {\n                            item.invalidate_quantity_value();\n                        }",
         ("cargo", "test", "-p", "openbim-gaeb", "--test", "editing", "empty_quantity_is_existing_but_not_editable"),
     ),
     Probe(
@@ -178,6 +178,27 @@ PROBES = (
         "} else if !self.quantity_has_non_value_xml && self.quantity_fragments.len() == 1 {",
         "} else if !self.quantity_fragments.is_empty() {",
         ("cargo", "test", "-p", "openbim-gaeb", "--test", "editing", "quantity_comments_are_read_completely_but_edits_fail_closed"),
+    ),
+    Probe(
+        "explicit-empty-quantity-state",
+        "openbim-gaeb/src/parser.rs",
+        "        } else if self.quantity_ambiguous || quantity.is_none() {\n            QuantityEdit::NotEditable",
+        "        } else if self.quantity_ambiguous {\n            QuantityEdit::NotEditable\n        } else if quantity.is_none() {\n            QuantityEdit::Missing",
+        ("cargo", "test", "-p", "openbim-gaeb", "--test", "editing", "empty_quantity_is_existing_but_not_editable"),
+    ),
+    Probe(
+        "xml-space-outside-root",
+        "openbim-gaeb/src/parser.rs",
+        "                    if raw.bytes().all(is_xml_space) {",
+        "                    if raw.trim().is_empty() {",
+        ("cargo", "test", "-p", "openbim-gaeb", "--test", "document", "rejects_non_xml_whitespace_outside_the_root"),
+    ),
+    Probe(
+        "namespace-uri-reference",
+        "openbim-gaeb/src/parser.rs",
+        "    if !value.is_empty() && UriReferenceStr::new(value).is_err() {\n        return Err(Error::Xml(\n            \"an XML namespace name must be a valid URI reference\".into(),\n        ));\n    }",
+        "    let _ = value;",
+        ("cargo", "test", "-p", "openbim-gaeb", "--test", "document", "rejects_namespace_names_that_are_not_uri_references"),
     ),
 )
 

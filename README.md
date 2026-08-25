@@ -72,8 +72,9 @@ assert_eq!(document.as_bytes(), xml);
 
 ## XML boundary
 
-The crate uses dedicated upstream XML infrastructure (`quick-xml`) directly and
-owns its small BOM/content-detection policy beside the parser. GAEB-specific
+The crate uses dedicated upstream XML infrastructure (`quick-xml`) directly,
+validates namespace URI references with `iri-string`, and owns its small
+BOM/content-detection policy beside the parser. GAEB-specific
 strict parsing policy, namespace resolution, exchange phases, BoQ semantics,
 diagnostics, and lossless edits remain here; no project-owned generic XML/ZIP
 abstraction leaks policy across different openBIM formats.

@@ -12,12 +12,13 @@ versions rather than paths outside this repository.
 ## Dependency direction
 
 ```text
-quick-xml  <-  openbim-gaeb  <-  gaeb alias
-                         ^
-openbim facade  ----------+
+quick-xml + iri-string  <-  openbim-gaeb  <-  gaeb alias
+                                    ^
+openbim facade  ---------------------+
 ```
 
-The dedicated upstream `quick-xml` crate provides streaming XML mechanics.
+The dedicated upstream `quick-xml` crate provides streaming XML mechanics, while
+`iri-string` validates XML Namespace URI references without adding URL semantics.
 GAEB owns UTF-8 BOM/content detection, strict input policy, the namespace matrix,
 schema-positioned interpretation, diagnostics, mutations, and lossless output
 rules. It does not introduce a project-owned generic XML/ZIP abstraction. IFC

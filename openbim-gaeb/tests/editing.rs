@@ -76,14 +76,16 @@ fn nested_item_fields_do_not_attach_to_the_active_schema_item() {
 
 #[test]
 fn empty_quantity_is_existing_but_not_editable() {
-    let xml = schema_items("86", r#"<Item ID="empty"><Qty/></Item>"#);
-    let mut document = Document::parse(&xml).unwrap();
-    assert_eq!(document.item("empty").unwrap().quantity, None);
-    assert!(matches!(
-        document.set_item_quantity("empty", "8"),
-        Err(Error::QuantityNotEditable(_))
-    ));
-    assert_eq!(document.as_bytes(), xml);
+    for quantity in ["<Qty/>", "<Qty></Qty>", "<Qty> \t\r\n</Qty>"] {
+        let xml = schema_items("86", &format!(r#"<Item ID="empty">{quantity}</Item>"#));
+        let mut document = Document::parse(&xml).unwrap();
+        assert_eq!(document.item("empty").unwrap().quantity, None);
+        assert!(matches!(
+            document.set_item_quantity("empty", "8"),
+            Err(Error::QuantityNotEditable(_))
+        ));
+        assert_eq!(document.as_bytes(), xml);
+    }
 }
 
 #[test]

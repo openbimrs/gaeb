@@ -22,7 +22,6 @@ def run(*command: str, cwd: Path = ROOT, capture: bool = False) -> subprocess.Co
         check=False,
         text=True,
         stdout=subprocess.PIPE if capture else None,
-        stderr=subprocess.STDOUT if capture else None,
     )
     if result.returncode != 0:
         if result.stdout:
@@ -49,7 +48,16 @@ if canonical_version != alias_version:
     raise SystemExit("canonical and alias package versions differ")
 
 run("cargo", "package", "--locked", "-p", "openbim-gaeb")
-run("cargo", "package", "--locked", "--no-verify", "-p", "gaeb")
+run(
+    "cargo",
+    "package",
+    "--locked",
+    "--no-verify",
+    "-p",
+    "gaeb",
+    "--config",
+    f'patch.crates-io.openbim-gaeb.path="{(ROOT / "openbim-gaeb").as_posix()}"',
+)
 
 package_root = TARGET / "package"
 canonical_source = package_root / f"openbim-gaeb-{canonical_version}"

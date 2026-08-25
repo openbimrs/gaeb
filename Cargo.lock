@@ -4,10 +4,16 @@ version = 4
 
 [[package]]
 name = "gaeb"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "openbim-gaeb",
 ]
+
+[[package]]
+name = "iri-string"
+version = "0.7.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1663ee7d8cf2900cc1414b1e1eec9f348d6eaa3bcab07579f4726a4b8499f447"
 
 [[package]]
 name = "memchr"
@@ -17,8 +23,9 @@ checksum = "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
 
 [[package]]
 name = "openbim-gaeb"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
+ "iri-string",
  "quick-xml",
  "thiserror",
 ]

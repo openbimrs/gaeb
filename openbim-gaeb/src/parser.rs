@@ -1,5 +1,6 @@
 use std::{borrow::Cow, collections::HashSet, ops::Range, str};
 
+use iri_string::types::UriReferenceStr;
 use quick_xml::{
     escape::unescape,
     events::{BytesDecl, BytesStart, Event},
@@ -122,10 +123,8 @@ impl ItemBuilder {
         };
         let quantity_edit = if !self.quantity_seen {
             QuantityEdit::Missing
-        } else if self.quantity_ambiguous {
+        } else if self.quantity_ambiguous || quantity.is_none() {
             QuantityEdit::NotEditable
-        } else if quantity.is_none() {
-            QuantityEdit::Missing
         } else if !self.quantity_has_non_value_xml && self.quantity_fragments.len() == 1 {
             QuantityEdit::Editable(self.quantity_fragments[0].clone())
         } else {
@@ -343,7 +342,7 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                 let raw = str::from_utf8(text.as_ref())
                     .map_err(|error| Error::Xml(format!("non-UTF-8 XML text: {error}")))?;
                 if path.is_empty() {
-                    if raw.trim().is_empty() {
+                    if raw.bytes().all(is_xml_space) {
                         continue;
                     }
                     return Err(if metadata.is_none() {
@@ -665,8 +664,17 @@ fn normalize_xml_attribute_whitespace(value: &str) -> Cow<'_, str> {
 const XML_NAMESPACE: &str = "http://www.w3.org/XML/1998/namespace";
 const XMLNS_NAMESPACE: &str = "http://www.w3.org/2000/xmlns/";
 
+fn is_xml_space(byte: u8) -> bool {
+    matches!(byte, b' ' | b'\t' | b'\r' | b'\n')
+}
+
 fn validate_namespace_declaration(name: &[u8], value: &str) -> Result<(), Error> {
     let prefix = name.strip_prefix(b"xmlns:");
+    if !value.is_empty() && UriReferenceStr::new(value).is_err() {
+        return Err(Error::Xml(
+            "an XML namespace name must be a valid URI reference".into(),
+        ));
+    }
     if name == b"xmlns" {
         if matches!(value, XML_NAMESPACE | XMLNS_NAMESPACE) {
             return Err(Error::Xml(

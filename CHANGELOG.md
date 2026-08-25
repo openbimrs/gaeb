@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Treat explicit-empty and XML-whitespace-only `Qty` elements as existing but
+  not safely editable rather than reporting them as missing.
+- Accept only XML 1.0 `S` characters outside the document element.
+- Validate decoded namespace names as URI references before interpreting any
+  namespaced content.
+- Expand parser mutation coverage from 22 to 25 probes for these regressions.
+- Package the exact-version alias against the local canonical candidate before
+  that canonical version exists in the registry.
+- Keep Cargo diagnostics on stderr so package verification can parse metadata
+  even while Cargo reports lock contention or index activity.
+
 ## [0.1.2] - 2026-08-25
 
 ### Fixed

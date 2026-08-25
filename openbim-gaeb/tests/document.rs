@@ -294,6 +294,28 @@ fn rejects_other_xml_lexical_malformations() {
 }
 
 #[test]
+fn rejects_non_xml_whitespace_outside_the_root() {
+    for character in ['\u{85}', '\u{a0}', '\u{2003}'] {
+        let xml = format!(r#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"/>{character}"#);
+        assert!(matches!(Document::parse(xml), Err(Error::Xml(_))));
+    }
+}
+
+#[test]
+fn rejects_namespace_names_that_are_not_uri_references() {
+    for namespace in [
+        "urn:vendor with-space",
+        "http://example.com/<bad>",
+        "urn:vendor\\bad",
+    ] {
+        let xml = format!(
+            r#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3" xmlns:v="{namespace}"/>"#
+        );
+        assert!(matches!(Document::parse(xml), Err(Error::Xml(_))));
+    }
+}
+
+#[test]
 fn local_byte_corruptions_and_truncations_return_without_panicking() {
     let seed = br#"<?xml version="1.0"?><GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item ID="i"><Qty><![CDATA[1.5]]></Qty></Item></Award></GAEB>"#;
 
