@@ -1,4 +1,4 @@
-use std::{ops::Range, str};
+use std::{borrow::Cow, collections::HashSet, ops::Range, str};
 
 use quick_xml::{
     escape::unescape,
@@ -182,7 +182,7 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
         match reader.read_resolved_event() {
             Ok((resolved, Event::Start(start))) => {
                 prolog_content_seen = true;
-                let namespace = resolved_namespace(resolved)?.map(<[u8]>::to_vec);
+                let namespace = resolved_namespace(resolved)?;
                 validate_attributes(&reader, &start)?;
                 let local = local_name(&start)?;
                 if metadata.is_some() && path.is_empty() {
@@ -208,14 +208,43 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                     local: local.clone(),
                     gaeb,
                 });
-                track_metadata_declaration(&path, &mut declarations, &mut diagnostics);
-                if gaeb && local == "BoQCtgy" && direct_boqbody_category(&path) {
+                track_metadata_declaration(
+                    &path,
+                    metadata
+                        .as_ref()
+                        .expect("root established before metadata declaration")
+                        .namespace
+                        .as_str(),
+                    &mut declarations,
+                    &mut diagnostics,
+                );
+                if gaeb
+                    && local == "BoQCtgy"
+                    && direct_boqbody_category(
+                        &path,
+                        metadata
+                            .as_ref()
+                            .expect("root established before category")
+                            .namespace
+                            .as_str(),
+                    )
+                {
                     categories.push(CategoryBuilder {
                         id: attribute(&start, b"ID")?,
                         outline_number: attribute(&start, b"RNoPart")?,
                         label: None,
                     });
-                } else if gaeb && local == "Item" && direct_itemlist_item(&path) {
+                } else if gaeb
+                    && local == "Item"
+                    && direct_itemlist_item(
+                        &path,
+                        metadata
+                            .as_ref()
+                            .expect("root established before item")
+                            .namespace
+                            .as_str(),
+                    )
+                {
                     if current_item.is_some() {
                         return Err(Error::Xml(
                             "nested GAEB Item elements are unsupported".into(),
@@ -230,7 +259,7 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
             }
             Ok((resolved, Event::Empty(start))) => {
                 prolog_content_seen = true;
-                let namespace = resolved_namespace(resolved)?.map(<[u8]>::to_vec);
+                let namespace = resolved_namespace(resolved)?;
                 validate_attributes(&reader, &start)?;
                 let local = local_name(&start)?;
                 if metadata.is_some() && path.is_empty() {
@@ -257,8 +286,27 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                     local: local.clone(),
                     gaeb,
                 });
-                track_metadata_declaration(&path, &mut declarations, &mut diagnostics);
-                if gaeb && local == "Item" && direct_itemlist_item(&path) {
+                track_metadata_declaration(
+                    &path,
+                    metadata
+                        .as_ref()
+                        .expect("root established before metadata declaration")
+                        .namespace
+                        .as_str(),
+                    &mut declarations,
+                    &mut diagnostics,
+                );
+                if gaeb
+                    && local == "Item"
+                    && direct_itemlist_item(
+                        &path,
+                        metadata
+                            .as_ref()
+                            .expect("root established before empty item")
+                            .namespace
+                            .as_str(),
+                    )
+                {
                     if current_item.is_some() {
                         return Err(Error::Xml(
                             "nested GAEB Item elements are unsupported".into(),
@@ -289,7 +337,8 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                         Error::Xml("non-whitespace content outside the XML root".into())
                     });
                 }
-                let decoded = unescape(raw)
+                let normalized = normalize_xml_line_endings(raw);
+                let decoded = unescape(normalized.as_ref())
                     .map_err(|error| Error::Xml(format!("invalid XML entity: {error}")))?;
                 validate_xml_chars(decoded.as_ref(), "decoded XML text")?;
                 let end = reader.buffer_position() as usize + source_offset;
@@ -315,7 +364,8 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                 }
                 let value = str::from_utf8(text.as_ref())
                     .map_err(|error| Error::Xml(format!("non-UTF-8 CDATA: {error}")))?;
-                validate_xml_chars(value, "CDATA")?;
+                let normalized = normalize_xml_line_endings(value);
+                validate_xml_chars(normalized.as_ref(), "CDATA")?;
                 let event_end = reader.buffer_position() as usize + source_offset;
                 let range = event_end.checked_sub(3).and_then(|content_end| {
                     content_end
@@ -324,7 +374,7 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                 });
                 capture_text(
                     &path,
-                    value,
+                    normalized.as_ref(),
                     range,
                     metadata.as_mut().expect("root established before CDATA"),
                     &mut categories,
@@ -340,13 +390,33 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                     .map_err(|error| Error::Xml(format!("non-UTF-8 element name: {error}")))?
                     .to_owned();
                 let gaeb = path.last().is_some_and(|element| element.gaeb);
-                if gaeb && local == "Item" && direct_itemlist_item(&path) {
+                if gaeb
+                    && local == "Item"
+                    && direct_itemlist_item(
+                        &path,
+                        metadata
+                            .as_ref()
+                            .expect("root established before item end")
+                            .namespace
+                            .as_str(),
+                    )
+                {
                     if let Some(builder) = current_item.take() {
                         let (item, edit) = builder.finish(&categories);
                         items.push(item);
                         quantity_edits.push(edit);
                     }
-                } else if gaeb && local == "BoQCtgy" && direct_boqbody_category(&path) {
+                } else if gaeb
+                    && local == "BoQCtgy"
+                    && direct_boqbody_category(
+                        &path,
+                        metadata
+                            .as_ref()
+                            .expect("root established before category end")
+                            .namespace
+                            .as_str(),
+                    )
+                {
                     categories.pop();
                 }
                 path.pop();
@@ -493,11 +563,16 @@ fn validate_comment(comment: &[u8]) -> Result<(), Error> {
 fn validate_processing_instruction(instruction: &[u8]) -> Result<(), Error> {
     let instruction = str::from_utf8(instruction)
         .map_err(|error| Error::Xml(format!("non-UTF-8 processing instruction: {error}")))?;
-    let target = instruction
-        .split_ascii_whitespace()
-        .next()
-        .ok_or_else(|| Error::Xml("processing instruction target is missing".into()))?;
-    validate_xml_name(target, true, "processing instruction target")?;
+    let target_end = instruction
+        .find(|character: char| character.is_ascii_whitespace())
+        .unwrap_or(instruction.len());
+    let target = &instruction[..target_end];
+    if target.is_empty() {
+        return Err(Error::Xml(
+            "processing instruction target is missing".into(),
+        ));
+    }
+    validate_xml_name(target, false, "processing instruction target")?;
     if target.eq_ignore_ascii_case("xml") {
         return Err(Error::Xml(
             "the processing instruction target `xml` is reserved".into(),
@@ -521,21 +596,127 @@ fn validate_xml_chars(value: &str, context: &str) -> Result<(), Error> {
     Ok(())
 }
 
+fn normalize_xml_line_endings(value: &str) -> Cow<'_, str> {
+    if !value.contains('\r') {
+        return Cow::Borrowed(value);
+    }
+    let mut normalized = String::with_capacity(value.len());
+    let mut characters = value.chars().peekable();
+    while let Some(character) = characters.next() {
+        if character == '\r' {
+            if characters.peek() == Some(&'\n') {
+                characters.next();
+            }
+            normalized.push('\n');
+        } else {
+            normalized.push(character);
+        }
+    }
+    Cow::Owned(normalized)
+}
+
+fn normalize_xml_attribute_whitespace(value: &str) -> Cow<'_, str> {
+    if !value
+        .bytes()
+        .any(|byte| matches!(byte, b'\t' | b'\n' | b'\r'))
+    {
+        return Cow::Borrowed(value);
+    }
+    let mut normalized = String::with_capacity(value.len());
+    let mut characters = value.chars().peekable();
+    while let Some(character) = characters.next() {
+        match character {
+            '\r' => {
+                if characters.peek() == Some(&'\n') {
+                    characters.next();
+                }
+                normalized.push(' ');
+            }
+            '\n' | '\t' => normalized.push(' '),
+            _ => normalized.push(character),
+        }
+    }
+    Cow::Owned(normalized)
+}
+
+const XML_NAMESPACE: &str = "http://www.w3.org/XML/1998/namespace";
+const XMLNS_NAMESPACE: &str = "http://www.w3.org/2000/xmlns/";
+
+fn validate_namespace_declaration(name: &[u8], value: &str) -> Result<(), Error> {
+    let prefix = name.strip_prefix(b"xmlns:");
+    if name == b"xmlns" {
+        if matches!(value, XML_NAMESPACE | XMLNS_NAMESPACE) {
+            return Err(Error::Xml(
+                "the default namespace cannot use a reserved XML namespace name".into(),
+            ));
+        }
+        return Ok(());
+    }
+    let Some(prefix) = prefix else {
+        return Ok(());
+    };
+    if prefix == b"xmlns" {
+        return Err(Error::Xml(
+            "the reserved `xmlns` prefix cannot be declared".into(),
+        ));
+    }
+    if value.is_empty() {
+        return Err(Error::Xml(
+            "a prefixed namespace declaration cannot have an empty value".into(),
+        ));
+    }
+    if value == XMLNS_NAMESPACE {
+        return Err(Error::Xml(
+            "the XMLNS namespace name cannot be bound to a prefix".into(),
+        ));
+    }
+    if prefix == b"xml" {
+        if value != XML_NAMESPACE {
+            return Err(Error::Xml(
+                "the `xml` prefix must bind the XML namespace name".into(),
+            ));
+        }
+    } else if value == XML_NAMESPACE {
+        return Err(Error::Xml(
+            "the XML namespace name can only be bound to the `xml` prefix".into(),
+        ));
+    }
+    Ok(())
+}
+
 fn validate_attributes(reader: &NsReader<&[u8]>, start: &BytesStart<'_>) -> Result<(), Error> {
     validate_qname(start.name().as_ref(), "element")?;
+    if start.name().as_ref().starts_with(b"xmlns:") {
+        return Err(Error::Xml(
+            "the reserved `xmlns` prefix cannot name an element".into(),
+        ));
+    }
+    let mut expanded_names = HashSet::new();
     for result in start.attributes().with_checks(true) {
         let attribute =
             result.map_err(|error| Error::Xml(format!("invalid attribute: {error}")))?;
         validate_qname(attribute.key.as_ref(), "attribute")?;
         let name = attribute.key.as_ref();
-        if name != b"xmlns" && !name.starts_with(b"xmlns:") {
-            resolved_namespace(reader.resolve_attribute(attribute.key).0)?;
+        let is_namespace_declaration = name == b"xmlns" || name.starts_with(b"xmlns:");
+        let namespace = if is_namespace_declaration {
+            None
+        } else {
+            resolved_namespace(reader.resolve_attribute(attribute.key).0)?
+        };
+        if !is_namespace_declaration
+            && !expanded_names.insert((namespace, attribute.key.local_name().as_ref().to_vec()))
+        {
+            return Err(Error::Xml("duplicate expanded attribute name".into()));
         }
         let raw = str::from_utf8(attribute.value.as_ref())
             .map_err(|error| Error::Xml(format!("non-UTF-8 attribute: {error}")))?;
-        let decoded = unescape(raw)
+        let normalized = normalize_xml_attribute_whitespace(raw);
+        let decoded = unescape(normalized.as_ref())
             .map_err(|error| Error::Xml(format!("invalid attribute entity: {error}")))?;
         validate_xml_chars(decoded.as_ref(), "decoded XML attribute")?;
+        if is_namespace_declaration {
+            validate_namespace_declaration(name, decoded.as_ref())?;
+        }
     }
     Ok(())
 }
@@ -600,10 +781,18 @@ fn validate_declaration(declaration: &BytesDecl<'_>) -> Result<(), Error> {
     Ok(())
 }
 
-fn resolved_namespace(resolved: ResolveResult<'_>) -> Result<Option<&[u8]>, Error> {
+fn resolved_namespace(resolved: ResolveResult<'_>) -> Result<Option<Vec<u8>>, Error> {
     match resolved {
         ResolveResult::Unbound => Ok(None),
-        ResolveResult::Bound(namespace) => Ok(Some(namespace.into_inner())),
+        ResolveResult::Bound(namespace) => {
+            let raw = str::from_utf8(namespace.into_inner())
+                .map_err(|error| Error::Xml(format!("non-UTF-8 namespace name: {error}")))?;
+            let normalized = normalize_xml_attribute_whitespace(raw);
+            let decoded = unescape(normalized.as_ref())
+                .map_err(|error| Error::Xml(format!("invalid namespace entity: {error}")))?;
+            validate_xml_chars(decoded.as_ref(), "decoded XML namespace name")?;
+            Ok(Some(decoded.as_bytes().to_vec()))
+        }
         ResolveResult::Unknown(prefix) => Err(Error::Xml(format!(
             "undeclared XML namespace prefix {:?}",
             String::from_utf8_lossy(&prefix)
@@ -623,7 +812,8 @@ fn attribute(start: &BytesStart<'_>, key: &[u8]) -> Result<Option<String>, Error
         if attr.key.as_ref() == key {
             let raw = str::from_utf8(attr.value.as_ref())
                 .map_err(|error| Error::Xml(format!("non-UTF-8 attribute: {error}")))?;
-            return unescape(raw)
+            let normalized = normalize_xml_attribute_whitespace(raw);
+            return unescape(normalized.as_ref())
                 .map(|value| Some(value.into_owned()))
                 .map_err(|error| Error::Xml(format!("invalid attribute entity: {error}")));
         }
@@ -635,16 +825,34 @@ fn direct_item_child(path: &[PathElement]) -> bool {
     path.len() >= 2 && path[path.len() - 2].is_gaeb("Item")
 }
 
-fn direct_itemlist_item(path: &[PathElement]) -> bool {
-    path.len() >= 2
-        && path[path.len() - 2].is_gaeb("Itemlist")
-        && path[path.len() - 1].is_gaeb("Item")
+fn valid_boq_descendant_path(path: &[PathElement], namespace: &str) -> bool {
+    if path.len() < 4
+        || !path[0].is_gaeb("GAEB")
+        || !expected_phase_parent(namespace).is_some_and(|parent| path[1].is_gaeb(parent))
+        || !path[2].is_gaeb("BoQ")
+    {
+        return false;
+    }
+    path[3..].iter().enumerate().all(|(index, element)| {
+        if index % 2 == 0 {
+            element.is_gaeb("BoQBody")
+        } else {
+            element.is_gaeb("BoQCtgy")
+        }
+    })
 }
 
-fn direct_boqbody_category(path: &[PathElement]) -> bool {
-    path.len() >= 2
-        && path[path.len() - 2].is_gaeb("BoQBody")
-        && path[path.len() - 1].is_gaeb("BoQCtgy")
+fn direct_itemlist_item(path: &[PathElement], namespace: &str) -> bool {
+    path.len() >= 6
+        && path[path.len() - 2].is_gaeb("Itemlist")
+        && path[path.len() - 1].is_gaeb("Item")
+        && valid_boq_descendant_path(&path[..path.len() - 2], namespace)
+}
+
+fn direct_boqbody_category(path: &[PathElement], namespace: &str) -> bool {
+    path.last()
+        .is_some_and(|element| element.is_gaeb("BoQCtgy"))
+        && valid_boq_descendant_path(path, namespace)
 }
 
 fn direct_quantity(path: &[PathElement]) -> bool {
@@ -660,25 +868,40 @@ fn direct_header_child(path: &[PathElement]) -> bool {
     path.len() == 3 && path[0].is_gaeb("GAEB") && path[1].is_gaeb("GAEBInfo")
 }
 
-fn direct_phase_child(path: &[PathElement]) -> bool {
+fn expected_phase_parent(namespace: &str) -> Option<&'static str> {
+    if namespace == "http://www.gaeb.de/GAEB_DA_XML/200407" {
+        return Some("Award");
+    }
+    if namespace == "http://www.gaeb.de/GAEB_DA_XML/200706" {
+        return Some("Order");
+    }
+    let product = namespace
+        .strip_prefix("http://www.gaeb.de/GAEB_DA_XML/DA")?
+        .split('/')
+        .next()?;
+    Some(match product {
+        "31" => "QtyDeterm",
+        "50" | "51" => "ElementalCosting",
+        "61" => "GAEBInfo",
+        "84P" => "SC_Evaluation",
+        "89" | "89B" => "Invoice",
+        "93" | "94" | "96" | "97" | "98" | "99" => "Order",
+        "52" | "80" | "81" | "82" | "83" | "83Z" | "84" | "84Z" | "85" | "86" | "86ZE" | "86ZR"
+        | "87" => "Award",
+        _ => return None,
+    })
+}
+
+fn direct_phase_child(path: &[PathElement], namespace: &str) -> bool {
     path.len() == 3
         && path[0].is_gaeb("GAEB")
         && path[2].is_gaeb("DP")
-        && matches!(
-            path[1].local.as_str(),
-            "Award"
-                | "Order"
-                | "Invoice"
-                | "QtyDeterm"
-                | "QtyDetermination"
-                | "ElementalCosting"
-                | "SC_Evaluation"
-                | "GAEBInfo"
-        )
+        && expected_phase_parent(namespace).is_some_and(|parent| path[1].is_gaeb(parent))
 }
 
 fn track_metadata_declaration(
     path: &[PathElement],
+    namespace: &str,
     declarations: &mut MetadataDeclarations,
     diagnostics: &mut Vec<Diagnostic>,
 ) {
@@ -693,7 +916,7 @@ fn track_metadata_declaration(
                 "multiple root GAEBInfo Version declarations are ambiguous",
             ));
         }
-    } else if current.is_gaeb("DP") && direct_phase_child(path) {
+    } else if current.is_gaeb("DP") && direct_phase_child(path, namespace) {
         declarations.phase += 1;
         if declarations.phase > 1 {
             diagnostics.push(Diagnostic::new(
@@ -704,10 +927,10 @@ fn track_metadata_declaration(
     }
 }
 
-fn direct_category_child(path: &[PathElement]) -> bool {
-    path.len() >= 3
-        && path[path.len() - 3].is_gaeb("BoQBody")
+fn direct_category_child(path: &[PathElement], namespace: &str) -> bool {
+    path.len() >= 6
         && path[path.len() - 2].is_gaeb("BoQCtgy")
+        && valid_boq_descendant_path(&path[..path.len() - 1], namespace)
 }
 
 fn capture_text(
@@ -746,7 +969,7 @@ fn capture_text(
     if value.is_empty() {
         return;
     }
-    if current.local == "LblTx" && direct_category_child(path) {
+    if current.local == "LblTx" && direct_category_child(path, metadata.namespace.as_str()) {
         if let Some(category) = categories.last_mut() {
             append_optional_words(&mut category.label, value);
         }
@@ -762,7 +985,9 @@ fn capture_text(
         "Time" if in_header => append_optional_raw(&mut metadata.time, raw_value),
         "ProgSystem" if in_header => append_optional_raw(&mut metadata.program_system, raw_value),
         "ProgName" if in_header => append_optional_raw(&mut metadata.program_name, raw_value),
-        "DP" if direct_phase_child(path) && declarations.phase == 1 => {
+        "DP" if direct_phase_child(path, metadata.namespace.as_str())
+            && declarations.phase == 1 =>
+        {
             append_optional_raw(&mut metadata.phase_code, raw_value)
         }
         _ => {}

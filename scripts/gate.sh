@@ -19,5 +19,4 @@ RUSTDOCFLAGS="-D warnings" cargo doc --workspace --all-features --no-deps
 scripts/check-alias-purity.sh
 scripts/test-alias-purity.sh
 python3 scripts/check-package-contents.py
-cargo package --locked -p openbim-gaeb
-cargo package --locked -p gaeb --no-verify
+python3 scripts/verify-packages.py

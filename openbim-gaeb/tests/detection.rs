@@ -50,7 +50,7 @@ fn surfaces_namespace_and_payload_disagreement() {
 #[test]
 fn coarse_50_namespace_accepts_specific_50_1_phase() {
     let document = Document::parse(
-        br#"<g:GAEB xmlns:g="http://www.gaeb.de/GAEB_DA_XML/DA50/3.3"><g:GAEBInfo><g:Version>3.3</g:Version></g:GAEBInfo><g:Award><g:DP>50.1</g:DP></g:Award></g:GAEB>"#,
+        br#"<g:GAEB xmlns:g="http://www.gaeb.de/GAEB_DA_XML/DA50/3.3"><g:GAEBInfo><g:Version>3.3</g:Version></g:GAEBInfo><g:ElementalCosting><g:DP>50.1</g:DP></g:ElementalCosting></g:GAEB>"#,
     )
     .unwrap();
     assert_eq!(document.metadata().version, Some(GaebVersion::V3_3));
@@ -115,6 +115,76 @@ fn detects_phase_31_under_quantity_determination() {
     )
     .unwrap();
     assert_eq!(document.metadata().phase, Some(ExchangePhase::X31));
+}
+
+#[test]
+fn phase_declarations_require_the_product_specific_gaeb_parent() {
+    for xml in [
+        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><Invoice><DP>86</DP></Invoice></GAEB>"#.as_slice(),
+        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA31/3.3"><Award><DP>31</DP></Award></GAEB>"#,
+        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA31/3.3"><QtyDetermination><DP>31</DP></QtyDetermination></GAEB>"#,
+        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3" xmlns:f="urn:vendor"><f:Award><DP>86</DP></f:Award></GAEB>"#,
+    ] {
+        let document = Document::parse(xml).unwrap();
+        assert_eq!(document.metadata().declared_phase, None);
+        assert_eq!(document.metadata().phase_code, None);
+    }
+
+    for (namespace, parent, code, phase) in [
+        (
+            "http://www.gaeb.de/GAEB_DA_XML/DA31/3.3",
+            "QtyDeterm",
+            "31",
+            ExchangePhase::X31,
+        ),
+        (
+            "http://www.gaeb.de/GAEB_DA_XML/DA50/3.3",
+            "ElementalCosting",
+            "50.1",
+            ExchangePhase::X50_1,
+        ),
+        (
+            "http://www.gaeb.de/GAEB_DA_XML/DA61/3.3",
+            "GAEBInfo",
+            "61",
+            ExchangePhase::X61,
+        ),
+        (
+            "http://www.gaeb.de/GAEB_DA_XML/DA84P/3.3",
+            "SC_Evaluation",
+            "84P",
+            ExchangePhase::X84P,
+        ),
+        (
+            "http://www.gaeb.de/GAEB_DA_XML/DA89/3.3",
+            "Invoice",
+            "89",
+            ExchangePhase::X89,
+        ),
+        (
+            "http://www.gaeb.de/GAEB_DA_XML/DA93/3.3",
+            "Order",
+            "93",
+            ExchangePhase::X93,
+        ),
+    ] {
+        let xml =
+            format!(r#"<GAEB xmlns="{namespace}"><{parent}><DP>{code}</DP></{parent}></GAEB>"#);
+        let document = Document::parse(xml).unwrap();
+        assert_eq!(document.metadata().declared_phase, Some(phase));
+    }
+}
+
+#[test]
+fn resolves_character_references_in_namespace_declarations() {
+    let document =
+        Document::parse(br#"<g:GAEB xmlns:g="http://www.gaeb.de/GAEB_DA_XML/DA83/&#x33;.3"/>"#)
+            .unwrap();
+    assert_eq!(
+        document.metadata().namespace,
+        "http://www.gaeb.de/GAEB_DA_XML/DA83/3.3"
+    );
+    assert_eq!(document.metadata().version, Some(GaebVersion::V3_3));
 }
 
 #[test]
@@ -200,7 +270,7 @@ fn rejects_nonexistent_namespace_version_phase_products() {
 #[test]
 fn accepts_official_31_order_namespace_and_ambiguous_84_phase() {
     let order = Document::parse(
-        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/200706"><GAEBInfo><Version>3.1</Version></GAEBInfo><Award><DP>93</DP></Award></GAEB>"#,
+        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/200706"><GAEBInfo><Version>3.1</Version></GAEBInfo><Order><DP>93</DP></Order></GAEB>"#,
     )
     .unwrap();
     assert_eq!(order.metadata().phase, Some(ExchangePhase::X93));

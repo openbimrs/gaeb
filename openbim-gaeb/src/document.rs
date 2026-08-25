@@ -67,7 +67,7 @@ impl Document {
         &self.diagnostics
     }
 
-    /// Common views of all `<Item>` elements in document order.
+    /// Common views of schema-positioned BoQ `Itemlist/Item` elements in document order.
     #[must_use]
     pub fn items(&self) -> &[Item] {
         &self.items
