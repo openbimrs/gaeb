@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ALIAS_PACKAGE = "gaeb"
 CANONICAL_PACKAGE = "openbim-gaeb"
 CANONICAL_CRATE = "openbim_gaeb"
-VERSION = "0.1.0"
+
 
 
 def fail(message: str) -> NoReturn:
@@ -98,8 +98,9 @@ if package_names != expected_names:
 
 canonical = package(packages, CANONICAL_PACKAGE)
 alias = package(packages, ALIAS_PACKAGE)
-if canonical["version"] != VERSION or alias["version"] != VERSION:
-    fail(f"both package versions must be {VERSION}")
+version = canonical["version"]
+if alias["version"] != version:
+    fail(f"alias version must match canonical version {version}")
 if alias.get("edition") != "2021":
     fail("alias package edition must be 2021")
 if alias.get("rust_version") != "1.85":
@@ -169,7 +170,7 @@ for field, expected in expected_fields.items():
     actual = dependency.get(field)
     if actual != expected:
         fail(f"canonical dependency field {field!r} must be {expected!r}, got {actual!r}")
-expected_requirement = f"={VERSION}"
+expected_requirement = f"={version}"
 if dependency["req"] != expected_requirement:
     fail(f"canonical requirement must be {expected_requirement}, got {dependency['req']}")
 expected_path = normalize(ROOT / CANONICAL_PACKAGE)

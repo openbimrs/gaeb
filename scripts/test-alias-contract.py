@@ -5,6 +5,7 @@ import json
 import shutil
 import subprocess
 import sys
+import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
 ALIAS = 'gaeb'
@@ -12,6 +13,7 @@ CANONICAL = 'openbim-gaeb'
 MANIFEST = ROOT / ALIAS / "Cargo.toml"
 LIB = ROOT / ALIAS / "src/lib.rs"
 LOCK = ROOT / "Cargo.lock"
+VERSION = tomllib.loads((ROOT / CANONICAL / "Cargo.toml").read_text())["package"]["version"]
 CHECKER = ROOT / "scripts/check-alias-purity.sh"
 CONTENTS = ROOT / "scripts/check-package-contents.py"
 original_manifest = MANIFEST.read_bytes()
@@ -82,7 +84,7 @@ def append_lib_setting(setting: str) -> None:
 
 def insert_package_field(field: str) -> None:
     text = MANIFEST.read_text()
-    marker = 'version = "0.1.0"\n'
+    marker = f'version = "{VERSION}"\n'
     assert_true(text.count(marker) == 1, "package version marker is not unique")
     MANIFEST.write_text(text.replace(marker, marker + field + "\n", 1))
 
@@ -96,9 +98,11 @@ try:
     reject("independent-type")
 
     text = MANIFEST.read_text()
-    assert_true(text.count('version = "=0.1.0"') == 1, "exact dependency marker is not unique")
-    MANIFEST.write_text(text.replace('version = "=0.1.0"', 'version = "0.1.0"'))
-    reject("loose-version", lambda: assert_true(dependency()["req"] != "=0.1.0", "loose mutation inactive"))
+    exact = f'version = "={VERSION}"'
+    loose = f'version = "{VERSION}"'
+    assert_true(text.count(exact) == 1, "exact dependency marker is not unique")
+    MANIFEST.write_text(text.replace(exact, loose))
+    reject("loose-version", lambda: assert_true(dependency()["req"] != f"={VERSION}", "loose mutation inactive"))
 
     text = MANIFEST.read_text()
     assert_true(text.count("[dependencies]") == 1, "dependency table is not unique")
@@ -151,11 +155,12 @@ try:
     reject("package-publish-disabled", lambda: assert_true(alias_package()["publish"] == [], "publish mutation inactive"))
 
     text = MANIFEST.read_text()
-    marker = 'version = "0.1.0"'
+    marker = f'version = "{VERSION}"'
     assert_true(text.count(marker) == 1, "alias version marker is not unique")
-    MANIFEST.write_text(text.replace(marker, 'version = "0.1.1"', 1))
+    mutated_version = f"{VERSION}-mutation"
+    MANIFEST.write_text(text.replace(marker, f'version = "{mutated_version}"', 1))
     updated = alias_package(locked=False)
-    assert_true(updated["version"] == "0.1.1", "version mutation inactive")
+    assert_true(updated["version"] == mutated_version, "version mutation inactive")
     reject("package-version")
 
     insert_package_field('links = "alias-contract-probe"')
