@@ -1,8 +1,20 @@
 use std::io::{Read, Write};
 
-use openbim_codec_xml::{looks_like_xml, strip_bom};
-
 use crate::{parser, parser::QuantityEdit, Diagnostic, Error, Item, Metadata};
+
+const UTF8_BOM: &[u8] = b"\xEF\xBB\xBF";
+
+fn strip_utf8_bom(bytes: &[u8]) -> &[u8] {
+    bytes.strip_prefix(UTF8_BOM).unwrap_or(bytes)
+}
+
+fn looks_like_xml(bytes: &[u8]) -> bool {
+    strip_utf8_bom(bytes)
+        .iter()
+        .copied()
+        .find(|byte| !byte.is_ascii_whitespace())
+        == Some(b'<')
+}
 
 /// An owned GAEB document with lossless source bytes and extracted domain views.
 ///
@@ -24,7 +36,7 @@ impl Document {
         if !looks_like_xml(bytes) {
             return Err(Error::NotXml);
         }
-        let xml = strip_bom(bytes);
+        let xml = strip_utf8_bom(bytes);
         let offset = bytes.len() - xml.len();
         let parsed = parser::parse(xml, offset)?;
         Ok(Self {
@@ -156,7 +168,15 @@ fn is_xsd_decimal(value: &str) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use super::is_xsd_decimal;
+    use super::{is_xsd_decimal, looks_like_xml, strip_utf8_bom};
+
+    #[test]
+    fn local_xml_detection_handles_bom_and_whitespace() {
+        let xml = b"\xEF\xBB\xBF \r\n<GAEB/>";
+        assert!(looks_like_xml(xml));
+        assert_eq!(strip_utf8_bom(xml), b" \r\n<GAEB/>");
+        assert!(!looks_like_xml(b"PK\x03\x04"));
+    }
 
     #[test]
     fn decimal_lexical_space_matches_xml_schema_shape() {

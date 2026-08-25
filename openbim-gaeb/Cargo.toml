@@ -1,6 +1,6 @@
 [package]
 name = "openbim-gaeb"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 rust-version = "1.85"
 license = "MIT"
@@ -13,6 +13,5 @@ categories = ["parser-implementations", "data-structures"]
 include = ["src/**", "tests/**", "examples/**", "Cargo.toml", "README.md", "LICENSE"]
 
 [dependencies]
-openbim-codec-xml = "0.1.0"
 quick-xml = "0.37"
 thiserror = "2"

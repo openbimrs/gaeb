@@ -11,7 +11,7 @@ verified commit as `openbimrs/openbim/packages/gaeb`.
 ## 2. Constraints
 
 - Standalone repository, versioned crates.io dependencies, MSRV 1.85.
-- `openbim-codec-xml` owns only generic BOM/content recognition.
+- GAEB uses `quick-xml` directly and owns BOM/content detection as adapter policy.
 - GAEB owns phase/version semantics, BoQ views, diagnostics, and supported edits.
 - Unknown XML must survive; unchanged writes must be byte-identical.
 - Official XSD/example redistribution terms are not explicit, so payloads remain

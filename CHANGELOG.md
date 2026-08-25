@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-08-25
+
 ### Changed
 
 - The release gate now verifies both published packages from clean source.
@@ -14,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and source shape, with 19 mutation probes and exact package allowlists.
 - CI now pins its runner and action revisions; local fallback targets are unique
   per gate invocation.
+- Removed the `openbim-codec-xml` wrapper dependency. GAEB now uses `quick-xml`
+  directly and keeps BOM/content detection beside its adapter policy.
 
 ### Fixed
 
@@ -37,4 +41,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Standalone OpenBIM.rs GAEB repository scaffold.
 
 [Unreleased]: https://github.com/openbimrs/gaeb/commits/main
+[0.1.1]: https://github.com/openbimrs/gaeb/compare/v0.1.0...v0.1.1
 [0.1.0]: https://crates.io/crates/openbim-gaeb/0.1.0

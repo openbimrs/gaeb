@@ -12,15 +12,14 @@ versions rather than paths outside this repository.
 ## Dependency direction
 
 ```text
-openbim-codec-xml  <-  openbim-gaeb  <-  gaeb alias
-                              ^
-openbim facade  ---------------------+
+quick-xml  <-  openbim-gaeb  <-  gaeb alias
+                       ^
+openbim facade  --------+
 ```
 
-`openbim-codec-xml` answers only whether bytes plausibly contain XML and strips
-a UTF-8 BOM for parsing. It intentionally does not own a tree, streaming reader,
-schema binding, or writer. GAEB-specific element interpretation and mutation
-remain here. IFC, core, and codecs must never depend on GAEB.
+`quick-xml` supplies streaming XML mechanics. GAEB owns UTF-8 BOM handling,
+content detection, element interpretation, mutation, and output policy. IFC and
+core must never depend on GAEB.
 
 ## Lossless representation
 

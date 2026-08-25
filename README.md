@@ -72,10 +72,9 @@ assert_eq!(document.as_bytes(), xml);
 
 ## XML boundary
 
-`openbim-codec-xml` owns only format-neutral BOM stripping and content sniffing.
-GAEB owns streaming element interpretation, exchange phases, BoQ semantics,
-diagnostics, and edits. This keeps GAEB quirks out of the shared codec while
-avoiding duplicate container recognition.
+GAEB uses `quick-xml` directly for XML mechanics and owns its small
+BOM/content detection policy beside the parser. Streaming element interpretation,
+exchange phases, BoQ semantics, diagnostics, and edits remain here.
 
 See [`docs/architecture.md`](docs/architecture.md).
 

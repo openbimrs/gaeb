@@ -7,8 +7,8 @@
 //!
 //! # Boundary
 //!
-//! Format-neutral XML sniffing and BOM handling come from
-//! `openbim-codec-xml`. Streaming element interpretation, GAEB exchange phases,
+//! XML mechanics use `quick-xml` directly. BOM handling, content detection,
+//! streaming element interpretation, GAEB exchange phases,
 //! BoQ semantics, diagnostics, and editing remain here because they are GAEB
 //! policy rather than generic XML behavior.
 //!

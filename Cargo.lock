@@ -4,7 +4,7 @@ version = 4
 
 [[package]]
 name = "gaeb"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "openbim-gaeb",
 ]
@@ -16,16 +16,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
 
 [[package]]
-name = "openbim-codec-xml"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d19084dee9fdc012ecf0ec2db86c4f0c1607091bccfcc174f1404e3baf55556c"
-
-[[package]]
 name = "openbim-gaeb"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
- "openbim-codec-xml",
  "quick-xml",
  "thiserror",
 ]

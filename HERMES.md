@@ -18,7 +18,8 @@ success from command exit codes.
 - Rust 2021, MSRV 1.85, MIT.
 - Pure Rust and `#![forbid(unsafe_code)]`.
 - GAEB-specific models, phase semantics, diagnostics, parsing, and editing stay
-  here. Format-neutral container recognition stays in `openbim-codec-xml`.
+  here. XML mechanics use `quick-xml` directly; BOM/content detection remains
+  local GAEB adapter policy.
 - Preserve unknown XML and exact input bytes unless a caller explicitly edits a
   supported field.
 - Do not claim full XSD validation or full schema coverage without executable

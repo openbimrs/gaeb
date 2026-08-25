@@ -1,6 +1,6 @@
 [package]
 name = "gaeb"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 rust-version = "1.85"
 license = "MIT"
@@ -12,4 +12,4 @@ keywords = ["gaeb", "bim", "openbim", "construction", "xml"]
 categories = ["parser-implementations", "data-structures"]
 
 [dependencies]
-openbim-gaeb = { version = "=0.1.0", path = "../openbim-gaeb" }
+openbim-gaeb = { version = "=0.1.1", path = "../openbim-gaeb" }
