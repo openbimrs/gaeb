@@ -1,6 +1,9 @@
 # OpenBIM.rs GAEB
 
 [![CI](https://github.com/openbimrs/gaeb/actions/workflows/ci.yml/badge.svg)](https://github.com/openbimrs/gaeb/actions/workflows/ci.yml)
+[![openbim-gaeb](https://img.shields.io/crates/v/openbim-gaeb.svg)](https://crates.io/crates/openbim-gaeb)
+[![gaeb](https://img.shields.io/crates/v/gaeb.svg)](https://crates.io/crates/gaeb)
+[![docs.rs](https://docs.rs/openbim-gaeb/badge.svg)](https://docs.rs/openbim-gaeb)
 [![MSRV](https://img.shields.io/badge/MSRV-1.85-blue)](https://www.rust-lang.org)
 
 Pure-Rust, lossless tools for working with GAEB DA XML bills of quantities.
@@ -41,18 +44,16 @@ lossless reader.
 
 ## Install
 
-The crates are not published yet. Install the canonical package directly from
-GitHub for now:
+Use either package name:
 
 ```bash
-cargo add --git https://github.com/openbimrs/gaeb.git openbim-gaeb
-```
-
-After the first crates.io release, the short alias will be available as:
-
-```bash
+cargo add openbim-gaeb
+# or
 cargo add gaeb
 ```
+
+Do not depend on both directly. `gaeb` already brings in the exact canonical
+`openbim-gaeb` version and re-exports it without defining independent types.
 
 ```rust
 use openbim_gaeb::{Document, ExchangePhase, GaebVersion};

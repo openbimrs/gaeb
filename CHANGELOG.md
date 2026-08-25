@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-08-25
+
 ### Added
 
 - Pure-Rust GAEB DA XML recognition for versions 3.1 through 3.4 beta.
@@ -16,3 +18,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Standalone OpenBIM.rs GAEB repository scaffold.
 
 [Unreleased]: https://github.com/openbimrs/gaeb/commits/main
+[0.1.0]: https://crates.io/crates/openbim-gaeb/0.1.0
