@@ -49,6 +49,7 @@ impl CategoryBuilder {
 }
 
 struct ItemBuilder {
+    item_depth: usize,
     id: Option<String>,
     outline_number: Option<String>,
     quantity_seen: bool,
@@ -63,8 +64,9 @@ struct ItemBuilder {
 }
 
 impl ItemBuilder {
-    fn new(start: &BytesStart<'_>) -> Result<Self, Error> {
+    fn new(start: &BytesStart<'_>, item_depth: usize) -> Result<Self, Error> {
         Ok(Self {
+            item_depth,
             id: attribute(start, b"ID")?,
             outline_number: attribute(start, b"RNoPart")?,
             quantity_seen: false,
@@ -101,6 +103,7 @@ impl ItemBuilder {
     }
 
     fn invalidate_quantity_value(&mut self) {
+        self.quantity_seen = true;
         self.quantity_ambiguous = true;
         self.quantity = None;
         self.quantity_fragments.clear();
@@ -198,10 +201,14 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                     root_namespace = Some(namespace.as_bytes().to_vec());
                     metadata = Some(Metadata::new(namespace.to_owned()));
                 }
-                if direct_quantity(&path) {
-                    if let Some(item) = current_item.as_mut() {
-                        item.invalidate_quantity_value();
-                    }
+                if current_item
+                    .as_ref()
+                    .is_some_and(|item| direct_quantity(&path, item.item_depth))
+                {
+                    current_item
+                        .as_mut()
+                        .expect("quantity owner checked above")
+                        .invalidate_quantity_value();
                 }
                 let gaeb = namespace.as_deref() == root_namespace.as_deref();
                 path.push(PathElement {
@@ -250,10 +257,12 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                             "nested GAEB Item elements are unsupported".into(),
                         ));
                     }
-                    current_item = Some(ItemBuilder::new(&start)?);
-                } else if gaeb && local == "Qty" && direct_item_child(&path) {
+                    current_item = Some(ItemBuilder::new(&start, path.len())?);
+                } else if gaeb && local == "Qty" {
                     if let Some(item) = current_item.as_mut() {
-                        item.start_quantity();
+                        if direct_item_child(&path, item.item_depth) {
+                            item.start_quantity();
+                        }
                     }
                 }
             }
@@ -276,10 +285,14 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                     metadata = Some(Metadata::new(namespace.to_owned()));
                     root_closed = true;
                 }
-                if direct_quantity(&path) {
-                    if let Some(item) = current_item.as_mut() {
-                        item.invalidate_quantity_value();
-                    }
+                if current_item
+                    .as_ref()
+                    .is_some_and(|item| direct_quantity(&path, item.item_depth))
+                {
+                    current_item
+                        .as_mut()
+                        .expect("quantity owner checked above")
+                        .invalidate_quantity_value();
                 }
                 let gaeb = namespace.as_deref() == root_namespace.as_deref();
                 path.push(PathElement {
@@ -312,13 +325,15 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                             "nested GAEB Item elements are unsupported".into(),
                         ));
                     }
-                    let builder = ItemBuilder::new(&start)?;
+                    let builder = ItemBuilder::new(&start, path.len())?;
                     let (item, edit) = builder.finish(&categories);
                     items.push(item);
                     quantity_edits.push(edit);
-                } else if gaeb && local == "Qty" && direct_item_child(&path) {
+                } else if gaeb && local == "Qty" {
                     if let Some(item) = current_item.as_mut() {
-                        item.start_quantity();
+                        if direct_item_child(&path, item.item_depth) {
+                            item.invalidate_quantity_value();
+                        }
                     }
                 }
                 path.pop();
@@ -442,19 +457,27 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
             Ok((_, Event::Comment(comment))) => {
                 prolog_content_seen = true;
                 validate_comment(comment.as_ref())?;
-                if direct_quantity(&path) {
-                    if let Some(item) = current_item.as_mut() {
-                        item.block_quantity_edit();
-                    }
+                if current_item
+                    .as_ref()
+                    .is_some_and(|item| direct_quantity(&path, item.item_depth))
+                {
+                    current_item
+                        .as_mut()
+                        .expect("quantity owner checked above")
+                        .block_quantity_edit();
                 }
             }
             Ok((_, Event::PI(instruction))) => {
                 prolog_content_seen = true;
                 validate_processing_instruction(instruction.as_ref())?;
-                if direct_quantity(&path) {
-                    if let Some(item) = current_item.as_mut() {
-                        item.block_quantity_edit();
-                    }
+                if current_item
+                    .as_ref()
+                    .is_some_and(|item| direct_quantity(&path, item.item_depth))
+                {
+                    current_item
+                        .as_mut()
+                        .expect("quantity owner checked above")
+                        .block_quantity_edit();
                 }
             }
             Ok((_, Event::Eof)) => {
@@ -821,8 +844,8 @@ fn attribute(start: &BytesStart<'_>, key: &[u8]) -> Result<Option<String>, Error
     Ok(None)
 }
 
-fn direct_item_child(path: &[PathElement]) -> bool {
-    path.len() >= 2 && path[path.len() - 2].is_gaeb("Item")
+fn direct_item_child(path: &[PathElement], item_depth: usize) -> bool {
+    path.len() == item_depth + 1 && path[item_depth - 1].is_gaeb("Item")
 }
 
 fn valid_boq_descendant_path(path: &[PathElement], namespace: &str) -> bool {
@@ -855,13 +878,17 @@ fn direct_boqbody_category(path: &[PathElement], namespace: &str) -> bool {
         && valid_boq_descendant_path(path, namespace)
 }
 
-fn direct_quantity(path: &[PathElement]) -> bool {
-    path.len() >= 2 && path[path.len() - 2].is_gaeb("Item") && path[path.len() - 1].is_gaeb("Qty")
+fn direct_quantity(path: &[PathElement], item_depth: usize) -> bool {
+    direct_item_child(path, item_depth) && path[item_depth].is_gaeb("Qty")
 }
 
-fn in_direct_item_description(path: &[PathElement]) -> bool {
-    path.windows(2)
-        .any(|elements| elements[0].is_gaeb("Item") && elements[1].is_gaeb("Description"))
+fn in_direct_item_description(path: &[PathElement], item_depth: usize) -> bool {
+    path.len() > item_depth
+        && path[item_depth - 1].is_gaeb("Item")
+        && path[item_depth].is_gaeb("Description")
+        && !path[item_depth + 1..]
+            .iter()
+            .any(|element| element.is_gaeb("Item") || element.is_gaeb("SubDescr"))
 }
 
 fn direct_header_child(path: &[PathElement]) -> bool {
@@ -950,7 +977,7 @@ fn capture_text(
     }
 
     if let Some(item) = item {
-        if direct_item_child(path) {
+        if direct_item_child(path, item.item_depth) {
             match current.local.as_str() {
                 "Qty" => item.capture_quantity(raw_value, range),
                 "QU" => append_optional_raw(&mut item.unit, raw_value),
@@ -959,7 +986,7 @@ fn capture_text(
                 _ => {}
             }
         }
-        if in_direct_item_description(path) {
+        if in_direct_item_description(path, item.item_depth) {
             append_words(&mut item.description, raw_value);
         }
         return;

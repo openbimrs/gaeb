@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The release gate now verifies both package archives and compiles the packaged
   alias against the candidate canonical package rather than a stale registry crate.
 - Alias purity now fails closed over Cargo dependency, feature, target, build,
-  and source shape, with 20 mutation probes and exact package allowlists.
+  and source shape, with 22 mutation probes and exact package allowlists.
 - CI now pins its runner and action revisions; local fallback targets are unique
   per gate invocation.
 - Removed the shared XML sniffing wrapper dependency. GAEB now uses `quick-xml`
@@ -47,8 +47,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the GAEB 3.1 `200706` order namespace, rather than accepting synthetic
   phase/version products.
 - Scope metadata, product-specific phase declarations, categories, items, scalars,
-  and descriptions to their complete GAEB-qualified schema ancestry; repeated
-  metadata evidence receives stable duplicate diagnostics.
+  and descriptions to their complete GAEB-qualified schema ancestry; nested item
+  content cannot populate an active outer item, and repeated metadata evidence
+  receives stable duplicate diagnostics.
 - Do not expose a fabricated quantity or description when nested markup,
   duplicate fields, or subordinate descriptions make the common view ambiguous.
 

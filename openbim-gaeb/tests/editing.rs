@@ -56,6 +56,37 @@ fn quantity_edit_distinguishes_missing_item_and_missing_quantity() {
 }
 
 #[test]
+fn nested_item_fields_do_not_attach_to_the_active_schema_item() {
+    let xml = schema_items(
+        "86",
+        r#"<Item ID="outer"><Item ID="inner"><Qty>7</Qty><Description><p>nested</p></Description></Item><QU>m</QU></Item>"#,
+    );
+    let mut document = Document::parse(&xml).unwrap();
+    let outer = document.item("outer").unwrap();
+    assert_eq!(outer.quantity, None);
+    assert_eq!(outer.description, None);
+    assert_eq!(outer.unit.as_deref(), Some("m"));
+    assert!(document.item("inner").is_none());
+    assert!(matches!(
+        document.set_item_quantity("outer", "8"),
+        Err(Error::QuantityMissing(_))
+    ));
+    assert_eq!(document.as_bytes(), xml);
+}
+
+#[test]
+fn empty_quantity_is_existing_but_not_editable() {
+    let xml = schema_items("86", r#"<Item ID="empty"><Qty/></Item>"#);
+    let mut document = Document::parse(&xml).unwrap();
+    assert_eq!(document.item("empty").unwrap().quantity, None);
+    assert!(matches!(
+        document.set_item_quantity("empty", "8"),
+        Err(Error::QuantityNotEditable(_))
+    ));
+    assert_eq!(document.as_bytes(), xml);
+}
+
+#[test]
 fn duplicate_item_ids_are_not_edited_ambiguously() {
     let xml = schema_items(
         "86",

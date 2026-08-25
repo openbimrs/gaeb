@@ -7,10 +7,10 @@
 //!
 //! # Boundary
 //!
-//! XML mechanics use `quick-xml` directly. BOM handling, content detection,
-//! streaming element interpretation, GAEB exchange phases,
-//! BoQ semantics, diagnostics, and editing remain here because they are GAEB
-//! policy rather than generic XML behavior.
+//! This crate uses `quick-xml` directly. BOM/content detection, strict
+//! XML/namespace checks, streaming interpretation, GAEB exchange phases, BoQ
+//! semantics, diagnostics, and editing live here so the standalone package has
+//! no project-owned generic codec dependency.
 //!
 //! # Example
 //!

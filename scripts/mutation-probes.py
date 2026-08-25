@@ -84,15 +84,15 @@ PROBES = (
     Probe(
         "direct-description-scope",
         "openbim-gaeb/src/parser.rs",
-        "        if in_direct_item_description(path) {",
+        "        if in_direct_item_description(path, item.item_depth) {",
         "        if path.iter().any(|element| element.is_gaeb(\"Description\")) {",
         ("cargo", "test", "-p", "openbim-gaeb", "--test", "document", "item_description_excludes_nested_subdescription_text"),
     ),
     Probe(
         "nested-quantity-semantics",
         "openbim-gaeb/src/parser.rs",
-        "    fn invalidate_quantity_value(&mut self) {\n        self.quantity_ambiguous = true;\n        self.quantity = None;\n        self.quantity_fragments.clear();\n        self.quantity_has_non_value_xml = true;\n    }",
-        "    fn invalidate_quantity_value(&mut self) {\n        self.block_quantity_edit();\n    }",
+        "    fn invalidate_quantity_value(&mut self) {\n        self.quantity_seen = true;\n        self.quantity_ambiguous = true;\n        self.quantity = None;\n        self.quantity_fragments.clear();\n        self.quantity_has_non_value_xml = true;\n    }",
+        "    fn invalidate_quantity_value(&mut self) {\n        self.quantity_seen = true;\n        self.block_quantity_edit();\n    }",
         ("cargo", "test", "-p", "openbim-gaeb", "--test", "editing", "nested_quantity_markup_is_not_exposed_as_a_fabricated_value"),
     ),
     Probe(
@@ -157,6 +157,20 @@ PROBES = (
         "            let decoded = unescape(normalized.as_ref())\n                .map_err(|error| Error::Xml(format!(\"invalid namespace entity: {error}\")))?;",
         "            let decoded: Cow<'_, str> = Cow::Borrowed(normalized.as_ref());",
         ("cargo", "test", "-p", "openbim-gaeb", "--test", "detection", "resolves_character_references_in_namespace_declarations"),
+    ),
+    Probe(
+        "active-item-depth-scope",
+        "openbim-gaeb/src/parser.rs",
+        "fn direct_item_child(path: &[PathElement], item_depth: usize) -> bool {\n    path.len() == item_depth + 1 && path[item_depth - 1].is_gaeb(\"Item\")\n}",
+        "fn direct_item_child(path: &[PathElement], _item_depth: usize) -> bool {\n    path.len() >= 2 && path[path.len() - 2].is_gaeb(\"Item\")\n}",
+        ("cargo", "test", "-p", "openbim-gaeb", "--test", "editing", "nested_item_fields_do_not_attach_to_the_active_schema_item"),
+    ),
+    Probe(
+        "empty-quantity-state",
+        "openbim-gaeb/src/parser.rs",
+        "                        if direct_item_child(&path, item.item_depth) {\n                            item.invalidate_quantity_value();\n                        }",
+        "                        if direct_item_child(&path, item.item_depth) {\n                            item.start_quantity();\n                        }",
+        ("cargo", "test", "-p", "openbim-gaeb", "--test", "editing", "empty_quantity_is_existing_but_not_editable"),
     ),
     Probe(
         "fragmented-quantity-fail-closed",
