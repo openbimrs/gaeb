@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-08-25
+
+### Fixed
+
+- Made the alias-contract gate derive the release version from package metadata,
+  so package-version bumps remain mutation-verified instead of failing CI.
+
 ## [0.1.1] - 2026-08-25
 
 ### Changed
@@ -41,5 +48,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Standalone OpenBIM.rs GAEB repository scaffold.
 
 [Unreleased]: https://github.com/openbimrs/gaeb/commits/main
+[0.1.2]: https://github.com/openbimrs/gaeb/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/openbimrs/gaeb/compare/v0.1.0...v0.1.1
 [0.1.0]: https://crates.io/crates/openbim-gaeb/0.1.0
