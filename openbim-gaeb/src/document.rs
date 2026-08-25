@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use openbim_codec_xml::{looks_like_xml, strip_bom};
 
-use crate::{parser, Diagnostic, Error, Item, Metadata};
+use crate::{parser, parser::QuantityEdit, Diagnostic, Error, Item, Metadata};
 
 /// An owned GAEB document with lossless source bytes and extracted domain views.
 ///
@@ -14,7 +14,7 @@ pub struct Document {
     metadata: Metadata,
     diagnostics: Vec<Diagnostic>,
     items: Vec<Item>,
-    quantity_ranges: Vec<Option<std::ops::Range<usize>>>,
+    quantity_edits: Vec<QuantityEdit>,
 }
 
 impl Document {
@@ -32,7 +32,7 @@ impl Document {
             metadata: parsed.metadata,
             diagnostics: parsed.diagnostics,
             items: parsed.items,
-            quantity_ranges: parsed.quantity_ranges,
+            quantity_edits: parsed.quantity_edits,
         })
     }
 
@@ -67,6 +67,9 @@ impl Document {
     /// choosing one silently.
     #[must_use]
     pub fn item(&self, id: &str) -> Option<&Item> {
+        if id.is_empty() {
+            return None;
+        }
         self.items.iter().find(|item| item.id == id)
     }
 
@@ -93,6 +96,9 @@ impl Document {
     /// The edit is atomic: invalid decimals, missing/duplicate IDs, missing
     /// quantity fields, or reparsing failures leave this document unchanged.
     pub fn set_item_quantity(&mut self, item_id: &str, quantity: &str) -> Result<(), Error> {
+        if item_id.is_empty() {
+            return Err(Error::ItemNotFound(item_id.to_owned()));
+        }
         if !is_xsd_decimal(quantity) {
             return Err(Error::InvalidDecimal(quantity.to_owned()));
         }
@@ -107,9 +113,13 @@ impl Document {
             [index] => *index,
             _ => return Err(Error::AmbiguousItem(item_id.to_owned())),
         };
-        let range = self.quantity_ranges[index]
-            .clone()
-            .ok_or_else(|| Error::QuantityMissing(item_id.to_owned()))?;
+        let range = match &self.quantity_edits[index] {
+            QuantityEdit::Missing => return Err(Error::QuantityMissing(item_id.to_owned())),
+            QuantityEdit::NotEditable => {
+                return Err(Error::QuantityNotEditable(item_id.to_owned()));
+            }
+            QuantityEdit::Editable(range) => range.clone(),
+        };
 
         let mut edited = Vec::with_capacity(self.bytes.len() - range.len() + quantity.len());
         edited.extend_from_slice(&self.bytes[..range.start]);

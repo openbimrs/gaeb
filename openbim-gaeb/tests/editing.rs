@@ -59,6 +59,76 @@ fn duplicate_item_ids_are_not_edited_ambiguously() {
 }
 
 #[test]
+fn quantity_entities_are_read_completely_and_replaced_as_one_value() {
+    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item ID="entity"><Qty>1&#x2E;5</Qty></Item></Award></GAEB>"#;
+    let mut document = Document::parse(xml).unwrap();
+    assert_eq!(
+        document.item("entity").unwrap().quantity.as_deref(),
+        Some("1.5")
+    );
+
+    document.set_item_quantity("entity", "9").unwrap();
+    assert!(String::from_utf8_lossy(document.as_bytes()).contains("<Qty>9</Qty>"));
+}
+
+#[test]
+fn quantity_comments_are_read_completely_but_edits_fail_closed() {
+    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item ID="split"><Qty>1<!-- preserve -->.5</Qty></Item></Award></GAEB>"#;
+    let mut document = Document::parse(xml).unwrap();
+    let before = document.as_bytes().to_vec();
+    assert_eq!(
+        document.item("split").unwrap().quantity.as_deref(),
+        Some("1.5")
+    );
+
+    assert!(matches!(
+        document.set_item_quantity("split", "9"),
+        Err(Error::QuantityNotEditable(id)) if id == "split"
+    ));
+    assert_eq!(document.as_bytes(), before);
+}
+
+#[test]
+fn cdata_quantity_is_read_and_edited_inside_the_cdata_section() {
+    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item ID="cdata"><Qty><![CDATA[1.5]]></Qty></Item></Award></GAEB>"#;
+    let mut document = Document::parse(xml).unwrap();
+    assert_eq!(
+        document.item("cdata").unwrap().quantity.as_deref(),
+        Some("1.5")
+    );
+
+    document.set_item_quantity("cdata", "9").unwrap();
+    assert!(String::from_utf8_lossy(document.as_bytes()).contains("<Qty><![CDATA[9]]></Qty>"));
+}
+
+#[test]
+fn missing_item_ids_cannot_be_used_as_mutation_handles() {
+    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item><Qty>1</Qty></Item></Award></GAEB>"#;
+    let mut document = Document::parse(xml).unwrap();
+    let before = document.as_bytes().to_vec();
+
+    assert!(document.item("").is_none());
+    assert!(matches!(
+        document.set_item_quantity("", "2"),
+        Err(Error::ItemNotFound(id)) if id.is_empty()
+    ));
+    assert_eq!(document.as_bytes(), before);
+}
+
+#[test]
+fn duplicate_quantity_elements_are_not_edited_ambiguously() {
+    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item ID="dup-qty"><Qty>1</Qty><Qty>2</Qty></Item></Award></GAEB>"#;
+    let mut document = Document::parse(xml).unwrap();
+    let before = document.as_bytes().to_vec();
+
+    assert!(matches!(
+        document.set_item_quantity("dup-qty", "3"),
+        Err(Error::QuantityNotEditable(id)) if id == "dup-qty"
+    ));
+    assert_eq!(document.as_bytes(), before);
+}
+
+#[test]
 fn quantity_edit_accounts_for_a_preserved_utf8_bom() {
     let mut bytes = b"\xEF\xBB\xBF".to_vec();
     bytes.extend_from_slice(&fixture());

@@ -16,7 +16,8 @@ pins verified revisions under `packages/gaeb`.
 
 The initial implementation reads GAEB DA XML into a lossless owned document,
 cross-checks version and exchange-phase evidence, extracts common BoQ item
-fields, and supports atomic quantity edits without regenerating unrelated XML.
+fields, and supports atomic quantity edits when the complete value has one
+safely replaceable XML text or CDATA range. Mixed-content values fail closed.
 
 | Capability | Status |
 | --- | --- |
@@ -24,10 +25,10 @@ fields, and supports atomic quantity edits without regenerating unrelated XML.
 | GAEB DA XML 3.2 recognition | Implemented and official-example tested |
 | GAEB DA XML 3.3 recognition | Implemented and synthetic-fixture tested |
 | GAEB DA XML 3.4 beta recognition | Implemented; explicitly marked beta |
-| Namespace / `<Version>` / `<DP>` conflict diagnostics | Implemented |
+| Namespace-resolved `<Version>` / `<DP>` conflict diagnostics | Implemented |
 | Byte-identical unchanged round trip | Implemented |
 | Common BoQ item view (`ID`, number, quantity, unit, prices, description) | Implemented |
-| Lossless quantity edit by item ID | Implemented |
+| Safe quantity edit by unique, non-empty item ID | Implemented; mixed-content values are read but not mutated |
 | Full typed binding for every exchange phase | Not implemented |
 | XSD validation | Not implemented |
 | Business-rule validation | Not implemented |

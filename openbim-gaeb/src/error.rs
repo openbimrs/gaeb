@@ -18,6 +18,10 @@ pub enum Error {
     ItemNotFound(String),
     #[error("GAEB item ID {0:?} occurs more than once")]
     AmbiguousItem(String),
-    #[error("GAEB item {0:?} has no editable Qty text")]
+    #[error("GAEB item {0:?} has no Qty value")]
     QuantityMissing(String),
+    #[error(
+        "GAEB item {0:?} has a Qty value that cannot be edited without changing non-value XML"
+    )]
+    QuantityNotEditable(String),
 }

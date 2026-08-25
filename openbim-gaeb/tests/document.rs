@@ -52,6 +52,48 @@ fn rejects_non_xml_and_non_gaeb_documents() {
 }
 
 #[test]
+fn ignores_vendor_elements_that_reuse_gaeb_local_names() {
+    let xml = br#"<g:GAEB xmlns:g="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3" xmlns:v="urn:vendor"><g:GAEBInfo><g:Version>3.3</g:Version><v:Version>9.9</v:Version></g:GAEBInfo><g:Award><g:DP>86</g:DP><v:DP>99</v:DP><v:Item ID="spoof"><v:Qty>999</v:Qty></v:Item><g:Item ID="real"><v:Qty>888</v:Qty><g:Qty>1.5</g:Qty><v:Description>spoof</v:Description></g:Item></g:Award></g:GAEB>"#;
+    let document = Document::parse(xml).unwrap();
+
+    assert_eq!(document.items().len(), 1);
+    assert!(document.item("spoof").is_none());
+    let item = document.item("real").unwrap();
+    assert_eq!(item.quantity.as_deref(), Some("1.5"));
+    assert_eq!(item.description, None);
+    assert_eq!(document.metadata().version_text.as_deref(), Some("3.3"));
+    assert_eq!(document.metadata().phase_code.as_deref(), Some("86"));
+}
+
+#[test]
+fn namespaced_vendor_id_does_not_become_a_gaeb_item_id() {
+    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3" xmlns:v="urn:vendor"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item v:ID="spoof"><Qty>1</Qty></Item></Award></GAEB>"#;
+    let document = Document::parse(xml).unwrap();
+
+    assert_eq!(document.items().len(), 1);
+    assert_eq!(document.items()[0].id, "");
+    assert!(document.item("spoof").is_none());
+}
+
+#[test]
+fn rejects_spoofed_namespaces_and_extra_root_elements() {
+    let spoof = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/not-gaeb"><GAEBInfo><Version>3.3</Version></GAEBInfo></GAEB>"#;
+    assert!(matches!(Document::parse(spoof), Err(Error::NotGaeb)));
+
+    let multiple = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo></GAEB><vendor/>"#;
+    assert!(matches!(Document::parse(multiple), Err(Error::Xml(_))));
+
+    let trailing_text = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo></GAEB>not-xml"#;
+    assert!(matches!(Document::parse(trailing_text), Err(Error::Xml(_))));
+}
+
+#[test]
+fn rejects_undeclared_namespace_prefixes() {
+    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><x:Item ID="bad"/></GAEB>"#;
+    assert!(matches!(Document::parse(xml), Err(Error::Xml(_))));
+}
+
+#[test]
 fn malformed_xml_is_an_error() {
     assert!(matches!(
         Document::parse(br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3">"#),

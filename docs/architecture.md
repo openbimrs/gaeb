@@ -29,9 +29,13 @@ extracted metadata/item views plus byte ranges for supported edits.
 
 - Unchanged output is exactly the input bytes.
 - Unknown elements and attributes are preserved because output is not regenerated.
-- A quantity edit replaces only the direct `<Qty>` text range.
+- Extraction resolves every element namespace against the GAEB root namespace;
+  vendor elements cannot impersonate GAEB fields by reusing local names.
+- A quantity edit replaces one complete text or CDATA range only. Entity-backed
+  text is replaced as a whole; comments, processing instructions, nested markup,
+  multiple `<Qty>` fields, and fragmented content make the value read-only.
 - Every edit reparses before commit; failure leaves the prior document unchanged.
-- Duplicate item IDs are rejected for mutation instead of choosing silently.
+- Empty or duplicate item IDs are rejected for mutation instead of choosing silently.
 
 The extracted `Item` is a common view, not a claim that all exchange phases use
 one identical schema type.
@@ -57,6 +61,9 @@ Description text is normalized only in the summary view. Raw XML remains exact.
 
 - Pure Rust and `unsafe` forbidden.
 - Content sniffing precedes parsing; extensions are not trusted.
+- The root must use one of the supported official GAEB namespace shapes, and
+  namespaced descendants are interpreted only when bound to that exact root namespace.
+- Undeclared prefixes, extra roots, and non-whitespace trailing content are rejected.
 - DTD/DOCTYPE documents are rejected; no external entities are loaded.
 - Edits accept only XML Schema decimal lexical forms.
 - ZIP handling is outside this crate because GAEB DA XML files are bare XML.
