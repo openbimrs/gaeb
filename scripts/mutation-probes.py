@@ -47,6 +47,20 @@ PROBES = (
         "            bytes: xml.to_vec(),",
         ("cargo", "test", "-p", "openbim-gaeb", "--test", "document", "unchanged_write_is_byte_identical_including_bom_and_unknown_xml"),
     ),
+    Probe(
+        "namespace-isolation",
+        "openbim-gaeb/src/parser.rs",
+        "if !current.gaeb {",
+        "if false && !current.gaeb {",
+        ("cargo", "test", "-p", "openbim-gaeb", "--test", "document", "ignores_vendor_elements_that_reuse_gaeb_local_names"),
+    ),
+    Probe(
+        "fragmented-quantity-fail-closed",
+        "openbim-gaeb/src/parser.rs",
+        "} else if !self.quantity_has_non_value_xml && self.quantity_fragments.len() == 1 {",
+        "} else if !self.quantity_fragments.is_empty() {",
+        ("cargo", "test", "-p", "openbim-gaeb", "--test", "editing", "quantity_comments_are_read_completely_but_edits_fail_closed"),
+    ),
 )
 
 

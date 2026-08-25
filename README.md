@@ -105,8 +105,8 @@ Requires Rust `1.85` or newer.
 
 The main gate checks formatting, all targets, tests, Clippy, rustdoc, and package
 contents from actual command exit codes. The mutation gate independently proves
-that version-conflict, decimal-validation, and BOM-preservation regressions are
-caught; CI runs both.
+that version-conflict, decimal-validation, BOM-preservation,
+namespace-isolation, and fragmented-edit regressions are caught; CI runs both.
 
 ## License
 
