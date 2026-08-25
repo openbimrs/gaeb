@@ -12,4 +12,4 @@ keywords = ["gaeb", "bim", "openbim", "construction", "xml"]
 categories = ["parser-implementations", "data-structures"]
 
 [dependencies]
-openbim-gaeb = { version = "0.1.0", path = "../openbim-gaeb" }
+openbim-gaeb = { version = "=0.1.0", path = "../openbim-gaeb" }
