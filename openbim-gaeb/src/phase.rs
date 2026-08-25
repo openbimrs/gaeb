@@ -113,3 +113,21 @@ impl fmt::Display for ExchangePhase {
         formatter.write_str(self.as_code())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::ExchangePhase;
+
+    #[test]
+    fn every_supported_dp_code_round_trips() {
+        for code in [
+            "31", "50.1", "50.2", "51.1", "51.2", "52", "61", "80", "81", "82", "83", "83Z", "84",
+            "84P", "84Z", "85", "86", "86ZE", "86ZR", "87", "88", "89", "89B", "93", "94", "96",
+            "97", "98", "99",
+        ] {
+            let phase = ExchangePhase::from_code(code).unwrap();
+            assert_eq!(phase.as_code(), code);
+            assert_eq!(phase.to_string(), code);
+        }
+    }
+}

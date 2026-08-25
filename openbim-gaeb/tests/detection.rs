@@ -46,3 +46,24 @@ fn surfaces_namespace_and_payload_disagreement() {
     assert!(kinds.contains(&DiagnosticKind::VersionMismatch));
     assert!(kinds.contains(&DiagnosticKind::PhaseMismatch));
 }
+
+#[test]
+fn coarse_50_namespace_accepts_specific_50_1_phase() {
+    let document = Document::parse(
+        br#"<g:GAEB xmlns:g="http://www.gaeb.de/GAEB_DA_XML/DA50/3.3"><g:GAEBInfo><g:Version>3.3</g:Version></g:GAEBInfo><g:Award><g:DP>50.1</g:DP></g:Award></g:GAEB>"#,
+    )
+    .unwrap();
+    assert_eq!(document.metadata().version, Some(GaebVersion::V3_3));
+    assert_eq!(document.metadata().namespace_phase, None);
+    assert_eq!(document.metadata().phase, Some(ExchangePhase::X50_1));
+    assert!(document.diagnostics().is_empty());
+}
+
+#[test]
+fn detects_phase_31_under_quantity_determination() {
+    let document = Document::parse(
+        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA31/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><QtyDeterm><DP>31</DP></QtyDeterm></GAEB>"#,
+    )
+    .unwrap();
+    assert_eq!(document.metadata().phase, Some(ExchangePhase::X31));
+}

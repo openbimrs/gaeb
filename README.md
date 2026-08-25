@@ -1,8 +1,6 @@
 # OpenBIM.rs GAEB
 
 [![CI](https://github.com/openbimrs/gaeb/actions/workflows/ci.yml/badge.svg)](https://github.com/openbimrs/gaeb/actions/workflows/ci.yml)
-[![crates.io](https://img.shields.io/crates/v/openbim-gaeb.svg)](https://crates.io/crates/openbim-gaeb)
-[![docs.rs](https://docs.rs/openbim-gaeb/badge.svg)](https://docs.rs/openbim-gaeb)
 [![MSRV](https://img.shields.io/badge/MSRV-1.85-blue)](https://www.rust-lang.org)
 
 Pure-Rust, lossless tools for working with GAEB DA XML bills of quantities.
@@ -43,14 +41,17 @@ lossless reader.
 
 ## Install
 
+The crates are not published yet. Install the canonical package directly from
+GitHub for now:
+
 ```bash
-cargo add gaeb
+cargo add --git https://github.com/openbimrs/gaeb.git openbim-gaeb
 ```
 
-Until the short alias is published, use the canonical package:
+After the first crates.io release, the short alias will be available as:
 
 ```bash
-cargo add openbim-gaeb
+cargo add gaeb
 ```
 
 ```rust
@@ -97,10 +98,13 @@ Requires Rust `1.85` or newer.
 
 ```bash
 ./scripts/gate.sh
+./scripts/mutation-probes.py
 ```
 
-The gate checks formatting, all targets, tests, Clippy, rustdoc, and package
-contents from actual command exit codes.
+The main gate checks formatting, all targets, tests, Clippy, rustdoc, and package
+contents from actual command exit codes. The mutation gate independently proves
+that version-conflict, decimal-validation, and BOM-preservation regressions are
+caught; CI runs both.
 
 ## License
 

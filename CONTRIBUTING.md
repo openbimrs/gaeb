@@ -6,6 +6,7 @@
 git clone https://github.com/openbimrs/gaeb.git
 cd gaeb
 ./scripts/gate.sh
+./scripts/mutation-probes.py
 ```
 
 Use Rust 1.85 or newer. Keep the workspace independently buildable from
@@ -27,5 +28,5 @@ confirmed redistribution license and an explicit repository decision.
 
 ## Pull requests
 
-Run `./scripts/gate.sh`. Keep commits focused and include the commands that prove
-the changed behavior.
+Run `./scripts/gate.sh` and `./scripts/mutation-probes.py`. Keep commits focused
+and include the commands that prove the changed behavior.

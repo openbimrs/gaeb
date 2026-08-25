@@ -11,6 +11,7 @@ Updated: 2026-08-25
 - [x] Common BoQ item summaries.
 - [x] Atomic quantity edit by unique item ID.
 - [x] Official example-corpus regression hook.
+- [x] Executable mutation probes for critical detection, validation, and preservation gates.
 
 ## Next
 

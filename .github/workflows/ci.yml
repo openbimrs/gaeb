@@ -20,3 +20,5 @@ jobs:
           components: rustfmt, clippy
       - name: Run verified gate
         run: ./scripts/gate.sh
+      - name: Run mutation probes
+        run: ./scripts/mutation-probes.py

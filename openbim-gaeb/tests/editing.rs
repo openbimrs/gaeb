@@ -57,3 +57,16 @@ fn duplicate_item_ids_are_not_edited_ambiguously() {
         Err(Error::AmbiguousItem(_))
     ));
 }
+
+#[test]
+fn quantity_edit_accounts_for_a_preserved_utf8_bom() {
+    let mut bytes = b"\xEF\xBB\xBF".to_vec();
+    bytes.extend_from_slice(&fixture());
+    let mut document = Document::parse(&bytes).unwrap();
+    document.set_item_quantity("item-1", "9").unwrap();
+
+    assert!(document.as_bytes().starts_with(b"\xEF\xBB\xBF"));
+    let xml = String::from_utf8_lossy(document.as_bytes());
+    assert!(xml.contains("<Qty>9</Qty>"));
+    assert!(!xml.contains("<Qty>1.000</Qty>"));
+}
