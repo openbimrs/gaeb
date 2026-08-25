@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - The release gate now verifies both published packages from clean source.
+- Alias purity now fails closed over Cargo dependency, feature, target, build,
+  and source shape, with 19 mutation probes and exact package allowlists.
+- CI now pins its runner and action revisions; local fallback targets are unique
+  per gate invocation.
 
 ### Fixed
 
