@@ -15,8 +15,5 @@ cargo test --workspace --all-features
 cargo clippy --workspace --all-targets --all-features -- -D warnings
 RUSTDOCFLAGS="-D warnings" cargo doc --workspace --all-features --no-deps
 scripts/check-alias-purity.sh
-cargo package --allow-dirty -p openbim-gaeb
-# Cargo requires the canonical dependency to exist in the registry before it can
-# package the alias. Until first publication, verify the alias file set plus its
-# normal workspace build/test above.
-cargo package --allow-dirty --list -p gaeb
+cargo package -p openbim-gaeb
+cargo package -p gaeb
