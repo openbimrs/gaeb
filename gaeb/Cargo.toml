@@ -1,0 +1,15 @@
+[package]
+name = "gaeb"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT"
+authors = ["point-grey"]
+repository = "https://github.com/openbimrs/gaeb"
+readme = "README.md"
+description = "Short-name re-export of the OpenBIM.rs GAEB implementation."
+keywords = ["gaeb", "bim", "openbim", "construction", "xml"]
+categories = ["parser-implementations", "data-structures"]
+
+[dependencies]
+openbim-gaeb = { version = "0.1.0", path = "../openbim-gaeb" }

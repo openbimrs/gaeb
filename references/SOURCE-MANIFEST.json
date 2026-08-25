@@ -1,0 +1,257 @@
+{
+  "files": {
+    "examples/gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X81": "7d085d057a42a37db4b9740fa09b83204b04698c23f432efa0f36d5f4ebcf29c",
+    "examples/gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X84": "a9220511f9aa0c1e81a448d40077858ebeb8af3829280679ed645983649068cd",
+    "examples/gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X83": "11d949a87213792b532950d7a66973d092b10aba66632bd07c0d264102b6d16b",
+    "examples/gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X86": "99fa9d3cd1cf30c273af7395f98750e65b75de25b27b79a1dc96b4d807218ca7",
+    "examples/gaeb-da-xml-3.2-2013-10/Beispiel_01_83Z_3.2_2014-03-24.X83Z": "2d9541beded7342cb74dde96c627274ee2aef7b5e36918e30ce2e8dc56ae0823",
+    "examples/gaeb-da-xml-3.2-2013-10/Beispiel_01_84Z_3.2_2014-03-24.X84Z": "7757a61b8327487165e3c35a00cde8ceb8226fd74b775c3e6311f22129f8ab42",
+    "examples/gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZE_3.2_2014-03-24.X86ZE": "a25225b94e041febfb8c9a1955c00653ff6d7328a8802b9e26559126e2548268",
+    "examples/gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZR_3.2_2014-03-24.X86ZR": "f69aadb4824368812bc28e2cedaabb6010153610affbb360808e70ac9c78e735",
+    "schema/gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd": "8db4edb24c6f5390650b527abe38d82e32dea2011e7f904234cf073fd6693817",
+    "schema/gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_84.xsd": "be4e7389e38386d1d0203b60180967ed52f2b540c05ca80d76cd4b200fcd0927",
+    "schema/gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_Order.xsd": "464f56ba306baa07d4add8ffb44fbbec2ccd516d4303980b62a7fe1b339eb0fa",
+    "schema/gaeb-da-xml-3.1-2007-11/xml.xsd": "068d7ed95badc1ccf1be78b47e97a3ad9f7d10e17d3d3d684606e62a85de20ed",
+    "schema/gaeb-da-xml-3.1-2007-11/xmldsig-core-schema.xsd": "51f45a96104c905697c5a708357c10e4311c04ff048dd78eeb5a264f835d0614",
+    "schema/gaeb-da-xml-3.1-2009-12/GAEB_DA_XML 3.1 2009-12.xsd": "4baa2b88e489ca9797ad63e8e6ee5af6fd2d93a312bd9b9a8b6ad660a48438c3",
+    "schema/gaeb-da-xml-3.1-2009-12/GAEB_DA_XML_84 3.1 2009-12.xsd": "f26d50c58c478fd7599c2a1f87a5d30451dce538ced3a4292c05e4e4200611de",
+    "schema/gaeb-da-xml-3.1-2009-12/xml.xsd": "068d7ed95badc1ccf1be78b47e97a3ad9f7d10e17d3d3d684606e62a85de20ed",
+    "schema/gaeb-da-xml-3.1-2009-12/xmldsig-core-schema.xsd": "af234e51dee3dbc3be288c79abdca95208e228f400259c8a485099bfb75eb88f",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_31_3.2_2013-10.xsd": "5d9030525bdd99b33be43b6664566e0da01d48f502c1b3af6b8fef4dd0defbba",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_52_3.2_2013-10.xsd": "cb0967aca269f5d2acb934dd4520755c8dbc360a6aa9b08fe0f6d226fef90767",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_80_3.2_2013-10.xsd": "8a18d58d77cae60b1fcf04c2c0045cf05d1d132f039d369c70d40a2b07728559",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_81_3.2_2013-10.xsd": "655f8a49716efd7186f6598c29b5208032060f57bc7f251c68d895ff0a7213f5",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_82_3.2_2013-10.xsd": "b4b87c159b5b7b6b58b36100415345ab2276776c3e76fcb5d41a33943f860434",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_83Z_3.2_2014-03.xsd": "55b59577b29ce2ffc88ed9c824a18cb5e06e88829a510daede32268a3af0e36c",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_83_3.2_2013-10.xsd": "51bcd0cc37c7851dbb89520d8a6663b9fcaa9982575476410432e346132c8f6e",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_84Z_3.2_2014-03.xsd": "9323874cc9817ea9a01fe04dd05029a4818a107026b21845959ab776f5134850",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_84_3.2_2013-10.xsd": "c57677b3b8be38371dabc9a83781049be483f0bd99eb9b771851ea9a6959ea5e",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_85_3.2_2013-10.xsd": "59b7d168e09dd3f0eb0c5469557f3b80e6b33948a87e5f49a9f916c3f8c047fe",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86ZE_3.2_2014-03.xsd": "6337a2f6d22916eaeb667cc0b6876c384e178399abf9b57ce056a62e309536d2",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86ZR_3.2_2014-03.xsd": "3cae38c0e488fd51c27275ad5258dd30c1a6843ce0b31a2f99ab0b39736592ae",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86_3.2_2013-10.xsd": "41e4da0a21f4164e625d867f5c0dc5a5c49be3075689668ee3e364b95cf75706",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_87_3.2_2013-10.xsd": "088965bb60676f77a40b8cb68fbbdb8ab4bc234fc9faf1e5059531422cd808fc",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_89_3.2_2013-10.xsd": "b7bb9a5941e8f1a1971ec792554806d7a7f471e0e855a71d4687bfd0954e089c",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_93_3.2_2013-10.xsd": "1a3d8cb0dfc988e6fb49259978142561cd1c4689f23816390b052b3388495ae3",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_94_3.2_2013-10.xsd": "bf76fc067bb3a5ef5e68e7fd8ff153871b0b0b934e80741d6ed4278e4774db90",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_96_3.2_2013-10.xsd": "5f391c94d38881335ceb7de2cd8e8f2850c7b217978c48605f5b9f95f1f348d3",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_97_3.2_2013-10.xsd": "7b266df83c3dbff72bd922f1ba8cea7f63d28b2f7cfda593a9773c2ad3d1f4ff",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_Lib_3.2_2013-10.xsd": "f8d736e96f3f2e1ba6e97aa0492dedad1c2064fafc502a7f70466b34b67d1f77",
+    "schema/gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_Lib_3.2_2014-03.xsd": "94980977cadc71ccb291005f37c40fd17cafa8776081a2736e0b214e780b5930",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_31_3.3_2021-05.xsd": "bbe4c1a21b22ff99b23ee0190a44b89fb1c5f29f7f04f0fe637091ebaa59fda5",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_50.1_3.3_2021-05.xsd": "3003517f9821e46095e9c780ef68014242aaa0c476961be78102237aaf47d961",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_50.2_3.3_2021-05.xsd": "968c389e9827d59b1305a390185f4741f586c5c96c706093b5a0e01b3578e662",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_50_3.3_2021-05.xsd": "ccde2540af0b735e8d6196eb3525bddf972b6d40a776775e0aa3570ce5c1719c",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_51.1_3.3_2021-05.xsd": "3b75db60ef5bce123c1c3143bf0fd930dfeab7e3cb04c8087e4c77c0b8dedaf5",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_51.2_3.3_2021-05.xsd": "6b60e9c0832a8d2bebaf182754500e54f37f8b0ed01b0209f049cc68be5f6f37",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_51_3.3_2021-05.xsd": "868b9a1c1048f1e99ef2dfe9ec6576d9626521181ee685603158a12406a79467",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_52_3.3_2021-05.xsd": "e35484e4e9c042430885476cdafce78b4e4021a8ee6e2a4e63baf2fb422855c1",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_61_3.3_2021-05_Beta.xsd": "a4899749ae71975364e92407824f4da6f37f9ec71d6e3f4bbc2fcfd2eec9928d",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_80_3.3_2021-05.xsd": "d8b1bda0a48725838aabae34333a2dfcf48edf3c05c764575e32622416bd2ff4",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_81_3.3_2021-05.xsd": "aa24ed698088308d38f1ff7612643e55e70a847f6b5d433aa10dcd6dfe6c3ea3",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_82_3.3_2021-05.xsd": "6fcf94f41aeac0a060d29251ca085e29aa659b1c6b2d4872a76788cc7512c52b",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_83Z_3.3_2021-05.xsd": "9d240ab53de426f0ceb5c31f508bc65e30f0f5133997038d2f1e48b6b60ffa6d",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_83_3.3_2021-05.xsd": "a963ca5b6a93ee0f7a83d3138272a4116635e30e7b288c6ba8761ed444cabaa8",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_84P_3.3_2021-05_Beta.xsd": "6dc7015068b5dd2b62ad29b0ab09795f9182c495df5af5debf6fc0a002057f36",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_84Z_3.3_2021-05.xsd": "ae58260cdbd8178b933827b66c82290e5ab15a2042b460d0069a616cfdf088fe",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_84_3.3_2021-05.xsd": "67282b688db3bb12a4ded22c7b677e30ce105f9d1f80d02d084be67156e1cc42",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_85_3.3_2021-05.xsd": "ca8661aa7c1202105e3cf87385880b9d1741664d43fa92c6dc209a5cfe3d91cb",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_86ZE_3.3_2021-05.xsd": "20cb0be3323e7d80ecc9d491ec4e4e6c25d1589b1bfb1960a22bc0c3098ac0c3",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_86ZR_3.3_2021-05.xsd": "31609b39c683cb46be8f85256b95113efcacc86db9e7a7be1b610e4a9471c9e5",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_86_3.3_2021-05.xsd": "334853ca68fe07c1321880c40f27b776c8133ec8c34207c63b0d438ab6e45e0d",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_87_3.3_2021-05.xsd": "1f351ad4e6e4d9db9175c51f24d22b2808adc14dbb0abd0858a3cca59389f125",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_89B_3.3_2021-05.xsd": "4055c4820deaf2e9431258cdba35dfb878480f69c14d5b8c52ff184915cbeac6",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_89_3.3_2021-05.xsd": "2b3a8e3fdff708980b8feeee312d9b9d81131eccbaab1ab8442280b6f8ab6b87",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_93_3.3_2021-05.xsd": "1ac02c1248d63688cf6a8d0f59c3f7b3594743c6416b9a038822568a47740496",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_94_3.3_2021-05.xsd": "2d33bb36b10b775dff511fb82cf864ec19e37a087a366d26883aede1534a4c27",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_96_3.3_2021-05.xsd": "f981e69f16a41cf9205e5620f26b65cf77931dc8a3ac4f036f7698484681f99f",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_97_3.3_2021-05.xsd": "da0a29ef4e09a43b751d34d8b249faaf44bb1b744ca84ede00676c03f71fddb3",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_98_3.3_2021-05_Beta.xsd": "7ab63b5b6a56d0747b719b52836e2f0f9914913533d7a999dd41f739c5c58a5c",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_99_3.3_2021-05_Beta.xsd": "22b100b7bca2abbd0d6047cbe27c94f85cf8e0be41e2c94672df76dc7d9b36ee",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_Lib5x_3.3_2021-05.xsd": "01480fc38c77fca4313eea997c68e8a26ca8f84eccc7127b34c2bac7ae053368",
+    "schema/gaeb-da-xml-3.3-2021-05/GAEB_DA_XML_Lib_3.3_2021-05.xsd": "a00cad3a5bfaf079de936393c0827c2387d4b9407c113359cca4b493903388ec",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_31_3.3_2023-01.xsd": "179b9d8c9a93145af63298270e44c2d1ae820bb850edd0ba284d5b7cbef01b56",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_50.1_3.3_2021-05.xsd": "3003517f9821e46095e9c780ef68014242aaa0c476961be78102237aaf47d961",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_50.2_3.3_2021-05.xsd": "968c389e9827d59b1305a390185f4741f586c5c96c706093b5a0e01b3578e662",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_50_3.3_2021-05.xsd": "ccde2540af0b735e8d6196eb3525bddf972b6d40a776775e0aa3570ce5c1719c",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_51.1_3.3_2021-05.xsd": "3b75db60ef5bce123c1c3143bf0fd930dfeab7e3cb04c8087e4c77c0b8dedaf5",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_51.2_3.3_2021-05.xsd": "6b60e9c0832a8d2bebaf182754500e54f37f8b0ed01b0209f049cc68be5f6f37",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_51_3.3_2021-05.xsd": "868b9a1c1048f1e99ef2dfe9ec6576d9626521181ee685603158a12406a79467",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_52_3.3_2021-05.xsd": "e35484e4e9c042430885476cdafce78b4e4021a8ee6e2a4e63baf2fb422855c1",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_61_3.3_2021-05_Beta.xsd": "a4899749ae71975364e92407824f4da6f37f9ec71d6e3f4bbc2fcfd2eec9928d",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_80_3.3_2021-05.xsd": "d8b1bda0a48725838aabae34333a2dfcf48edf3c05c764575e32622416bd2ff4",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_81_3.3_2021-05.xsd": "aa24ed698088308d38f1ff7612643e55e70a847f6b5d433aa10dcd6dfe6c3ea3",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_82_3.3_2021-05.xsd": "6fcf94f41aeac0a060d29251ca085e29aa659b1c6b2d4872a76788cc7512c52b",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_83Z_3.3_2021-05.xsd": "9d240ab53de426f0ceb5c31f508bc65e30f0f5133997038d2f1e48b6b60ffa6d",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_83_3.3_2021-05.xsd": "a963ca5b6a93ee0f7a83d3138272a4116635e30e7b288c6ba8761ed444cabaa8",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84P_3.3_2021-05_Beta.xsd": "6dc7015068b5dd2b62ad29b0ab09795f9182c495df5af5debf6fc0a002057f36",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84Z_3.3_2021-05.xsd": "ae58260cdbd8178b933827b66c82290e5ab15a2042b460d0069a616cfdf088fe",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84_3.3_2021-05.xsd": "67282b688db3bb12a4ded22c7b677e30ce105f9d1f80d02d084be67156e1cc42",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_85_3.3_2021-05.xsd": "ca8661aa7c1202105e3cf87385880b9d1741664d43fa92c6dc209a5cfe3d91cb",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86ZE_3.3_2021-05.xsd": "20cb0be3323e7d80ecc9d491ec4e4e6c25d1589b1bfb1960a22bc0c3098ac0c3",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86ZR_3.3_2021-05.xsd": "31609b39c683cb46be8f85256b95113efcacc86db9e7a7be1b610e4a9471c9e5",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86_3.3_2021-05.xsd": "334853ca68fe07c1321880c40f27b776c8133ec8c34207c63b0d438ab6e45e0d",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_87_3.3_2021-05.xsd": "1f351ad4e6e4d9db9175c51f24d22b2808adc14dbb0abd0858a3cca59389f125",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_89B_3.3_2021-05.xsd": "4055c4820deaf2e9431258cdba35dfb878480f69c14d5b8c52ff184915cbeac6",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_89_3.3_2021-05.xsd": "2b3a8e3fdff708980b8feeee312d9b9d81131eccbaab1ab8442280b6f8ab6b87",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_93_3.3_2021-05.xsd": "1ac02c1248d63688cf6a8d0f59c3f7b3594743c6416b9a038822568a47740496",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_94_3.3_2021-05.xsd": "2d33bb36b10b775dff511fb82cf864ec19e37a087a366d26883aede1534a4c27",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_96_3.3_2021-05.xsd": "f981e69f16a41cf9205e5620f26b65cf77931dc8a3ac4f036f7698484681f99f",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_97_3.3_2021-05.xsd": "da0a29ef4e09a43b751d34d8b249faaf44bb1b744ca84ede00676c03f71fddb3",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_98_3.3_2021-05_Beta.xsd": "7ab63b5b6a56d0747b719b52836e2f0f9914913533d7a999dd41f739c5c58a5c",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_99_3.3_2021-05_Beta.xsd": "22b100b7bca2abbd0d6047cbe27c94f85cf8e0be41e2c94672df76dc7d9b36ee",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_Lib5x_3.3_2021-05.xsd": "01480fc38c77fca4313eea997c68e8a26ca8f84eccc7127b34c2bac7ae053368",
+    "schema/gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_Lib_3.3_2021-05.xsd": "a00cad3a5bfaf079de936393c0827c2387d4b9407c113359cca4b493903388ec",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_31_3.4_2026-03.xsd": "2f9302091473bf00e77ede62c60b5cb8563f79ae1aa663f559ae08949e740781",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_50.1_3.4_2026-03.xsd": "1d422a5981be2808c5b756131a64e021d7d4bd83a4958fb0131bc65cc95a9852",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_50.2_3.4_2026-03.xsd": "4093a2b760ec4e35821bcb3b71b6e971a45a025c26527ccdd1bdaac3503e377a",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_50_3.4_2026-03.xsd": "206aac6a0b2b35d8a04293b7e77f462edc3d82d38eea97d8ab65f60c777fbe6f",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_51.1_3.4_2026-03.xsd": "ff6b53ea0c79a715e2ca8e6c6213f1d4781fbd64f5bfcba2f9501323577222ff",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_51.2_3.4_2026-03.xsd": "99af2b9b9346606844c63972ffc3d4ce45943607a702b190737187c335b10125",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_51_3.4_2026-03.xsd": "af967d918d13231a70be7d36265849053f4fc60903692b62f59d59a63f14cfa8",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_52_3.4_2026-03.xsd": "a3893fc1310d2800880f29176f11e7005995125010b48d1a36686b00efbdad69",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_61_3.4_2026-03.xsd": "cd08111151c7d40ed82a72e0e9561ba16a2b9a8415c106ed0cf5022a3084f6da",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_80_3.4_2026-03.xsd": "6975a5d1642c7daf663fb4ec47a904ea4c0fcc7b33d61cbef32ece7678429e81",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_81_3.4_2026-03.xsd": "7be1e01d0367083766f5bd9212a74534e06f3ea40571015ae2c9c18267a75698",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_82_3.4_2026-03.xsd": "e3f8d77e502bcd95c233ddb22a6bfea50f9a3a9c62aa0c8b1aee5f524c1cf62d",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_83Z_3.4_2026-03.xsd": "28df6c3e1f7e90649400fd2a8396ccf0aa85f92101797638b8aa7368fb872cd5",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_83_3.4_2026-03.xsd": "d9841e6952202d06c1dfb187b59b4f58b456a7b6271b9130dd77a2dfd443552c",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84P_3.4_2026-03.xsd": "4486c7bc49ca2b477872a875f8f239f2835ecafe2f5c96c1a461c099cc06715c",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84Z_3.4_2026-03.xsd": "486368ae4f846cbd154024034fea8f52a83277865feb05ef1eb8162ccaa0ce93",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84_3.4_2026-03.xsd": "c2f9ea47d5527e628bf34ab5ce55d1ec307827d8bc17ff5c1e6bc30245df868e",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_85_3.4_2026-03.xsd": "2355c5814b3e2f7e03a5a64ecf472627bd330a334b33f719acce9bd7242de3c4",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86ZE_3.4_2026-03.xsd": "596c0b75ca0b01dd3ff40da5f98b1f67016bc1ba8c623171994561e07c440733",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86ZR_3.4_2026-03.xsd": "ac98cf37aeec50f149f7cd62502cf1405674a961ddc23d9b2a1190ab136b0432",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86_3.4_2026-03.xsd": "2ed090a23da2ea6686fce5c5bd50d2c91f7f1ed983673e6bde5edc83ad34d8e8",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_87_3.4_2026-03.xsd": "cde296384182cebe6cf712db8ef0162dad65e35626d7fb9a1cbb73cd9c2404ef",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_89B_3.4_2026-03.xsd": "8ca5ea4504505cc628d616be3da6b4ed977a80134fa3cc4ab702c7323f0578b1",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_89_3.4_2026-03.xsd": "1272d6909c3bbaf2d1fe1c78a6b249406989eafe06329a9f59c7abee2c4e8aa8",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_93_3.4_2026-03.xsd": "82d14528aa674cea836f379605189838cd24d105f25310571d3fee1a874ecba9",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_94_3.4_2026-03.xsd": "a407735248e8a7b31e4bc90adce43f9f4ba519ae59556fe3af44f23849ed3182",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_96_3.4_2026-03.xsd": "a30090cb7b461f4c9225f749dc4dd46e3391f712f016d887956cd7157a197ccc",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_97_3.4_2026-03.xsd": "15830c6c26826c901a8d8f37eddb90eb6819fc09b6fb991cb25177e50ecddf50",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_98_3.4_2026-03.xsd": "5f266580f817db3cd46e9ee08e47f3e4237932a9b4ff7ce69b32ec992b6624a8",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_99_3.4_2026-03.xsd": "7f04fd55021a33a71dfa739feccf00d03e43b2ae68cc1893310b1fbbf1d4ee1c",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_Lib5x_3.4_2026-03.xsd": "56426c739bf63c405c82b663dca7c8fd6dc0f97c179cd889e738b34dfa70a5c0",
+    "schema/gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_Lib_3.4_2026-03.xsd": "f7065795c155f81b7be7062cf7715d9f24afb453d989b1985d7cd24612040bec"
+  },
+  "retrieved_at": "2026-08-25T09:44:21Z",
+  "source_archives": {
+    "2021-05_Beta.zip": {
+      "sha256": "80115f876e5cccba6ab1c47a64920cd532b4f3909985bee5c03cb367b49df548",
+      "size": 43454,
+      "url": "https://www.gaeb.de/wp-content/uploads/2021/06/2021-05_Beta.zip"
+    },
+    "2021-05_Handel.zip": {
+      "sha256": "7b9a8d2decd1a80fee8a0ec749f09bbd856c6ffa64ec757f7267405e3f51b60f",
+      "size": 35566,
+      "url": "https://www.gaeb.de/wp-content/uploads/2021/06/2021-05_Handel.zip"
+    },
+    "2021-05_Kosten_und_Kalkulation.zip": {
+      "sha256": "41fc1b1f0b999ffcf2c6d2766167cbacc7c0ba7f7d400d269be087e0a7898b70",
+      "size": 52329,
+      "url": "https://www.gaeb.de/wp-content/uploads/2021/06/2021-05_Kosten_und_Kalkulation.zip"
+    },
+    "2021-05_Leistungsverzeichnis.zip": {
+      "sha256": "d4f19a79c46119ba6a7bbca1067bc2a26ccadb60d1b5fd8a82725f45b491e203",
+      "size": 72036,
+      "url": "https://www.gaeb.de/wp-content/uploads/2021/06/2021-05_Leistungsverzeichnis.zip"
+    },
+    "2021-05_Mengenermittlung.zip": {
+      "sha256": "88e796ec1c26419edf4446dab24953a83b449c0983297ae9c7e25ca3500888f0",
+      "size": 34170,
+      "url": "https://www.gaeb.de/wp-content/uploads/2021/06/2021-05_Mengenermittlung.zip"
+    },
+    "2021-05_Rechnung.zip": {
+      "sha256": "fe54f6da6ccf5da36bb78bd07a97d5d7fe14d03c515459a4e9f45316595e91f1",
+      "size": 40631,
+      "url": "https://www.gaeb.de/wp-content/uploads/2021/06/2021-05_Rechnung.zip"
+    },
+    "2021-05_Zeitvertrag.zip": {
+      "sha256": "169335068c52cb9159546eb125cb5984ccfca1a73fbbd218d9ea85f1c000ff42",
+      "size": 46227,
+      "url": "https://www.gaeb.de/wp-content/uploads/2021/06/2021-05_Zeitvertrag.zip"
+    },
+    "2023-01_Mengenermittlung.zip": {
+      "sha256": "4301767daaddb79b5ea249f287d65eaa60debaf75dbbc6123ff44db6cd43c735",
+      "size": 33422,
+      "url": "https://www.gaeb.de/wp-content/uploads/2023/09/2023-01_Mengenermittlung.zip"
+    },
+    "2026-03_BETA-Schemadateien.zip": {
+      "sha256": "b1322633625147d7f936f72e4fd523b043b1e5d50e4529febdd74811c87cdb34",
+      "size": 1071303,
+      "url": "https://www.gaeb.de/wp-content/uploads/2025/11/2026-03_BETA-Schemadateien.zip"
+    },
+    "Handel.zip": {
+      "sha256": "571dba986fe7b8d9aca05ae24ab0956e72cf070a7dcb61a4ecc034d4406e647d",
+      "size": 31559,
+      "url": "https://www.gaeb.de/wp-content/uploads/2019/04/Handel.zip"
+    },
+    "Kalkulation_3.2_2013-10.zip": {
+      "sha256": "7fa4ee0701c5faef5b7a84c833161984bc2a7845173b3e9010f178713e8d3081",
+      "size": 32340,
+      "url": "https://www.gaeb.de/wp-content/uploads/2019/04/Kalkulation_3.2_2013-10.zip"
+    },
+    "Leistungsverzeichnis.zip": {
+      "sha256": "b655e955db75df43c82f49bea0a4246c19f25bcb2ad01186a6a14ffdae03fe76",
+      "size": 65636,
+      "url": "https://www.gaeb.de/wp-content/uploads/2019/04/Leistungsverzeichnis.zip"
+    },
+    "Mengenermittlung_3.2_2013-10.zip": {
+      "sha256": "f360a10886d164d7b4ddf297d3327b9e70a9b1194e50f76c4e59f88cf02d9267",
+      "size": 30419,
+      "url": "https://www.gaeb.de/wp-content/uploads/2019/04/Mengenermittlung_3.2_2013-10.zip"
+    },
+    "Musterdateien_GAEB_DA_XML_3.1_20-11-2007.zip": {
+      "sha256": "e7908a2692cd5580899a4af1a908b98ef357e733ac718f20b1595a0ee289993a",
+      "size": 1338366,
+      "url": "https://www.gaeb.de/wp-content/uploads/2022/11/Musterdateien_GAEB_DA_XML_3.1_20-11-2007.zip"
+    },
+    "Musterdateien_GAEB_DA_XML_3.1_2009-12.zip": {
+      "sha256": "81696335235298ebe876186215f868db4cf8374c62d69400d5351e42aa172491",
+      "size": 1338353,
+      "url": "https://www.gaeb.de/wp-content/uploads/2022/11/Musterdateien_GAEB_DA_XML_3.1_2009-12.zip"
+    },
+    "Rechnung_3.2_2013-10.zip": {
+      "sha256": "0250a104e048ee48249f3e457f598bf7fa5e215f01397a20cd5ead74da1775c4",
+      "size": 32033,
+      "url": "https://www.gaeb.de/wp-content/uploads/2019/04/Rechnung_3.2_2013-10.zip"
+    },
+    "Schema_GAEB_DA_XML_3.1_2009-12_X81-X83_u_X85-X87.zip": {
+      "sha256": "69c3d2e8c08088851e77c1dac173a2cc4314336f32896c43fae70494797b1cab",
+      "size": 17127,
+      "url": "https://www.gaeb.de/wp-content/uploads/2022/11/Schema_GAEB_DA_XML_3.1_2009-12_X81-X83_u_X85-X87.zip"
+    },
+    "Schema_GAEB_DA_XML_3.1_2009-12_X84.zip": {
+      "sha256": "531812b0b8b0618acf54af49d297c9269c0441aceefd5db0862ecbd7807f546e",
+      "size": 17217,
+      "url": "https://www.gaeb.de/wp-content/uploads/2022/11/Schema_GAEB_DA_XML_3.1_2009-12_X84.zip"
+    },
+    "Zeitvertrag_3.2_2014-03.zip": {
+      "sha256": "7b99e84c7726eaa7ac67cf4100b9058f9a853475a200e906aefd7687efb2beed",
+      "size": 41775,
+      "url": "https://www.gaeb.de/wp-content/uploads/2019/04/Zeitvertrag_3.2_2014-03.zip"
+    },
+    "Zeitvertrag_3.2_2014-03_Beispieldateien.zip": {
+      "sha256": "ab78d9175fcc8ee2e5d86d7d2bb97bbf2bd3cc04b813f6739897d4a3ec3c49bb",
+      "size": 13250,
+      "url": "https://www.gaeb.de/wp-content/uploads/2019/04/Zeitvertrag_3.2_2014-03_Beispieldateien.zip"
+    },
+    "schema_gaeb-da-xml-3.1_20-11-2007_X81-X83_u_X85-X88.zip": {
+      "sha256": "ec84698441a94f2e88fde9e746f95e3cf9dd005bd775e83a99444e366195bdc6",
+      "size": 17296,
+      "url": "https://www.gaeb.de/wp-content/uploads/2022/11/schema_gaeb-da-xml-3.1_20-11-2007_X81-X83_u_X85-X88.zip"
+    },
+    "schema_gaeb-da-xml-3.1_20-11-2007_X84.zip": {
+      "sha256": "29a75aba2c1a425e0baaee7985a2bd04b9a039f86e8f08d6759ebe5f892b84e1",
+      "size": 13913,
+      "url": "https://www.gaeb.de/wp-content/uploads/2022/11/schema_gaeb-da-xml-3.1_20-11-2007_X84.zip"
+    },
+    "schema_gaeb-da-xml-3.1_20-11-2007_X93_X94_X96_X97.zip": {
+      "sha256": "15d29cdf43d50ea9ab337c5f8e8c62dc709658282fad7b165e4f6ada15561348",
+      "size": 13477,
+      "url": "https://www.gaeb.de/wp-content/uploads/2022/11/schema_gaeb-da-xml-3.1_20-11-2007_X93_X94_X96_X97.zip"
+    }
+  },
+  "source_page": "https://www.gaeb.de/de/service/downloads/gaeb-datenaustausch/"
+}

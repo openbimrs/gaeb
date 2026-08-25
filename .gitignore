@@ -1,0 +1,6 @@
+/target/
+
+# Official GAEB reference payloads are downloaded locally. Their public
+# redistribution terms are not explicit enough to vendor them in this MIT repo.
+/references/schema/
+/references/examples/
