@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Use the dedicated upstream `quick-xml` crate directly and remove the abandoned
-  project-owned `openbim-codec-xml` dependency.
+  project-owned XML mechanics wrapper dependency.
 - The release gate now verifies both package archives and compiles the packaged
   alias against the candidate canonical package rather than a stale registry crate.
 - Alias purity now fails closed over Cargo dependency, feature, target, build,
