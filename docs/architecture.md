@@ -63,7 +63,8 @@ Description text is normalized only in the summary view. Raw XML remains exact.
 - Content sniffing precedes parsing; extensions are not trusted.
 - The root must use one of the supported official GAEB namespace shapes, and
   namespaced descendants are interpreted only when bound to that exact root namespace.
-- Undeclared prefixes, extra roots, and non-whitespace trailing content are rejected.
+- Undeclared prefixes, duplicate attributes, misplaced/repeated XML declarations,
+  extra roots, and non-whitespace trailing content are rejected.
 - DTD/DOCTYPE documents are rejected; no external entities are loaded.
 - Edits accept only XML Schema decimal lexical forms.
 - ZIP handling is outside this crate because GAEB DA XML files are bare XML.

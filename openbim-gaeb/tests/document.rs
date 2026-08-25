@@ -94,6 +94,38 @@ fn rejects_undeclared_namespace_prefixes() {
 }
 
 #[test]
+fn rejects_duplicate_attributes_instead_of_selecting_one() {
+    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><Award><Item ID="a" ID="b"><Qty>1</Qty></Item></Award></GAEB>"#;
+    assert!(matches!(Document::parse(xml), Err(Error::Xml(_))));
+}
+
+#[test]
+fn rejects_misplaced_or_repeated_xml_declarations() {
+    let nested =
+        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><?xml version="1.0"?></GAEB>"#;
+    assert!(matches!(Document::parse(nested), Err(Error::Xml(_))));
+
+    let repeated = br#"<?xml version="1.0"?><?xml version="1.0"?><GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"/>"#;
+    assert!(matches!(Document::parse(repeated), Err(Error::Xml(_))));
+}
+
+#[test]
+fn local_byte_corruptions_and_truncations_return_without_panicking() {
+    let seed = br#"<?xml version="1.0"?><GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item ID="i"><Qty><![CDATA[1.5]]></Qty></Item></Award></GAEB>"#;
+
+    for end in 0..seed.len() {
+        let _ = Document::parse(&seed[..end]);
+    }
+    for index in 0..seed.len() {
+        for replacement in [0, b'<', b'&', 0xff] {
+            let mut candidate = seed.to_vec();
+            candidate[index] = replacement;
+            let _ = Document::parse(candidate);
+        }
+    }
+}
+
+#[test]
 fn malformed_xml_is_an_error() {
     assert!(matches!(
         Document::parse(br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3">"#),

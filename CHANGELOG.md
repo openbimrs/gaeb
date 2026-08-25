@@ -29,7 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   processing instructions, nested markup, or repeated fields prevent one safe edit.
 - Edit entity-backed and CDATA-only quantities over their complete lexical ranges.
 - Reject missing IDs as mutation handles, spoofed namespaces, undeclared prefixes,
-  extra root elements, and non-whitespace trailing content.
+  duplicate attributes, misplaced/repeated XML declarations, extra root elements,
+  and non-whitespace trailing content.
 
 [Unreleased]: https://github.com/openbimrs/gaeb/commits/main
 [0.1.0]: https://crates.io/crates/openbim-gaeb/0.1.0

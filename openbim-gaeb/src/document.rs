@@ -94,7 +94,8 @@ impl Document {
     /// Replace an item's direct `<Qty>` value while preserving all other bytes.
     ///
     /// The edit is atomic: invalid decimals, missing/duplicate IDs, missing
-    /// quantity fields, or reparsing failures leave this document unchanged.
+    /// quantity fields, fragmented or mixed-content values, and reparsing failures
+    /// leave this document unchanged.
     pub fn set_item_quantity(&mut self, item_id: &str, quantity: &str) -> Result<(), Error> {
         if item_id.is_empty() {
             return Err(Error::ItemNotFound(item_id.to_owned()));

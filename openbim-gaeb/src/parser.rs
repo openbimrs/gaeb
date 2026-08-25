@@ -135,6 +135,7 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
     let mut metadata = None;
     let mut root_namespace = None;
     let mut root_closed = false;
+    let mut declaration_seen = false;
     let mut diagnostics = Vec::new();
     let mut items = Vec::new();
     let mut quantity_edits = Vec::new();
@@ -299,6 +300,14 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                     root_closed = true;
                 }
             }
+            Ok((_, Event::Decl(_))) => {
+                if declaration_seen || metadata.is_some() {
+                    return Err(Error::Xml(
+                        "XML declaration must appear at most once before the root".into(),
+                    ));
+                }
+                declaration_seen = true;
+            }
             Ok((_, Event::DocType(_))) => {
                 return Err(Error::Xml(
                     "DOCTYPE declarations are not supported in GAEB documents".into(),
@@ -322,7 +331,6 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                 }
                 break;
             }
-            Ok(_) => {}
             Err(error) => return Err(Error::Xml(error.to_string())),
         }
     }
@@ -350,7 +358,7 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
     })
 }
 
-fn resolved_namespace<'a>(resolved: ResolveResult<'a>) -> Result<Option<&'a [u8]>, Error> {
+fn resolved_namespace(resolved: ResolveResult<'_>) -> Result<Option<&[u8]>, Error> {
     match resolved {
         ResolveResult::Unbound => Ok(None),
         ResolveResult::Bound(namespace) => Ok(Some(namespace.into_inner())),
