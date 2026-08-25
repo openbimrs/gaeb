@@ -176,24 +176,6 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                     current_item.as_mut(),
                 );
             }
-            Ok(Event::GeneralRef(reference)) => {
-                if metadata.is_none() {
-                    return Err(Error::NotGaeb);
-                }
-                let name = str::from_utf8(reference.as_ref())
-                    .map_err(|error| Error::Xml(format!("non-UTF-8 entity reference: {error}")))?;
-                let escaped = format!("&{name};");
-                let decoded = unescape(&escaped)
-                    .map_err(|error| Error::Xml(format!("invalid XML entity: {error}")))?;
-                capture_text(
-                    &path,
-                    decoded.as_ref(),
-                    None,
-                    metadata.as_mut().expect("root established before entity"),
-                    &mut categories,
-                    current_item.as_mut(),
-                );
-            }
             Ok(Event::End(end)) => {
                 let local = str::from_utf8(end.local_name().as_ref())
                     .map_err(|error| Error::Xml(format!("non-UTF-8 element name: {error}")))?

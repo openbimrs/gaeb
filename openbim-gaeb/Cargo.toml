@@ -14,5 +14,5 @@ include = ["src/**", "tests/**", "examples/**", "Cargo.toml", "README.md", "LICE
 
 [dependencies]
 openbim-codec-xml = "0.1.0"
-quick-xml = "0.41"
+quick-xml = "0.37"
 thiserror = "2"
