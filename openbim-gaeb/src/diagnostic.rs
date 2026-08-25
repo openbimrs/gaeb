@@ -22,5 +22,7 @@ pub enum DiagnosticKind {
     PhaseMismatch,
     UnsupportedVersion,
     UnknownPhase,
+    DuplicateVersionDeclaration,
+    DuplicatePhaseDeclaration,
     MissingItemId,
 }

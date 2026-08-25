@@ -4,6 +4,13 @@ fn fixture() -> Vec<u8> {
     br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><BoQ><BoQBody><Itemlist><Item ID="item-1" RNoPart="10"><Qty>1.000</Qty><QU>m3</QU><vendor>keep me</vendor></Item></Itemlist></BoQBody></BoQ></Award></GAEB>"#.to_vec()
 }
 
+fn schema_items(phase: &str, items: &str) -> Vec<u8> {
+    format!(
+        r#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA{phase}/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>{phase}</DP><BoQ><BoQBody><Itemlist>{items}</Itemlist></BoQBody></BoQ></Award></GAEB>"#
+    )
+    .into_bytes()
+}
+
 #[test]
 fn quantity_edit_changes_only_the_target_text_and_reparses() {
     let before = fixture();
@@ -40,8 +47,8 @@ fn quantity_edit_distinguishes_missing_item_and_missing_quantity() {
         Err(Error::ItemNotFound(_))
     ));
 
-    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA84/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>84</DP><Item ID="priced"><UP>1.0</UP></Item></Award></GAEB>"#;
-    let mut document = Document::parse(xml).unwrap();
+    let xml = schema_items("84", r#"<Item ID="priced"><UP>1.0</UP></Item>"#);
+    let mut document = Document::parse(&xml).unwrap();
     assert!(matches!(
         document.set_item_quantity("priced", "1"),
         Err(Error::QuantityMissing(_))
@@ -50,8 +57,11 @@ fn quantity_edit_distinguishes_missing_item_and_missing_quantity() {
 
 #[test]
 fn duplicate_item_ids_are_not_edited_ambiguously() {
-    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item ID="dup"><Qty>1</Qty></Item><Item ID="dup"><Qty>2</Qty></Item></Award></GAEB>"#;
-    let mut document = Document::parse(xml).unwrap();
+    let xml = schema_items(
+        "86",
+        r#"<Item ID="dup"><Qty>1</Qty></Item><Item ID="dup"><Qty>2</Qty></Item>"#,
+    );
+    let mut document = Document::parse(&xml).unwrap();
     assert!(matches!(
         document.set_item_quantity("dup", "3"),
         Err(Error::AmbiguousItem(_))
@@ -60,8 +70,8 @@ fn duplicate_item_ids_are_not_edited_ambiguously() {
 
 #[test]
 fn quantity_entities_are_read_completely_and_replaced_as_one_value() {
-    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item ID="entity"><Qty>1&#x2E;5</Qty></Item></Award></GAEB>"#;
-    let mut document = Document::parse(xml).unwrap();
+    let xml = schema_items("86", r#"<Item ID="entity"><Qty>1&#x2E;5</Qty></Item>"#);
+    let mut document = Document::parse(&xml).unwrap();
     assert_eq!(
         document.item("entity").unwrap().quantity.as_deref(),
         Some("1.5")
@@ -73,8 +83,11 @@ fn quantity_entities_are_read_completely_and_replaced_as_one_value() {
 
 #[test]
 fn quantity_comments_are_read_completely_but_edits_fail_closed() {
-    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item ID="split"><Qty>1<!-- preserve -->.5</Qty></Item></Award></GAEB>"#;
-    let mut document = Document::parse(xml).unwrap();
+    let xml = schema_items(
+        "86",
+        r#"<Item ID="split"><Qty>1<!-- preserve -->.5</Qty></Item>"#,
+    );
+    let mut document = Document::parse(&xml).unwrap();
     let before = document.as_bytes().to_vec();
     assert_eq!(
         document.item("split").unwrap().quantity.as_deref(),
@@ -90,8 +103,11 @@ fn quantity_comments_are_read_completely_but_edits_fail_closed() {
 
 #[test]
 fn cdata_quantity_is_read_and_edited_inside_the_cdata_section() {
-    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item ID="cdata"><Qty><![CDATA[1.5]]></Qty></Item></Award></GAEB>"#;
-    let mut document = Document::parse(xml).unwrap();
+    let xml = schema_items(
+        "86",
+        r#"<Item ID="cdata"><Qty><![CDATA[1.5]]></Qty></Item>"#,
+    );
+    let mut document = Document::parse(&xml).unwrap();
     assert_eq!(
         document.item("cdata").unwrap().quantity.as_deref(),
         Some("1.5")
@@ -103,8 +119,8 @@ fn cdata_quantity_is_read_and_edited_inside_the_cdata_section() {
 
 #[test]
 fn missing_item_ids_cannot_be_used_as_mutation_handles() {
-    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item><Qty>1</Qty></Item></Award></GAEB>"#;
-    let mut document = Document::parse(xml).unwrap();
+    let xml = schema_items("86", "<Item><Qty>1</Qty></Item>");
+    let mut document = Document::parse(&xml).unwrap();
     let before = document.as_bytes().to_vec();
 
     assert!(document.item("").is_none());
@@ -116,10 +132,25 @@ fn missing_item_ids_cannot_be_used_as_mutation_handles() {
 }
 
 #[test]
-fn duplicate_quantity_elements_are_not_edited_ambiguously() {
-    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>86</DP><Item ID="dup-qty"><Qty>1</Qty><Qty>2</Qty></Item></Award></GAEB>"#;
+fn nested_quantity_markup_is_not_exposed_as_a_fabricated_value() {
+    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3"><Award><BoQ><BoQBody><Itemlist><Item ID="nested"><Qty>1<X>2</X>3</Qty></Item></Itemlist></BoQBody></BoQ></Award></GAEB>"#;
     let mut document = Document::parse(xml).unwrap();
+    assert_eq!(document.item("nested").unwrap().quantity, None);
+    assert!(matches!(
+        document.set_item_quantity("nested", "9"),
+        Err(Error::QuantityNotEditable(id)) if id == "nested"
+    ));
+}
+
+#[test]
+fn duplicate_quantity_elements_are_not_edited_ambiguously() {
+    let xml = schema_items(
+        "86",
+        r#"<Item ID="dup-qty"><Qty>1</Qty><Qty>2</Qty></Item>"#,
+    );
+    let mut document = Document::parse(&xml).unwrap();
     let before = document.as_bytes().to_vec();
+    assert_eq!(document.item("dup-qty").unwrap().quantity, None);
 
     assert!(matches!(
         document.set_item_quantity("dup-qty", "3"),

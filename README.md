@@ -21,14 +21,14 @@ safely replaceable XML text or CDATA range. Mixed-content values fail closed.
 
 | Capability | Status |
 | --- | --- |
-| GAEB DA XML 3.1 recognition | Implemented and tested |
+| Exact official namespace/version matrix, including both 3.1 namespaces | Implemented and tested |
 | GAEB DA XML 3.2 recognition | Implemented and official-example tested |
-| GAEB DA XML 3.3 recognition | Implemented and synthetic-fixture tested |
-| GAEB DA XML 3.4 beta recognition | Implemented; explicitly marked beta |
+| GAEB DA XML 3.3 recognition | Implemented and synthetic-fixture tested; some phases are beta |
+| GAEB DA XML 3.4 beta recognition | Implemented; generation explicitly marked beta |
 | Namespace-resolved `<Version>` / `<DP>` conflict diagnostics | Implemented |
 | Byte-identical unchanged round trip | Implemented |
-| Common BoQ item view (`ID`, number, quantity, unit, prices, description) | Implemented |
-| Safe quantity edit by unique, non-empty item ID | Implemented; mixed-content values are read but not mutated |
+| Common BoQ item view (`ID`, number, quantity, unit, prices, direct description) | Implemented for schema-positioned `Itemlist/Item` |
+| Safe quantity edit by unique, non-empty item ID | Implemented for one complete scalar range; nested/repeated values are not exposed |
 | Full typed binding for every exchange phase | Not implemented |
 | XSD validation | Not implemented |
 | Business-rule validation | Not implemented |
@@ -72,9 +72,11 @@ assert_eq!(document.as_bytes(), xml);
 
 ## XML boundary
 
-GAEB uses `quick-xml` directly for XML mechanics and owns its small
-BOM/content detection policy beside the parser. Streaming element interpretation,
-exchange phases, BoQ semantics, diagnostics, and edits remain here.
+The crate uses dedicated upstream XML infrastructure (`quick-xml`) directly and
+owns its small BOM/content-detection policy beside the parser. GAEB-specific
+strict parsing policy, namespace resolution, exchange phases, BoQ semantics,
+diagnostics, and lossless edits remain here; no project-owned generic XML/ZIP
+abstraction leaks policy across different openBIM formats.
 
 See [`docs/architecture.md`](docs/architecture.md).
 
@@ -104,8 +106,10 @@ Requires Rust `1.85` or newer.
 
 The main gate checks formatting, all targets, tests, Clippy, rustdoc, and package
 contents from actual command exit codes. The mutation gate independently proves
-that version-conflict, decimal-validation, BOM-preservation,
-namespace-isolation, and fragmented-edit regressions are caught; CI runs both.
+that version conflicts, decimal validation, BOM preservation, namespace
+isolation, attribute-prefix validation, exact namespace matrices, schema-scoped
+items/descriptions/phases, empty/repeated evidence stability, and fragmented or nested
+quantity handling remain enforced; CI runs both.
 
 ## License
 

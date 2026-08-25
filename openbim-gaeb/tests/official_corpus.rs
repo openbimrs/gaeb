@@ -33,5 +33,17 @@ fn parses_every_official_example_losslessly() {
             path.display(),
             document.diagnostics()
         );
+        if path.extension().and_then(|extension| extension.to_str()) == Some("X81") {
+            let description = document
+                .item("DBDGLGKI")
+                .and_then(|item| item.description.as_deref())
+                .expect("official X81 item DBDGLGKI has a direct description");
+            assert_eq!(description.chars().count(), 304, "{}", path.display());
+            assert!(
+                !description.contains("Unterkonstruktion"),
+                "{}",
+                path.display()
+            );
+        }
     }
 }

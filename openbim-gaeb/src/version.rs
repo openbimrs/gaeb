@@ -3,7 +3,7 @@ use std::fmt;
 /// A GAEB DA XML schema generation.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum GaebVersion {
-    /// Legacy GAEB DA XML 3.1 using the shared `200407` namespace.
+    /// Legacy GAEB DA XML 3.1 using the official `200407` or order `200706` namespace.
     V3_1,
     /// GAEB DA XML 3.2.
     V3_2,
@@ -38,7 +38,10 @@ impl GaebVersion {
         }
     }
 
-    /// Whether this generation is currently published only as beta material.
+    /// Whether this whole generation is currently published only as beta material.
+    ///
+    /// This is generation-level status only: the stable 3.3 generation also
+    /// contains phase-specific beta schemas (including X61, X84P, X98, and X99).
     #[must_use]
     pub const fn is_beta(self) -> bool {
         matches!(self, Self::V3_4Beta)

@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Use the dedicated upstream `quick-xml` crate directly and remove the abandoned
+  project-owned `openbim-codec-xml` dependency.
 - The release gate now verifies both published packages from clean source.
 - Alias purity now fails closed over Cargo dependency, feature, target, build,
   and source shape, with 19 mutation probes and exact package allowlists.
@@ -34,8 +36,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   processing instructions, nested markup, or repeated fields prevent one safe edit.
 - Edit entity-backed and CDATA-only quantities over their complete lexical ranges.
 - Reject missing IDs as mutation handles, spoofed namespaces, undeclared prefixes,
-  duplicate attributes, misplaced/repeated XML declarations, extra root elements,
-  and non-whitespace trailing content.
+  unknown entities, malformed UTF-8, XML 1.0-forbidden characters, duplicate
+  attributes, misplaced/repeated XML declarations, extra root elements, and
+  non-whitespace trailing content.
+- Restrict namespace recognition to the exact pinned official matrix, including
+  the GAEB 3.1 `200706` order namespace, rather than accepting synthetic
+  phase/version products.
+- Scope metadata, phase, category, item, scalar, and description extraction to
+  their schema-defined structural parents; repeated metadata evidence receives
+  stable duplicate diagnostics.
+- Do not expose a fabricated quantity or description when nested markup,
+  duplicate fields, or subordinate descriptions make the common view ambiguous.
 
 ## [0.1.0] - 2026-08-25
 

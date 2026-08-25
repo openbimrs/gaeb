@@ -1,4 +1,4 @@
-use openbim_gaeb::{DiagnosticKind, Document, ExchangePhase, GaebVersion};
+use openbim_gaeb::{DiagnosticKind, Document, Error, ExchangePhase, GaebVersion};
 
 #[test]
 fn detects_stable_33_from_consistent_namespace_header_and_phase() {
@@ -60,10 +60,160 @@ fn coarse_50_namespace_accepts_specific_50_1_phase() {
 }
 
 #[test]
+fn duplicate_version_and_phase_declarations_are_explicitly_diagnosed() {
+    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3"><GAEBInfo><Version>3.3</Version><Version>3.4</Version></GAEBInfo><Award><DP>83</DP><DP>84</DP></Award></GAEB>"#;
+    let document = Document::parse(xml).unwrap();
+
+    assert!(document
+        .diagnostics()
+        .iter()
+        .any(|diagnostic| diagnostic.kind == DiagnosticKind::DuplicateVersionDeclaration));
+    assert!(document
+        .diagnostics()
+        .iter()
+        .any(|diagnostic| diagnostic.kind == DiagnosticKind::DuplicatePhaseDeclaration));
+    assert_eq!(document.metadata().version_text.as_deref(), Some("3.3"));
+    assert_eq!(document.metadata().phase_code.as_deref(), Some("83"));
+}
+
+#[test]
+fn only_schema_defined_top_level_phase_locations_are_interpreted() {
+    let misplaced = Document::parse(
+        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/200407"><Anything><DP>83</DP></Anything></GAEB>"#,
+    )
+    .unwrap();
+    assert_eq!(misplaced.metadata().phase, None);
+
+    let x61 = Document::parse(
+        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA61/3.3"><GAEBInfo><DP>61</DP></GAEBInfo></GAEB>"#,
+    )
+    .unwrap();
+    assert_eq!(x61.metadata().phase, Some(ExchangePhase::X61));
+}
+
+#[test]
+fn empty_version_and_phase_elements_still_count_as_declarations() {
+    let xml = br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3"><GAEBInfo><Version/><Version>3.3</Version></GAEBInfo><Award><DP/><DP>83</DP></Award></GAEB>"#;
+    let document = Document::parse(xml).unwrap();
+
+    assert_eq!(document.metadata().version_text, None);
+    assert_eq!(document.metadata().phase_code, None);
+    assert!(document
+        .diagnostics()
+        .iter()
+        .any(|diagnostic| diagnostic.kind == DiagnosticKind::DuplicateVersionDeclaration));
+    assert!(document
+        .diagnostics()
+        .iter()
+        .any(|diagnostic| diagnostic.kind == DiagnosticKind::DuplicatePhaseDeclaration));
+}
+
+#[test]
 fn detects_phase_31_under_quantity_determination() {
     let document = Document::parse(
         br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA31/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><QtyDeterm><DP>31</DP></QtyDeterm></GAEB>"#,
     )
     .unwrap();
     assert_eq!(document.metadata().phase, Some(ExchangePhase::X31));
+}
+
+#[test]
+fn recognizes_only_namespaces_present_in_the_official_schema_snapshots() {
+    let cases = [
+        ("http://www.gaeb.de/GAEB_DA_XML/200407", GaebVersion::V3_1),
+        ("http://www.gaeb.de/GAEB_DA_XML/200706", GaebVersion::V3_1),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA31/3.2", GaebVersion::V3_2),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA52/3.2", GaebVersion::V3_2),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA80/3.2", GaebVersion::V3_2),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA81/3.2", GaebVersion::V3_2),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA82/3.2", GaebVersion::V3_2),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA83/3.2", GaebVersion::V3_2),
+        (
+            "http://www.gaeb.de/GAEB_DA_XML/DA83Z/3.2",
+            GaebVersion::V3_2,
+        ),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA84/3.2", GaebVersion::V3_2),
+        (
+            "http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.2",
+            GaebVersion::V3_2,
+        ),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA85/3.2", GaebVersion::V3_2),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA86/3.2", GaebVersion::V3_2),
+        (
+            "http://www.gaeb.de/GAEB_DA_XML/DA86ZE/3.2",
+            GaebVersion::V3_2,
+        ),
+        (
+            "http://www.gaeb.de/GAEB_DA_XML/DA86ZR/3.2",
+            GaebVersion::V3_2,
+        ),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA87/3.2", GaebVersion::V3_2),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA89/3.2", GaebVersion::V3_2),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA93/3.2", GaebVersion::V3_2),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA94/3.2", GaebVersion::V3_2),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA96/3.2", GaebVersion::V3_2),
+        ("http://www.gaeb.de/GAEB_DA_XML/DA97/3.2", GaebVersion::V3_2),
+    ];
+    for (namespace, expected) in cases {
+        let xml = format!(r#"<GAEB xmlns="{namespace}"/>"#);
+        let document = Document::parse(xml.as_bytes())
+            .unwrap_or_else(|error| panic!("official namespace {namespace} was rejected: {error}"));
+        assert_eq!(document.metadata().namespace_version, Some(expected));
+    }
+
+    for (version, expected, phases) in [
+        (
+            "3.3",
+            GaebVersion::V3_3,
+            "31,50,51,52,61,80,81,82,83,83Z,84,84P,84Z,85,86,86ZE,86ZR,87,89,89B,93,94,96,97,98,99",
+        ),
+        (
+            "3.4",
+            GaebVersion::V3_4Beta,
+            "31,50,51,52,61,80,81,82,83,83Z,84,84P,84Z,85,86,86ZE,86ZR,87,89,89B,93,94,96,97,98,99",
+        ),
+    ] {
+        for phase in phases.split(',') {
+            let namespace = format!("http://www.gaeb.de/GAEB_DA_XML/DA{phase}/{version}");
+            let xml = format!(r#"<GAEB xmlns="{namespace}"/>"#);
+            let document = Document::parse(xml.as_bytes()).unwrap_or_else(|error| {
+                panic!("official namespace {namespace} was rejected: {error}")
+            });
+            assert_eq!(document.metadata().namespace_version, Some(expected));
+        }
+    }
+}
+
+#[test]
+fn rejects_nonexistent_namespace_version_phase_products() {
+    for namespace in [
+        "http://www.gaeb.de/GAEB_DA_XML/DA50.1/3.3",
+        "http://www.gaeb.de/GAEB_DA_XML/DA88/3.3",
+        "http://www.gaeb.de/GAEB_DA_XML/DA99/3.2",
+        "http://www.gaeb.de/GAEB_DA_XML/DA81/3.1",
+    ] {
+        let xml = format!(r#"<GAEB xmlns="{namespace}"/>"#);
+        assert!(matches!(Document::parse(xml), Err(Error::NotGaeb)));
+    }
+}
+
+#[test]
+fn accepts_official_31_order_namespace_and_ambiguous_84_phase() {
+    let order = Document::parse(
+        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/200706"><GAEBInfo><Version>3.1</Version></GAEBInfo><Award><DP>93</DP></Award></GAEB>"#,
+    )
+    .unwrap();
+    assert_eq!(order.metadata().phase, Some(ExchangePhase::X93));
+    assert!(order.diagnostics().is_empty());
+
+    let x84z = Document::parse(
+        br#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA84/3.3"><GAEBInfo><Version>3.3</Version></GAEBInfo><Award><DP>84Z</DP></Award></GAEB>"#,
+    )
+    .unwrap();
+    assert_eq!(x84z.metadata().namespace_phase, None);
+    assert_eq!(x84z.metadata().phase, Some(ExchangePhase::X84Z));
+    assert!(!x84z
+        .diagnostics()
+        .iter()
+        .any(|diagnostic| diagnostic.kind == DiagnosticKind::PhaseMismatch));
 }
