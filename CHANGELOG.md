@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and source shape, with 19 mutation probes and exact package allowlists.
 - CI now pins its runner and action revisions; local fallback targets are unique
   per gate invocation.
-- Removed the `openbim-codec-xml` wrapper dependency. GAEB now uses `quick-xml`
+- Removed the shared XML sniffing wrapper dependency. GAEB now uses `quick-xml`
   directly and keeps BOM/content detection beside its adapter policy.
 
 ### Fixed
