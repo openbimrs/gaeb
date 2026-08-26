@@ -29,21 +29,26 @@ safely replaceable XML text or CDATA range. Mixed-content values fail closed.
 | Byte-identical unchanged round trip | Implemented |
 | Common BoQ item view (`ID`, number, quantity, unit, prices, direct description) | Implemented for schema-positioned `Itemlist/Item` |
 | Safe quantity edit by unique, non-empty item ID | Implemented for one complete scalar range; nested/repeated values are not exposed |
-| Full typed binding for every exchange phase | Not implemented |
-| XSD validation | Not implemented |
-| Business-rule validation | Not implemented |
+| Typed bindings | Opt-in sibling crate; fixture/XSD/decimal-round-trip proven for GAEB 3.1 X81, X83, and X86 only |
+| Caller-provided XSD validation | Implemented; eight official fixture profiles and all 126 official XSDs verified locally |
+| Business-rule validation | 18 checks with pairwise executable coverage; 3 narrowly scoped conformance errors and 15 explicitly advisory `GAEB-LINT` warnings; see [`docs/business-rules.md`](docs/business-rules.md) |
 
-No full-schema or business-validation capability should be inferred from the
-lossless reader.
+Typed or business support must not be inferred from namespace recognition alone.
 
 ## Crates
 
 | Crate | Purpose |
 | --- | --- |
-| [`openbim-gaeb`](openbim-gaeb/) | Canonical implementation and public types |
+| [`openbim-gaeb`](openbim-gaeb/) | Lossless core, exact support manifests, XSD validation, and business checks |
+| [`openbim-gaeb-bindings`](openbim-gaeb-bindings/) | Opt-in generated typed bindings for fixture-proven profiles |
 | [`gaeb`](gaeb/) | Short-name compatibility re-export |
 
 ## Install
+
+The commands below install the last registry release. The unreleased XSD and
+typed-binding work in this repository is source-only while its required
+`xsd-schema` fix remains Git-pinned; all three manifests deliberately set
+`publish = false`.
 
 Use either package name:
 

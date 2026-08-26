@@ -6,15 +6,18 @@
 `openbimrs/openbim` pins a verified commit at `packages/gaeb` and provides
 cross-standard integration and the optional `openbim` facade feature.
 
-The child repository is independently buildable. Published dependencies use
-versions rather than paths outside this repository.
+The child repository is independently buildable and uses no dependency paths
+outside this repository. The required `xsd-schema` fork is Git-pinned and all
+packages remain non-publishable until an equivalent registry release exists.
 
 ## Dependency direction
 
 ```text
-quick-xml + iri-string  <-  openbim-gaeb  <-  gaeb alias
-                                    ^
-openbim facade  ---------------------+
+quick-xml + iri-string + roxmltree + xsd-schema  <-  openbim-gaeb  <-  gaeb alias
+                                                          ^
+quick-xml + xsd-parser-types  <-  openbim-gaeb-bindings --+
+                                                          ^
+openbim facade  -------------------------------------------+
 ```
 
 The dedicated upstream `quick-xml` crate provides streaming XML mechanics, while
@@ -63,10 +66,30 @@ because the official 2026-03 bundle is beta; GAEB 3.3 is the stable generation,
 although its official matrix also includes phase-specific beta schemas such as
 X61, X84P, X98, and X99.
 
+## Validation and typed boundaries
+
+`openbim-gaeb` compiles caller-provided schema roots with the pinned
+`xsd-schema` revision. Strict schema-derivation validation is the default; the
+trusted-corpus opt-out skips only that consistency stage. Directive resolution,
+nested redefine/include traversal, reference resolution, and streaming instance
+validation remain enabled. `support-matrix.csv` dispatches by declared version,
+exact version date, exact phase, and exact namespace—not filenames.
+
+Generated bindings live in `openbim-gaeb-bindings`. A non-empty typed module in
+the runtime matrix is a release claim and therefore requires official-fixture
+parse → typed write → reparse, exact-root XSD validation, and exact decimal
+value retention. The current typed claim is limited to GAEB 3.1 X81, X83, and
+X86; X84 and all 3.2 rows remain untyped. Generated inputs and reviewed
+corrections are recorded in [`generated-bindings.md`](generated-bindings.md).
+Official schema and fixture bytes remain caller-provided.
+
 ## Resource behavior
 
 Parsing is streaming over the source bytes. Memory is the owned source plus the
-extracted item/category summaries; there is no second general-purpose XML tree.
+extracted item/category summaries; there is no second general-purpose XML tree
+in the lossless document. Business validation builds a short-lived `roxmltree`
+view on demand and drops it with the validation call. XSD validation streams the
+instance through the precompiled schema set. Generated typed bindings are opt-in.
 Description text is normalized only in the summary view. Raw XML remains exact.
 
 ## Security posture

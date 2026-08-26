@@ -151,8 +151,11 @@ try:
     MANIFEST.write_text(text.replace(marker, ""))
     reject("package-rust-version", lambda: assert_true(alias_package()["rust_version"] is None, "rust-version mutation inactive"))
 
-    insert_package_field("publish = false")
-    reject("package-publish-disabled", lambda: assert_true(alias_package()["publish"] == [], "publish mutation inactive"))
+    text = MANIFEST.read_text()
+    marker = "publish = false\n"
+    assert_true(text.count(marker) == 1, "publish marker is not unique")
+    MANIFEST.write_text(text.replace(marker, ""))
+    reject("package-publish-enabled", lambda: assert_true(alias_package()["publish"] is None, "publish mutation inactive"))
 
     text = MANIFEST.read_text()
     marker = f'version = "{VERSION}"'

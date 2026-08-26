@@ -1,0 +1,4035 @@
+{
+  "manifest": {
+    "claim_semantics": {
+      "dispatch_edge_key": [
+        "generation",
+        "namespace",
+        "phase",
+        "snapshot"
+      ],
+      "ordering_rule": "UTF-8 JSON, lexicographically sorted object keys and IDs; support rows use generation then published phase order.",
+      "runtime_fixture_dispatch_key": [
+        "generation",
+        "namespace",
+        "version_date",
+        "phase"
+      ],
+      "selection_rule": "Exact support-row lookup by generation, namespace, version_date, and phase, then exact snapshot dispatch; never independently combine dimensions.",
+      "support_row_key": [
+        "generation",
+        "namespace",
+        "phase"
+      ]
+    },
+    "counts": {
+      "active_phase_roots": 80,
+      "dispatch_edges": 93,
+      "fixture_backed_rows": 8,
+      "known_parser_policy_false_positives": 3,
+      "official_fixtures": 8,
+      "schema_corpus_files": 126,
+      "schema_only_rows": 79,
+      "semantic_support_rows": 87
+    },
+    "fixtures": [
+      {
+        "bytes": 717644,
+        "generation": "3.1",
+        "id": "fixture:gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X81",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "path": "gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X81",
+        "phase": "81",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd",
+        "sha256": "7d085d057a42a37db4b9740fa09b83204b04698c23f432efa0f36d5f4ebcf29c",
+        "source_manifest_path": "examples/gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X81",
+        "support_row_id": "gaeb-3.1-x81",
+        "version_date": "2007-06",
+        "xsd_validation": "accepted"
+      },
+      {
+        "bytes": 21334,
+        "generation": "3.1",
+        "id": "fixture:gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X84",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "path": "gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X84",
+        "phase": "84",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_84.xsd",
+        "sha256": "a9220511f9aa0c1e81a448d40077858ebeb8af3829280679ed645983649068cd",
+        "source_manifest_path": "examples/gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X84",
+        "support_row_id": "gaeb-3.1-x84",
+        "version_date": "2007-06",
+        "xsd_validation": "accepted"
+      },
+      {
+        "bytes": 19099,
+        "generation": "3.1",
+        "id": "fixture:gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X83",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "path": "gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X83",
+        "phase": "83",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd",
+        "sha256": "11d949a87213792b532950d7a66973d092b10aba66632bd07c0d264102b6d16b",
+        "source_manifest_path": "examples/gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X83",
+        "support_row_id": "gaeb-3.1-x83",
+        "version_date": "2007-06",
+        "xsd_validation": "accepted"
+      },
+      {
+        "bytes": 20406,
+        "generation": "3.1",
+        "id": "fixture:gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X86",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "path": "gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X86",
+        "phase": "86",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd",
+        "sha256": "99fa9d3cd1cf30c273af7395f98750e65b75de25b27b79a1dc96b4d807218ca7",
+        "source_manifest_path": "examples/gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X86",
+        "support_row_id": "gaeb-3.1-x86",
+        "version_date": "2007-06",
+        "xsd_validation": "accepted"
+      },
+      {
+        "bytes": 35809,
+        "generation": "3.2",
+        "id": "fixture:gaeb-da-xml-3.2-2013-10/Beispiel_01_83Z_3.2_2014-03-24.X83Z",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83Z/3.2",
+        "path": "gaeb-da-xml-3.2-2013-10/Beispiel_01_83Z_3.2_2014-03-24.X83Z",
+        "phase": "83Z",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_83Z_3.2_2014-03.xsd",
+        "sha256": "2d9541beded7342cb74dde96c627274ee2aef7b5e36918e30ce2e8dc56ae0823",
+        "source_manifest_path": "examples/gaeb-da-xml-3.2-2013-10/Beispiel_01_83Z_3.2_2014-03-24.X83Z",
+        "support_row_id": "gaeb-3.2-x83z",
+        "version_date": "2014-03",
+        "xsd_validation": "accepted"
+      },
+      {
+        "bytes": 5687,
+        "generation": "3.2",
+        "id": "fixture:gaeb-da-xml-3.2-2013-10/Beispiel_01_84Z_3.2_2014-03-24.X84Z",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.2",
+        "path": "gaeb-da-xml-3.2-2013-10/Beispiel_01_84Z_3.2_2014-03-24.X84Z",
+        "phase": "84Z",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_84Z_3.2_2014-03.xsd",
+        "sha256": "7757a61b8327487165e3c35a00cde8ceb8226fd74b775c3e6311f22129f8ab42",
+        "source_manifest_path": "examples/gaeb-da-xml-3.2-2013-10/Beispiel_01_84Z_3.2_2014-03-24.X84Z",
+        "support_row_id": "gaeb-3.2-x84z",
+        "version_date": "2014-03",
+        "xsd_validation": "accepted"
+      },
+      {
+        "bytes": 4652,
+        "generation": "3.2",
+        "id": "fixture:gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZE_3.2_2014-03-24.X86ZE",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZE/3.2",
+        "path": "gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZE_3.2_2014-03-24.X86ZE",
+        "phase": "86ZE",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86ZE_3.2_2014-03.xsd",
+        "sha256": "a25225b94e041febfb8c9a1955c00653ff6d7328a8802b9e26559126e2548268",
+        "source_manifest_path": "examples/gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZE_3.2_2014-03-24.X86ZE",
+        "support_row_id": "gaeb-3.2-x86ze",
+        "version_date": "2014-03",
+        "xsd_validation": "accepted"
+      },
+      {
+        "bytes": 36491,
+        "generation": "3.2",
+        "id": "fixture:gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZR_3.2_2014-03-24.X86ZR",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZR/3.2",
+        "path": "gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZR_3.2_2014-03-24.X86ZR",
+        "phase": "86ZR",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86ZR_3.2_2014-03.xsd",
+        "sha256": "f69aadb4824368812bc28e2cedaabb6010153610affbb360808e70ac9c78e735",
+        "source_manifest_path": "examples/gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZR_3.2_2014-03-24.X86ZR",
+        "support_row_id": "gaeb-3.2-x86zr",
+        "version_date": "2014-03",
+        "xsd_validation": "accepted"
+      }
+    ],
+    "format_version": 1,
+    "known_policy_mismatches": [
+      {
+        "correct_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.2",
+        "generation": "3.2",
+        "id": "policy-da84-allows-84z-3.2",
+        "manifest_supports": false,
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84/3.2",
+        "parser_policy_allows": true,
+        "phase": "84Z",
+        "reason": "namespace_allows_phase treats every DA84 namespace as permitting both X84 and X84Z, while the official X84Z root targets DA84Z"
+      },
+      {
+        "correct_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.3",
+        "generation": "3.3",
+        "id": "policy-da84-allows-84z-3.3",
+        "manifest_supports": false,
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84/3.3",
+        "parser_policy_allows": true,
+        "phase": "84Z",
+        "reason": "namespace_allows_phase treats every DA84 namespace as permitting both X84 and X84Z, while the official X84Z root targets DA84Z"
+      },
+      {
+        "correct_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.4",
+        "generation": "3.4",
+        "id": "policy-da84-allows-84z-3.4",
+        "manifest_supports": false,
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84/3.4",
+        "parser_policy_allows": true,
+        "phase": "84Z",
+        "reason": "namespace_allows_phase treats every DA84 namespace as permitting both X84 and X84Z, while the official X84Z root targets DA84Z"
+      }
+    ],
+    "mutation_probes": [
+      {
+        "category": "row-membership",
+        "expected": "reject",
+        "id": "mutant-global-cartesian-product",
+        "mutation": "Use independent global membership checks; query generation=3.3, namespace=DA50/3.3, phase=51.1.",
+        "observed": "candidate exact lookup rejects",
+        "oracle": "No support row has that exact triple."
+      },
+      {
+        "category": "row-membership",
+        "expected": "reject",
+        "id": "mutant-per-generation-cartesian-product",
+        "mutation": "Within 3.2 combine namespace DA83Z/3.2 with phase 84Z.",
+        "observed": "candidate exact lookup rejects",
+        "oracle": "Only exact DA84Z/3.2 + 84Z exists."
+      },
+      {
+        "category": "policy-drift",
+        "expected": "reject all 3",
+        "id": "mutant-da84-collapses-da84z",
+        "mutation": "For 3.2, 3.3, and 3.4 accept X84Z under DA84 rather than DA84Z.",
+        "observed": "candidate rejects all 3; current parser accepts all 3",
+        "oracle": "All three tuples are absent and X84Z roots target DA84Z."
+      },
+      {
+        "category": "wrong-root",
+        "expected": "reject",
+        "id": "mutant-legacy-x84-uses-generic-root",
+        "mutation": "Dispatch official 3.1 X84 fixture to 2007 generic root.",
+        "observed": "rejected: BoQBody unexpected; LblTx expected",
+        "oracle": "Validate with unmodified libxml2 XSD."
+      },
+      {
+        "category": "wrong-root",
+        "expected": "reject",
+        "id": "mutant-legacy-x81-uses-x84-root",
+        "mutation": "Dispatch official 3.1 X81 fixture to 2007 X84 root.",
+        "observed": "rejected: AddText unexpected",
+        "oracle": "Validate with unmodified libxml2 XSD."
+      },
+      {
+        "category": "wrong-snapshot",
+        "expected": "reject",
+        "id": "mutant-legacy-wrong-snapshot",
+        "mutation": "Dispatch VersDate=2007-06 X81 fixture to 2009-12 generic root.",
+        "observed": "rejected: VersDate not in enumeration {2009-12}",
+        "oracle": "Validate with unmodified libxml2 XSD."
+      },
+      {
+        "category": "wrong-root",
+        "expected": "12/12 reject",
+        "id": "mutant-3_2-pairwise-root-swap",
+        "mutation": "For X83Z, X84Z, X86ZE, X86ZR fixtures substitute each other root (12 directed swaps).",
+        "observed": "12/12 rejected; 4/4 correct roots accepted",
+        "oracle": "Validate each fixture with substituted XSD."
+      },
+      {
+        "category": "wrong-root",
+        "expected": "reject",
+        "id": "mutant-shared-namespace-dotted-phase-swap",
+        "mutation": "Swap 50.1/50.2 or 51.1/51.2 roots; namespaces still match.",
+        "observed": "candidate invariant rejects",
+        "oracle": "row.phase must occur in root.dispatch_phases."
+      },
+      {
+        "category": "wrong-root",
+        "expected": "reject",
+        "id": "mutant-root-target-namespace",
+        "mutation": "Point any row to root with differing target_namespace.",
+        "observed": "candidate invariant rejects",
+        "oracle": "row.namespace must equal root.target_namespace."
+      },
+      {
+        "category": "integrity",
+        "expected": "reject",
+        "id": "mutant-source-byte-drift",
+        "mutation": "Change any fixture or XSD byte.",
+        "observed": "134/134 payloads match; none missing or extra",
+        "oracle": "SHA-256 must match official source manifest and candidate."
+      }
+    ],
+    "schema_roots": [
+      {
+        "dispatch_phases": [
+          "81",
+          "82",
+          "83",
+          "85",
+          "86",
+          "88"
+        ],
+        "generation": "3.1",
+        "id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "8db4edb24c6f5390650b527abe38d82e32dea2011e7f904234cf073fd6693817",
+        "snapshot": "gaeb-da-xml-3.1-2007-11",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "81",
+            "82",
+            "83",
+            "84",
+            "85",
+            "86",
+            "88"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "84"
+        ],
+        "generation": "3.1",
+        "id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_84.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_84.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "be4e7389e38386d1d0203b60180967ed52f2b540c05ca80d76cd4b200fcd0927",
+        "snapshot": "gaeb-da-xml-3.1-2007-11",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "84"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "93",
+          "94",
+          "96",
+          "97"
+        ],
+        "generation": "3.1",
+        "id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_Order.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_Order.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "464f56ba306baa07d4add8ffb44fbbec2ccd516d4303980b62a7fe1b339eb0fa",
+        "snapshot": "gaeb-da-xml-3.1-2007-11",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/200706",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "93",
+            "94",
+            "96",
+            "97"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "81",
+          "82",
+          "83",
+          "85",
+          "86",
+          "87"
+        ],
+        "generation": "3.1",
+        "id": "gaeb-da-xml-3.1-2009-12/GAEB_DA_XML 3.1 2009-12.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.1-2009-12/GAEB_DA_XML 3.1 2009-12.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "4baa2b88e489ca9797ad63e8e6ee5af6fd2d93a312bd9b9a8b6ad660a48438c3",
+        "snapshot": "gaeb-da-xml-3.1-2009-12",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "81",
+            "82",
+            "83",
+            "84",
+            "85",
+            "86",
+            "87"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "84"
+        ],
+        "generation": "3.1",
+        "id": "gaeb-da-xml-3.1-2009-12/GAEB_DA_XML_84 3.1 2009-12.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.1-2009-12/GAEB_DA_XML_84 3.1 2009-12.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "f26d50c58c478fd7599c2a1f87a5d30451dce538ced3a4292c05e4e4200611de",
+        "snapshot": "gaeb-da-xml-3.1-2009-12",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "84"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "31"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_31_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_31_3.2_2013-10.xsd",
+        "phase_parent": "QtyDeterm",
+        "root_element": "GAEB",
+        "sha256": "5d9030525bdd99b33be43b6664566e0da01d48f502c1b3af6b8fef4dd0defbba",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA31/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "31"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "52"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_52_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_52_3.2_2013-10.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "cb0967aca269f5d2acb934dd4520755c8dbc360a6aa9b08fe0f6d226fef90767",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA52/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "52"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "80"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_80_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_80_3.2_2013-10.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "8a18d58d77cae60b1fcf04c2c0045cf05d1d132f039d369c70d40a2b07728559",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA80/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "80"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "81"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_81_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_81_3.2_2013-10.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "655f8a49716efd7186f6598c29b5208032060f57bc7f251c68d895ff0a7213f5",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA81/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "81"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "82"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_82_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_82_3.2_2013-10.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "b4b87c159b5b7b6b58b36100415345ab2276776c3e76fcb5d41a33943f860434",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA82/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "82"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "83Z"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_83Z_3.2_2014-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_83Z_3.2_2014-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "55b59577b29ce2ffc88ed9c824a18cb5e06e88829a510daede32268a3af0e36c",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83Z/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "83Z"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "83"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_83_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_83_3.2_2013-10.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "51bcd0cc37c7851dbb89520d8a6663b9fcaa9982575476410432e346132c8f6e",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "83"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "84Z"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_84Z_3.2_2014-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_84Z_3.2_2014-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "9323874cc9817ea9a01fe04dd05029a4818a107026b21845959ab776f5134850",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "84Z"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "84"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_84_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_84_3.2_2013-10.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "c57677b3b8be38371dabc9a83781049be483f0bd99eb9b771851ea9a6959ea5e",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "84"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "85"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_85_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_85_3.2_2013-10.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "59b7d168e09dd3f0eb0c5469557f3b80e6b33948a87e5f49a9f916c3f8c047fe",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA85/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "85"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "86ZE"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86ZE_3.2_2014-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86ZE_3.2_2014-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "6337a2f6d22916eaeb667cc0b6876c384e178399abf9b57ce056a62e309536d2",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZE/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "86ZE"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "86ZR"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86ZR_3.2_2014-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86ZR_3.2_2014-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "3cae38c0e488fd51c27275ad5258dd30c1a6843ce0b31a2f99ab0b39736592ae",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZR/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "86ZR"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "86"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86_3.2_2013-10.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "41e4da0a21f4164e625d867f5c0dc5a5c49be3075689668ee3e364b95cf75706",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "86"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "87"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_87_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_87_3.2_2013-10.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "088965bb60676f77a40b8cb68fbbdb8ab4bc234fc9faf1e5059531422cd808fc",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA87/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "87"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "89"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_89_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_89_3.2_2013-10.xsd",
+        "phase_parent": "Invoice",
+        "root_element": "GAEB",
+        "sha256": "b7bb9a5941e8f1a1971ec792554806d7a7f471e0e855a71d4687bfd0954e089c",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA89/3.2",
+        "xsd_phase_evidence": {
+          "method": "filename_and_target_namespace",
+          "values": [
+            "89"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "93"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_93_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_93_3.2_2013-10.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "1a3d8cb0dfc988e6fb49259978142561cd1c4689f23816390b052b3388495ae3",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA93/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "93"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "94"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_94_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_94_3.2_2013-10.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "bf76fc067bb3a5ef5e68e7fd8ff153871b0b0b934e80741d6ed4278e4774db90",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA94/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "94"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "96"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_96_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_96_3.2_2013-10.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "5f391c94d38881335ceb7de2cd8e8f2850c7b217978c48605f5b9f95f1f348d3",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA96/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "96"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "97"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_97_3.2_2013-10.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_97_3.2_2013-10.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "7b266df83c3dbff72bd922f1ba8cea7f63d28b2f7cfda593a9773c2ad3d1f4ff",
+        "snapshot": "gaeb-da-xml-3.2-2013-10",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA97/3.2",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "97"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "31"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_31_3.3_2023-01.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_31_3.3_2023-01.xsd",
+        "phase_parent": "QtyDeterm",
+        "root_element": "GAEB",
+        "sha256": "179b9d8c9a93145af63298270e44c2d1ae820bb850edd0ba284d5b7cbef01b56",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA31/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "31"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "50.1"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_50.1_3.3_2021-05.xsd",
+        "libxml2_compiles": false,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_50.1_3.3_2021-05.xsd",
+        "phase_parent": "ElementalCosting",
+        "root_element": "GAEB",
+        "sha256": "3003517f9821e46095e9c780ef68014242aaa0c476961be78102237aaf47d961",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA50/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "50.1"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "50.2"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_50.2_3.3_2021-05.xsd",
+        "libxml2_compiles": false,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_50.2_3.3_2021-05.xsd",
+        "phase_parent": "ElementalCosting",
+        "root_element": "GAEB",
+        "sha256": "968c389e9827d59b1305a390185f4741f586c5c96c706093b5a0e01b3578e662",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA50/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "50.2"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "51.1"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_51.1_3.3_2021-05.xsd",
+        "libxml2_compiles": false,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_51.1_3.3_2021-05.xsd",
+        "phase_parent": "ElementalCosting",
+        "root_element": "GAEB",
+        "sha256": "3b75db60ef5bce123c1c3143bf0fd930dfeab7e3cb04c8087e4c77c0b8dedaf5",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA51/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "51.1"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "51.2"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_51.2_3.3_2021-05.xsd",
+        "libxml2_compiles": false,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_51.2_3.3_2021-05.xsd",
+        "phase_parent": "ElementalCosting",
+        "root_element": "GAEB",
+        "sha256": "6b60e9c0832a8d2bebaf182754500e54f37f8b0ed01b0209f049cc68be5f6f37",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA51/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "51.2"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "52"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_52_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_52_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "e35484e4e9c042430885476cdafce78b4e4021a8ee6e2a4e63baf2fb422855c1",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA52/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "52"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "61"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_61_3.3_2021-05_Beta.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_61_3.3_2021-05_Beta.xsd",
+        "phase_parent": "GAEBInfo",
+        "root_element": "GAEB",
+        "sha256": "a4899749ae71975364e92407824f4da6f37f9ec71d6e3f4bbc2fcfd2eec9928d",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA61/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "61"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "80"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_80_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_80_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "d8b1bda0a48725838aabae34333a2dfcf48edf3c05c764575e32622416bd2ff4",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA80/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "80"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "81"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_81_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_81_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "aa24ed698088308d38f1ff7612643e55e70a847f6b5d433aa10dcd6dfe6c3ea3",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA81/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "81"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "82"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_82_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_82_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "6fcf94f41aeac0a060d29251ca085e29aa659b1c6b2d4872a76788cc7512c52b",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA82/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "82"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "83Z"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_83Z_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_83Z_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "9d240ab53de426f0ceb5c31f508bc65e30f0f5133997038d2f1e48b6b60ffa6d",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83Z/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "83Z"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "83"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_83_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_83_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "a963ca5b6a93ee0f7a83d3138272a4116635e30e7b288c6ba8761ed444cabaa8",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "83"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "84P"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84P_3.3_2021-05_Beta.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84P_3.3_2021-05_Beta.xsd",
+        "phase_parent": "SC_Evaluation",
+        "root_element": "GAEB",
+        "sha256": "6dc7015068b5dd2b62ad29b0ab09795f9182c495df5af5debf6fc0a002057f36",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84P/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "84P"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "84Z"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84Z_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84Z_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "ae58260cdbd8178b933827b66c82290e5ab15a2042b460d0069a616cfdf088fe",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "84Z"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "84"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "67282b688db3bb12a4ded22c7b677e30ce105f9d1f80d02d084be67156e1cc42",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "84"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "85"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_85_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_85_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "ca8661aa7c1202105e3cf87385880b9d1741664d43fa92c6dc209a5cfe3d91cb",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA85/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "85"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "86ZE"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86ZE_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86ZE_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "20cb0be3323e7d80ecc9d491ec4e4e6c25d1589b1bfb1960a22bc0c3098ac0c3",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZE/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "86ZE"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "86ZR"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86ZR_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86ZR_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "31609b39c683cb46be8f85256b95113efcacc86db9e7a7be1b610e4a9471c9e5",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZR/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "86ZR"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "86"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "334853ca68fe07c1321880c40f27b776c8133ec8c34207c63b0d438ab6e45e0d",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "86"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "87"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_87_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_87_3.3_2021-05.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "1f351ad4e6e4d9db9175c51f24d22b2808adc14dbb0abd0858a3cca59389f125",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA87/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "87"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "89B"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_89B_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_89B_3.3_2021-05.xsd",
+        "phase_parent": "Invoice",
+        "root_element": "GAEB",
+        "sha256": "4055c4820deaf2e9431258cdba35dfb878480f69c14d5b8c52ff184915cbeac6",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA89B/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "89B"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "89"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_89_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_89_3.3_2021-05.xsd",
+        "phase_parent": "Invoice",
+        "root_element": "GAEB",
+        "sha256": "2b3a8e3fdff708980b8feeee312d9b9d81131eccbaab1ab8442280b6f8ab6b87",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA89/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "89"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "93"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_93_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_93_3.3_2021-05.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "1ac02c1248d63688cf6a8d0f59c3f7b3594743c6416b9a038822568a47740496",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA93/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "93"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "94"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_94_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_94_3.3_2021-05.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "2d33bb36b10b775dff511fb82cf864ec19e37a087a366d26883aede1534a4c27",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA94/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "94"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "96"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_96_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_96_3.3_2021-05.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "f981e69f16a41cf9205e5620f26b65cf77931dc8a3ac4f036f7698484681f99f",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA96/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "96"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "97"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_97_3.3_2021-05.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_97_3.3_2021-05.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "da0a29ef4e09a43b751d34d8b249faaf44bb1b744ca84ede00676c03f71fddb3",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "stable",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA97/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "97"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "98"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_98_3.3_2021-05_Beta.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_98_3.3_2021-05_Beta.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "7ab63b5b6a56d0747b719b52836e2f0f9914913533d7a999dd41f739c5c58a5c",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA98/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "98"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "99"
+        ],
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_99_3.3_2021-05_Beta.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_99_3.3_2021-05_Beta.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "22b100b7bca2abbd0d6047cbe27c94f85cf8e0be41e2c94672df76dc7d9b36ee",
+        "snapshot": "gaeb-da-xml-3.3-2023-01",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA99/3.3",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "99"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "31"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_31_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_31_3.4_2026-03.xsd",
+        "phase_parent": "QtyDeterm",
+        "root_element": "GAEB",
+        "sha256": "2f9302091473bf00e77ede62c60b5cb8563f79ae1aa663f559ae08949e740781",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA31/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "31"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "50.1"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_50.1_3.4_2026-03.xsd",
+        "libxml2_compiles": false,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_50.1_3.4_2026-03.xsd",
+        "phase_parent": "ElementalCosting",
+        "root_element": "GAEB",
+        "sha256": "1d422a5981be2808c5b756131a64e021d7d4bd83a4958fb0131bc65cc95a9852",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA50/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "50.1"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "50.2"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_50.2_3.4_2026-03.xsd",
+        "libxml2_compiles": false,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_50.2_3.4_2026-03.xsd",
+        "phase_parent": "ElementalCosting",
+        "root_element": "GAEB",
+        "sha256": "4093a2b760ec4e35821bcb3b71b6e971a45a025c26527ccdd1bdaac3503e377a",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA50/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "50.2"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "51.1"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_51.1_3.4_2026-03.xsd",
+        "libxml2_compiles": false,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_51.1_3.4_2026-03.xsd",
+        "phase_parent": "ElementalCosting",
+        "root_element": "GAEB",
+        "sha256": "ff6b53ea0c79a715e2ca8e6c6213f1d4781fbd64f5bfcba2f9501323577222ff",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA51/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "51.1"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "51.2"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_51.2_3.4_2026-03.xsd",
+        "libxml2_compiles": false,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_51.2_3.4_2026-03.xsd",
+        "phase_parent": "ElementalCosting",
+        "root_element": "GAEB",
+        "sha256": "99af2b9b9346606844c63972ffc3d4ce45943607a702b190737187c335b10125",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA51/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "51.2"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "52"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_52_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_52_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "a3893fc1310d2800880f29176f11e7005995125010b48d1a36686b00efbdad69",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA52/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "52"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "61"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_61_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_61_3.4_2026-03.xsd",
+        "phase_parent": "GAEBInfo",
+        "root_element": "GAEB",
+        "sha256": "cd08111151c7d40ed82a72e0e9561ba16a2b9a8415c106ed0cf5022a3084f6da",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA61/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "61"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "80"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_80_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_80_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "6975a5d1642c7daf663fb4ec47a904ea4c0fcc7b33d61cbef32ece7678429e81",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA80/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "80"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "81"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_81_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_81_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "7be1e01d0367083766f5bd9212a74534e06f3ea40571015ae2c9c18267a75698",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA81/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "81"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "82"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_82_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_82_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "e3f8d77e502bcd95c233ddb22a6bfea50f9a3a9c62aa0c8b1aee5f524c1cf62d",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA82/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "82"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "83Z"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_83Z_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_83Z_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "28df6c3e1f7e90649400fd2a8396ccf0aa85f92101797638b8aa7368fb872cd5",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83Z/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "83Z"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "83"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_83_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_83_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "d9841e6952202d06c1dfb187b59b4f58b456a7b6271b9130dd77a2dfd443552c",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "83"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "84P"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84P_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84P_3.4_2026-03.xsd",
+        "phase_parent": "SC_Evaluation",
+        "root_element": "GAEB",
+        "sha256": "4486c7bc49ca2b477872a875f8f239f2835ecafe2f5c96c1a461c099cc06715c",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84P/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "84P"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "84Z"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84Z_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84Z_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "486368ae4f846cbd154024034fea8f52a83277865feb05ef1eb8162ccaa0ce93",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "84Z"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "84"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "c2f9ea47d5527e628bf34ab5ce55d1ec307827d8bc17ff5c1e6bc30245df868e",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "84"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "85"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_85_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_85_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "2355c5814b3e2f7e03a5a64ecf472627bd330a334b33f719acce9bd7242de3c4",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA85/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "85"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "86ZE"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86ZE_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86ZE_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "596c0b75ca0b01dd3ff40da5f98b1f67016bc1ba8c623171994561e07c440733",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZE/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "86ZE"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "86ZR"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86ZR_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86ZR_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "ac98cf37aeec50f149f7cd62502cf1405674a961ddc23d9b2a1190ab136b0432",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZR/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "86ZR"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "86"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "2ed090a23da2ea6686fce5c5bd50d2c91f7f1ed983673e6bde5edc83ad34d8e8",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "86"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "87"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_87_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_87_3.4_2026-03.xsd",
+        "phase_parent": "Award",
+        "root_element": "GAEB",
+        "sha256": "cde296384182cebe6cf712db8ef0162dad65e35626d7fb9a1cbb73cd9c2404ef",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA87/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "87"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "89B"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_89B_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_89B_3.4_2026-03.xsd",
+        "phase_parent": "Invoice",
+        "root_element": "GAEB",
+        "sha256": "8ca5ea4504505cc628d616be3da6b4ed977a80134fa3cc4ab702c7323f0578b1",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA89B/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "89B"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "89"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_89_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_89_3.4_2026-03.xsd",
+        "phase_parent": "Invoice",
+        "root_element": "GAEB",
+        "sha256": "1272d6909c3bbaf2d1fe1c78a6b249406989eafe06329a9f59c7abee2c4e8aa8",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA89/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "89"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "93"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_93_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_93_3.4_2026-03.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "82d14528aa674cea836f379605189838cd24d105f25310571d3fee1a874ecba9",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA93/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "93"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "94"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_94_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_94_3.4_2026-03.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "a407735248e8a7b31e4bc90adce43f9f4ba519ae59556fe3af44f23849ed3182",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA94/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "94"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "96"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_96_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_96_3.4_2026-03.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "a30090cb7b461f4c9225f749dc4dd46e3391f712f016d887956cd7157a197ccc",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA96/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "96"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "97"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_97_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_97_3.4_2026-03.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "15830c6c26826c901a8d8f37eddb90eb6819fc09b6fb991cb25177e50ecddf50",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA97/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "97"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "98"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_98_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_98_3.4_2026-03.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "5f266580f817db3cd46e9ee08e47f3e4237932a9b4ff7ce69b32ec992b6624a8",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA98/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "98"
+          ]
+        }
+      },
+      {
+        "dispatch_phases": [
+          "99"
+        ],
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_99_3.4_2026-03.xsd",
+        "libxml2_compiles": true,
+        "path": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_99_3.4_2026-03.xsd",
+        "phase_parent": "Order",
+        "root_element": "GAEB",
+        "sha256": "7f04fd55021a33a71dfa739feccf00d03e43b2ae68cc1893310b1fbbf1d4ee1c",
+        "snapshot": "gaeb-da-xml-3.4-2026-03-beta",
+        "status": "beta",
+        "target_namespace": "http://www.gaeb.de/GAEB_DA_XML/DA99/3.4",
+        "xsd_phase_evidence": {
+          "method": "dp_enumeration",
+          "values": [
+            "99"
+          ]
+        }
+      }
+    ],
+    "snapshots": [
+      {
+        "active_for_dispatch": true,
+        "generation": "3.1",
+        "id": "gaeb-da-xml-3.1-2007-11",
+        "phase_root_count": 3,
+        "status": "historical"
+      },
+      {
+        "active_for_dispatch": true,
+        "generation": "3.1",
+        "id": "gaeb-da-xml-3.1-2009-12",
+        "phase_root_count": 2,
+        "status": "historical"
+      },
+      {
+        "active_for_dispatch": true,
+        "generation": "3.2",
+        "id": "gaeb-da-xml-3.2-2013-10",
+        "phase_root_count": 19,
+        "status": "historical"
+      },
+      {
+        "active_for_dispatch": false,
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2021-05",
+        "phase_root_count": 28,
+        "status": "previous"
+      },
+      {
+        "active_for_dispatch": true,
+        "generation": "3.3",
+        "id": "gaeb-da-xml-3.3-2023-01",
+        "phase_root_count": 28,
+        "status": "current"
+      },
+      {
+        "active_for_dispatch": true,
+        "generation": "3.4",
+        "id": "gaeb-da-xml-3.4-2026-03-beta",
+        "phase_root_count": 28,
+        "status": "beta"
+      }
+    ],
+    "sources": {
+      "audited_repo": "/mnt/backup/build-cache/openbim-gaeb-bindings",
+      "fixture_root": "/home/friedrich/projects/openbim/packages/gaeb/tests/fixtures",
+      "parser_policy": "openbim-gaeb/src/parser.rs:1067-1191",
+      "repo_head": "7bbed85166e46c9177fe120c28080a553cf04e81",
+      "schema_root": "/home/friedrich/projects/openbim/packages/gaeb/references/specs",
+      "source_manifest": "/mnt/backup/build-cache/openbim-gaeb-bindings/references/SOURCE-MANIFEST.json",
+      "source_manifest_sha256": "6a7baa4446c45e08834a880848f524ce7bbb1440eaf49606dda0e9e652f0aae7"
+    },
+    "support_rows": [
+      {
+        "evidence": "official_fixture_and_schema",
+        "fixture_ids": [
+          "fixture:gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X81"
+        ],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x81",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "ordinal": 0,
+        "phase": "81",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2007-11"
+          },
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2009-12/GAEB_DA_XML 3.1 2009-12.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2009-12"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x82",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "ordinal": 1,
+        "phase": "82",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2007-11"
+          },
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2009-12/GAEB_DA_XML 3.1 2009-12.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2009-12"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_fixture_and_schema",
+        "fixture_ids": [
+          "fixture:gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X83"
+        ],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x83",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "ordinal": 2,
+        "phase": "83",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2007-11"
+          },
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2009-12/GAEB_DA_XML 3.1 2009-12.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2009-12"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_fixture_and_schema",
+        "fixture_ids": [
+          "fixture:gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X84"
+        ],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x84",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "ordinal": 3,
+        "phase": "84",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_84.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2007-11"
+          },
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2009-12/GAEB_DA_XML_84 3.1 2009-12.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2009-12"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x85",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "ordinal": 4,
+        "phase": "85",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2007-11"
+          },
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2009-12/GAEB_DA_XML 3.1 2009-12.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2009-12"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_fixture_and_schema",
+        "fixture_ids": [
+          "fixture:gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X86"
+        ],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x86",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "ordinal": 5,
+        "phase": "86",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2007-11"
+          },
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2009-12/GAEB_DA_XML 3.1 2009-12.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2009-12"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x87",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "ordinal": 6,
+        "phase": "87",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2009-12/GAEB_DA_XML 3.1 2009-12.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2009-12"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x88",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200407",
+        "ordinal": 7,
+        "phase": "88",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2007-11"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x93",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200706",
+        "ordinal": 8,
+        "phase": "93",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_Order.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2007-11"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x94",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200706",
+        "ordinal": 9,
+        "phase": "94",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_Order.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2007-11"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x96",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200706",
+        "ordinal": 10,
+        "phase": "96",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_Order.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2007-11"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.1",
+        "id": "gaeb-3.1-x97",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/200706",
+        "ordinal": 11,
+        "phase": "97",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.1-2007-11/GAEB_DA_XML_Order.xsd",
+            "snapshot": "gaeb-da-xml-3.1-2007-11"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x31",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA31/3.2",
+        "ordinal": 0,
+        "phase": "31",
+        "phase_parent": "QtyDeterm",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_31_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x52",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA52/3.2",
+        "ordinal": 1,
+        "phase": "52",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_52_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x80",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA80/3.2",
+        "ordinal": 2,
+        "phase": "80",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_80_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x81",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA81/3.2",
+        "ordinal": 3,
+        "phase": "81",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_81_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x82",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA82/3.2",
+        "ordinal": 4,
+        "phase": "82",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_82_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x83",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83/3.2",
+        "ordinal": 5,
+        "phase": "83",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_83_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_fixture_and_schema",
+        "fixture_ids": [
+          "fixture:gaeb-da-xml-3.2-2013-10/Beispiel_01_83Z_3.2_2014-03-24.X83Z"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x83z",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83Z/3.2",
+        "ordinal": 6,
+        "phase": "83Z",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_83Z_3.2_2014-03.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x84",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84/3.2",
+        "ordinal": 7,
+        "phase": "84",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_84_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_fixture_and_schema",
+        "fixture_ids": [
+          "fixture:gaeb-da-xml-3.2-2013-10/Beispiel_01_84Z_3.2_2014-03-24.X84Z"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x84z",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.2",
+        "ordinal": 8,
+        "phase": "84Z",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_84Z_3.2_2014-03.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x85",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA85/3.2",
+        "ordinal": 9,
+        "phase": "85",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_85_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x86",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86/3.2",
+        "ordinal": 10,
+        "phase": "86",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_fixture_and_schema",
+        "fixture_ids": [
+          "fixture:gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZE_3.2_2014-03-24.X86ZE"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x86ze",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZE/3.2",
+        "ordinal": 11,
+        "phase": "86ZE",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86ZE_3.2_2014-03.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_fixture_and_schema",
+        "fixture_ids": [
+          "fixture:gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZR_3.2_2014-03-24.X86ZR"
+        ],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x86zr",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZR/3.2",
+        "ordinal": 12,
+        "phase": "86ZR",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_86ZR_3.2_2014-03.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x87",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA87/3.2",
+        "ordinal": 13,
+        "phase": "87",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_87_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x89",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA89/3.2",
+        "ordinal": 14,
+        "phase": "89",
+        "phase_parent": "Invoice",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_89_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x93",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA93/3.2",
+        "ordinal": 15,
+        "phase": "93",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_93_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x94",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA94/3.2",
+        "ordinal": 16,
+        "phase": "94",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_94_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x96",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA96/3.2",
+        "ordinal": 17,
+        "phase": "96",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_96_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.2",
+        "id": "gaeb-3.2-x97",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA97/3.2",
+        "ordinal": 18,
+        "phase": "97",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.2-2013-10/GAEB_DA_XML_97_3.2_2013-10.xsd",
+            "snapshot": "gaeb-da-xml-3.2-2013-10"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x31",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA31/3.3",
+        "ordinal": 0,
+        "phase": "31",
+        "phase_parent": "QtyDeterm",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_31_3.3_2023-01.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x50_1",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA50/3.3",
+        "ordinal": 1,
+        "phase": "50.1",
+        "phase_parent": "ElementalCosting",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_50.1_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x50_2",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA50/3.3",
+        "ordinal": 2,
+        "phase": "50.2",
+        "phase_parent": "ElementalCosting",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_50.2_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x51_1",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA51/3.3",
+        "ordinal": 3,
+        "phase": "51.1",
+        "phase_parent": "ElementalCosting",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_51.1_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x51_2",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA51/3.3",
+        "ordinal": 4,
+        "phase": "51.2",
+        "phase_parent": "ElementalCosting",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_51.2_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x52",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA52/3.3",
+        "ordinal": 5,
+        "phase": "52",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_52_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x61",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA61/3.3",
+        "ordinal": 6,
+        "phase": "61",
+        "phase_parent": "GAEBInfo",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_61_3.3_2021-05_Beta.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x80",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA80/3.3",
+        "ordinal": 7,
+        "phase": "80",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_80_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x81",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA81/3.3",
+        "ordinal": 8,
+        "phase": "81",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_81_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x82",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA82/3.3",
+        "ordinal": 9,
+        "phase": "82",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_82_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x83",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83/3.3",
+        "ordinal": 10,
+        "phase": "83",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_83_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x83z",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83Z/3.3",
+        "ordinal": 11,
+        "phase": "83Z",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_83Z_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x84",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84/3.3",
+        "ordinal": 12,
+        "phase": "84",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x84p",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84P/3.3",
+        "ordinal": 13,
+        "phase": "84P",
+        "phase_parent": "SC_Evaluation",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84P_3.3_2021-05_Beta.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x84z",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.3",
+        "ordinal": 14,
+        "phase": "84Z",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_84Z_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x85",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA85/3.3",
+        "ordinal": 15,
+        "phase": "85",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_85_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x86",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86/3.3",
+        "ordinal": 16,
+        "phase": "86",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x86ze",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZE/3.3",
+        "ordinal": 17,
+        "phase": "86ZE",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86ZE_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x86zr",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZR/3.3",
+        "ordinal": 18,
+        "phase": "86ZR",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_86ZR_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x87",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA87/3.3",
+        "ordinal": 19,
+        "phase": "87",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_87_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x89",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA89/3.3",
+        "ordinal": 20,
+        "phase": "89",
+        "phase_parent": "Invoice",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_89_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x89b",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA89B/3.3",
+        "ordinal": 21,
+        "phase": "89B",
+        "phase_parent": "Invoice",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_89B_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x93",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA93/3.3",
+        "ordinal": 22,
+        "phase": "93",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_93_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x94",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA94/3.3",
+        "ordinal": 23,
+        "phase": "94",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_94_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x96",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA96/3.3",
+        "ordinal": 24,
+        "phase": "96",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_96_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x97",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA97/3.3",
+        "ordinal": 25,
+        "phase": "97",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_97_3.3_2021-05.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "stable"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x98",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA98/3.3",
+        "ordinal": 26,
+        "phase": "98",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_98_3.3_2021-05_Beta.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.3",
+        "id": "gaeb-3.3-x99",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA99/3.3",
+        "ordinal": 27,
+        "phase": "99",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.3-2023-01/GAEB_DA_XML_99_3.3_2021-05_Beta.xsd",
+            "snapshot": "gaeb-da-xml-3.3-2023-01"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x31",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA31/3.4",
+        "ordinal": 0,
+        "phase": "31",
+        "phase_parent": "QtyDeterm",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_31_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x50_1",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA50/3.4",
+        "ordinal": 1,
+        "phase": "50.1",
+        "phase_parent": "ElementalCosting",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_50.1_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x50_2",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA50/3.4",
+        "ordinal": 2,
+        "phase": "50.2",
+        "phase_parent": "ElementalCosting",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_50.2_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x51_1",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA51/3.4",
+        "ordinal": 3,
+        "phase": "51.1",
+        "phase_parent": "ElementalCosting",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_51.1_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x51_2",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA51/3.4",
+        "ordinal": 4,
+        "phase": "51.2",
+        "phase_parent": "ElementalCosting",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_51.2_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x52",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA52/3.4",
+        "ordinal": 5,
+        "phase": "52",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_52_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x61",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA61/3.4",
+        "ordinal": 6,
+        "phase": "61",
+        "phase_parent": "GAEBInfo",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_61_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x80",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA80/3.4",
+        "ordinal": 7,
+        "phase": "80",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_80_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x81",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA81/3.4",
+        "ordinal": 8,
+        "phase": "81",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_81_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x82",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA82/3.4",
+        "ordinal": 9,
+        "phase": "82",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_82_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x83",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83/3.4",
+        "ordinal": 10,
+        "phase": "83",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_83_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x83z",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA83Z/3.4",
+        "ordinal": 11,
+        "phase": "83Z",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_83Z_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x84",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84/3.4",
+        "ordinal": 12,
+        "phase": "84",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x84p",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84P/3.4",
+        "ordinal": 13,
+        "phase": "84P",
+        "phase_parent": "SC_Evaluation",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84P_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x84z",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.4",
+        "ordinal": 14,
+        "phase": "84Z",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_84Z_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x85",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA85/3.4",
+        "ordinal": 15,
+        "phase": "85",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_85_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x86",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86/3.4",
+        "ordinal": 16,
+        "phase": "86",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x86ze",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZE/3.4",
+        "ordinal": 17,
+        "phase": "86ZE",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86ZE_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x86zr",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA86ZR/3.4",
+        "ordinal": 18,
+        "phase": "86ZR",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_86ZR_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x87",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA87/3.4",
+        "ordinal": 19,
+        "phase": "87",
+        "phase_parent": "Award",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_87_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x89",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA89/3.4",
+        "ordinal": 20,
+        "phase": "89",
+        "phase_parent": "Invoice",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_89_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x89b",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA89B/3.4",
+        "ordinal": 21,
+        "phase": "89B",
+        "phase_parent": "Invoice",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_89B_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x93",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA93/3.4",
+        "ordinal": 22,
+        "phase": "93",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_93_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x94",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA94/3.4",
+        "ordinal": 23,
+        "phase": "94",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_94_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x96",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA96/3.4",
+        "ordinal": 24,
+        "phase": "96",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_96_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x97",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA97/3.4",
+        "ordinal": 25,
+        "phase": "97",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_97_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x98",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA98/3.4",
+        "ordinal": 26,
+        "phase": "98",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_98_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      },
+      {
+        "evidence": "official_schema_only",
+        "fixture_ids": [],
+        "generation": "3.4",
+        "id": "gaeb-3.4-x99",
+        "namespace": "http://www.gaeb.de/GAEB_DA_XML/DA99/3.4",
+        "ordinal": 27,
+        "phase": "99",
+        "phase_parent": "Order",
+        "schema_dispatch": [
+          {
+            "schema_root_id": "gaeb-da-xml-3.4-2026-03-beta/GAEB_DA_XML_99_3.4_2026-03.xsd",
+            "snapshot": "gaeb-da-xml-3.4-2026-03-beta"
+          }
+        ],
+        "status": "beta"
+      }
+    ]
+  },
+  "manifest_schema": {
+    "$id": "https://openbim.rs/schemas/gaeb-support-matrix-candidate-v1.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
+    "properties": {
+      "claim_semantics": {
+        "additionalProperties": false,
+        "properties": {
+          "dispatch_edge_key": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "ordering_rule": {
+            "type": "string"
+          },
+          "selection_rule": {
+            "type": "string"
+          },
+          "support_row_key": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "support_row_key",
+          "dispatch_edge_key",
+          "selection_rule",
+          "ordering_rule"
+        ],
+        "type": "object"
+      },
+      "counts": {
+        "additionalProperties": false,
+        "properties": {
+          "active_phase_roots": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "dispatch_edges": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "fixture_backed_rows": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "known_parser_policy_false_positives": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "official_fixtures": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "schema_corpus_files": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "schema_only_rows": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "semantic_support_rows": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "schema_corpus_files",
+          "active_phase_roots",
+          "semantic_support_rows",
+          "dispatch_edges",
+          "official_fixtures",
+          "fixture_backed_rows",
+          "schema_only_rows",
+          "known_parser_policy_false_positives"
+        ],
+        "type": "object"
+      },
+      "fixtures": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "bytes": {
+              "type": "integer"
+            },
+            "generation": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "namespace": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "phase": {
+              "type": "string"
+            },
+            "phase_parent": {
+              "type": "string"
+            },
+            "root_element": {
+              "type": "string"
+            },
+            "schema_root_id": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string"
+            },
+            "source_manifest_path": {
+              "type": "string"
+            },
+            "support_row_id": {
+              "type": "string"
+            },
+            "version_date": {
+              "type": "string"
+            },
+            "xsd_validation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "path",
+            "source_manifest_path",
+            "sha256",
+            "bytes",
+            "root_element",
+            "generation",
+            "version_date",
+            "phase",
+            "namespace",
+            "phase_parent",
+            "support_row_id",
+            "schema_root_id",
+            "xsd_validation"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "format_version": {
+        "const": 1
+      },
+      "known_policy_mismatches": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "correct_namespace": {
+              "type": "string"
+            },
+            "generation": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "manifest_supports": {
+              "type": "boolean"
+            },
+            "namespace": {
+              "type": "string"
+            },
+            "parser_policy_allows": {
+              "type": "boolean"
+            },
+            "phase": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "generation",
+            "namespace",
+            "phase",
+            "parser_policy_allows",
+            "manifest_supports",
+            "correct_namespace",
+            "reason"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "mutation_probes": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "category": {
+              "type": "string"
+            },
+            "expected": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "mutation": {
+              "type": "string"
+            },
+            "observed": {
+              "type": "string"
+            },
+            "oracle": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "category",
+            "mutation",
+            "oracle",
+            "expected",
+            "observed"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "schema_roots": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "dispatch_phases": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            },
+            "generation": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "libxml2_compiles": {
+              "type": "boolean"
+            },
+            "path": {
+              "type": "string"
+            },
+            "phase_parent": {
+              "type": "string"
+            },
+            "root_element": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string"
+            },
+            "snapshot": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "target_namespace": {
+              "type": "string"
+            },
+            "xsd_phase_evidence": {
+              "additionalProperties": false,
+              "properties": {
+                "method": {
+                  "enum": [
+                    "dp_enumeration",
+                    "filename_and_target_namespace"
+                  ]
+                },
+                "values": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "method",
+                "values"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "id",
+            "generation",
+            "snapshot",
+            "path",
+            "sha256",
+            "target_namespace",
+            "root_element",
+            "phase_parent",
+            "dispatch_phases",
+            "status",
+            "libxml2_compiles",
+            "xsd_phase_evidence"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "snapshots": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "active_for_dispatch": {
+              "type": "boolean"
+            },
+            "generation": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "phase_root_count": {
+              "type": "integer"
+            },
+            "status": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "generation",
+            "status",
+            "active_for_dispatch",
+            "phase_root_count"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "sources": {
+        "additionalProperties": false,
+        "properties": {
+          "audited_repo": {
+            "type": "string"
+          },
+          "fixture_root": {
+            "type": "string"
+          },
+          "parser_policy": {
+            "type": "string"
+          },
+          "repo_head": {
+            "type": "string"
+          },
+          "schema_root": {
+            "type": "string"
+          },
+          "source_manifest": {
+            "type": "string"
+          },
+          "source_manifest_sha256": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "audited_repo",
+          "repo_head",
+          "parser_policy",
+          "fixture_root",
+          "schema_root",
+          "source_manifest",
+          "source_manifest_sha256"
+        ],
+        "type": "object"
+      },
+      "support_rows": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence": {
+              "type": "string"
+            },
+            "fixture_ids": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            },
+            "generation": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "namespace": {
+              "type": "string"
+            },
+            "ordinal": {
+              "type": "integer"
+            },
+            "phase": {
+              "type": "string"
+            },
+            "phase_parent": {
+              "type": "string"
+            },
+            "schema_dispatch": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "schema_root_id": {
+                    "type": "string"
+                  },
+                  "snapshot": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "snapshot",
+                  "schema_root_id"
+                ],
+                "type": "object"
+              },
+              "minItems": 1,
+              "type": "array"
+            },
+            "status": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "ordinal",
+            "generation",
+            "phase",
+            "namespace",
+            "phase_parent",
+            "status",
+            "evidence",
+            "fixture_ids",
+            "schema_dispatch"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      }
+    },
+    "required": [
+      "format_version",
+      "claim_semantics",
+      "sources",
+      "counts",
+      "snapshots",
+      "schema_roots",
+      "fixtures",
+      "support_rows",
+      "known_policy_mismatches",
+      "mutation_probes"
+    ],
+    "type": "object"
+  }
+}

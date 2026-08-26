@@ -8,7 +8,31 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-EXPECTED = {'openbim-gaeb': ['.cargo_vcs_info.json', 'Cargo.lock', 'Cargo.toml', 'Cargo.toml.orig', 'LICENSE', 'README.md', 'examples/inspect.rs', 'src/diagnostic.rs', 'src/document.rs', 'src/error.rs', 'src/lib.rs', 'src/metadata.rs', 'src/model.rs', 'src/parser.rs', 'src/phase.rs', 'src/version.rs', 'tests/detection.rs', 'tests/document.rs', 'tests/editing.rs', 'tests/official_corpus.rs'], 'gaeb': ['.cargo_vcs_info.json', 'Cargo.lock', 'Cargo.toml', 'Cargo.toml.orig', 'LICENSE', 'README.md', 'src/lib.rs']}
+EXPECTED = {
+    "openbim-gaeb": [
+        ".cargo_vcs_info.json", "Cargo.lock", "Cargo.toml", "Cargo.toml.orig",
+        "LICENSE", "README.md", "build.rs", "examples/inspect.rs",
+        "schema-support-matrix.json", "src/business/decimal.rs",
+        "src/business/mod.rs", "src/business/pair.rs", "src/business/single.rs",
+        "src/business/tree.rs", "src/diagnostic.rs", "src/document.rs",
+        "src/error.rs", "src/lib.rs", "src/metadata.rs", "src/model.rs",
+        "src/parser.rs", "src/phase.rs", "src/support.rs", "src/validation.rs",
+        "src/version.rs", "src/xsd/collection.rs", "src/xsd/single.rs", "src/xsd.rs",
+        "support-matrix.csv", "tests/business_rule_pairs.rs",
+        "tests/business_validation.rs", "tests/detection.rs", "tests/document.rs",
+        "tests/editing.rs", "tests/fixtures/xsd/minimal.xsd",
+        "tests/official_corpus.rs", "tests/official_xsd.rs",
+        "tests/support_matrix.rs", "tests/xsd_validation.rs",
+    ],
+    "openbim-gaeb-bindings": [
+        ".cargo_vcs_info.json", "Cargo.lock", "Cargo.toml", "Cargo.toml.orig",
+        "LICENSE", "README.md", "src/generated/v3_1_2007_11.rs", "src/lib.rs",
+    ],
+    "gaeb": [
+        ".cargo_vcs_info.json", "Cargo.lock", "Cargo.toml", "Cargo.toml.orig",
+        "LICENSE", "README.md", "src/lib.rs",
+    ],
+}
 
 errors: list[str] = []
 for package, expected in EXPECTED.items():

@@ -36,6 +36,7 @@
 
 #![forbid(unsafe_code)]
 
+mod business;
 mod diagnostic;
 mod document;
 mod error;
@@ -43,12 +44,18 @@ mod metadata;
 mod model;
 mod parser;
 mod phase;
+pub mod support;
+mod validation;
 mod version;
+mod xsd;
 
+pub use business::{BusinessRule, BusinessValidator, BUSINESS_RULES};
 pub use diagnostic::{Diagnostic, DiagnosticKind};
 pub use document::Document;
 pub use error::Error;
 pub use metadata::Metadata;
 pub use model::{CategoryRef, Item};
 pub use phase::ExchangePhase;
+pub use validation::{ValidationDiagnostic, ValidationLayer, ValidationReport, ValidationSeverity};
 pub use version::GaebVersion;
+pub use xsd::{GaebSchemaSet, XsdLoadOptions, XsdSchema, XsdSchemaError};

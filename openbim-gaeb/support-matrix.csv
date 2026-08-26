@@ -1,0 +1,9 @@
+version,snapshot,version_date,phase,variant,namespace,schema_root,fixture,typed_module
+3.1,gaeb-da-xml-3.1-2007-11,2007-06,81,,http://www.gaeb.de/GAEB_DA_XML/200407,GAEB_DA_XML.xsd,gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X81,v3_1_2007_11
+3.1,gaeb-da-xml-3.1-2007-11,2007-06,83,,http://www.gaeb.de/GAEB_DA_XML/200407,GAEB_DA_XML.xsd,gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X83,v3_1_2007_11
+3.1,gaeb-da-xml-3.1-2007-11,2007-06,84,,http://www.gaeb.de/GAEB_DA_XML/200407,GAEB_DA_XML_84.xsd,gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-001.X84,
+3.1,gaeb-da-xml-3.1-2007-11,2007-06,86,,http://www.gaeb.de/GAEB_DA_XML/200407,GAEB_DA_XML.xsd,gaeb-da-xml-3.1-2007-11/Musterdatei_3.1_2008-004.X86,v3_1_2007_11
+3.2,gaeb-da-xml-3.2-2013-10,2014-03,83,z,http://www.gaeb.de/GAEB_DA_XML/DA83Z/3.2,GAEB_DA_XML_83Z_3.2_2014-03.xsd,gaeb-da-xml-3.2-2013-10/Beispiel_01_83Z_3.2_2014-03-24.X83Z,
+3.2,gaeb-da-xml-3.2-2013-10,2014-03,84,z,http://www.gaeb.de/GAEB_DA_XML/DA84Z/3.2,GAEB_DA_XML_84Z_3.2_2014-03.xsd,gaeb-da-xml-3.2-2013-10/Beispiel_01_84Z_3.2_2014-03-24.X84Z,
+3.2,gaeb-da-xml-3.2-2013-10,2014-03,86,ze,http://www.gaeb.de/GAEB_DA_XML/DA86ZE/3.2,GAEB_DA_XML_86ZE_3.2_2014-03.xsd,gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZE_3.2_2014-03-24.X86ZE,
+3.2,gaeb-da-xml-3.2-2013-10,2014-03,86,zr,http://www.gaeb.de/GAEB_DA_XML/DA86ZR/3.2,GAEB_DA_XML_86ZR_3.2_2014-03.xsd,gaeb-da-xml-3.2-2013-10/Beispiel_01_86ZR_3.2_2014-03-24.X86ZR,

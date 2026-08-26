@@ -12,6 +12,8 @@ use crate::{
     CategoryRef, Diagnostic, DiagnosticKind, Error, ExchangePhase, GaebVersion, Item, Metadata,
 };
 
+const MAX_XML_DEPTH: usize = 256;
+
 #[derive(Debug, Clone)]
 pub(crate) enum QuantityEdit {
     Missing,
@@ -209,6 +211,11 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                         .expect("quantity owner checked above")
                         .invalidate_quantity_value();
                 }
+                if path.len() >= MAX_XML_DEPTH {
+                    return Err(Error::Xml(format!(
+                        "XML nesting depth exceeds the configured limit of {MAX_XML_DEPTH}"
+                    )));
+                }
                 let gaeb = namespace.as_deref() == root_namespace.as_deref();
                 path.push(PathElement {
                     local: local.clone(),
@@ -292,6 +299,11 @@ pub(crate) fn parse(source: &[u8], source_offset: usize) -> Result<Parsed, Error
                         .as_mut()
                         .expect("quantity owner checked above")
                         .invalidate_quantity_value();
+                }
+                if path.len() >= MAX_XML_DEPTH {
+                    return Err(Error::Xml(format!(
+                        "XML nesting depth exceeds the configured limit of {MAX_XML_DEPTH}"
+                    )));
                 }
                 let gaeb = namespace.as_deref() == root_namespace.as_deref();
                 path.push(PathElement {

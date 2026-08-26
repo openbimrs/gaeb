@@ -7,8 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add caller-provided GAEB XSD graph loading and real streaming instance
+  validation through the immutable reviewed `xsd-schema` revision
+  `53de66ccb075246a67e5986742cdcdb5deb81267`.
+- Add machine-readable schema/support manifests with exact generation, version
+  date, phase, namespace, root-schema, fixture, and typed-support claims.
+- Add the opt-in `openbim-gaeb-bindings` crate with official-fixture-proven typed
+  parse/write/reparse support for GAEB 3.1 X81, X83, and X86.
+- Add evidence-tiered business validation: three conformance errors and fifteen
+  explicitly advisory interoperability warnings.
+
+### Security
+
+- Reject empty/multiple-root XML, declarations after prolog content, trailing
+  non-whitespace, and all DTDs before XSD instance validation; fail schema
+  loading when include/import directives fail.
+- Bound lossless XML parsing to 256 nested elements and reject `NoUPComps`
+  declarations above the six GAEB unit-price component fields before traversal.
+
+### Changed
+
+- Disable publication of all three packages while the required `xsd-schema`
+  implementation remains an immutable Git dependency; extracted package checks
+  continue to patch and compile that exact revision.
+
 ### Fixed
 
+- Emit `xml:space` in the XML namespace from generated bindings and require every
+  claimed official typed output to pass its exact official XSD.
+- Preserve GAEB decimal fields with an exact decimal type rather than binary64;
+  official typed round trips now compare numeric leaf values as well as reparsing.
+- Scope conformance errors and pairwise lints to coherent evidence-backed release
+  tuples; include description IDs and breakdown policy in pair signatures.
+- Apply item discounts in commercial price arithmetic and resolve `NoUPComps`
+  from each item's containing BoQ instead of a document-wide declaration.
 - Treat explicit-empty and XML-whitespace-only `Qty` elements as existing but
   not safely editable rather than reporting them as missing.
 - Accept only XML 1.0 `S` characters outside the document element.

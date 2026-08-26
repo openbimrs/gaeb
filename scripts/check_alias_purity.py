@@ -92,7 +92,7 @@ metadata = json.loads(subprocess.run(
 ).stdout)
 packages = metadata["packages"]
 package_names = {candidate["name"] for candidate in packages}
-expected_names = {ALIAS_PACKAGE, CANONICAL_PACKAGE}
+expected_names = {ALIAS_PACKAGE, CANONICAL_PACKAGE, "openbim-gaeb-bindings"}
 if package_names != expected_names:
     fail(f"workspace package set must be {sorted(expected_names)}, got {sorted(package_names)}")
 
@@ -105,8 +105,8 @@ if alias.get("edition") != "2021":
     fail("alias package edition must be 2021")
 if alias.get("rust_version") != "1.85":
     fail("alias package rust-version must be 1.85")
-if alias.get("publish") is not None:
-    fail("alias package must remain publishable to crates.io")
+if alias.get("publish") != []:
+    fail("alias package publishing must remain disabled while canonical dependencies are Git-pinned")
 if alias.get("features"):
     fail("alias must not define Cargo features")
 if alias.get("links") is not None:

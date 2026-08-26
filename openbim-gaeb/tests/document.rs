@@ -338,3 +338,18 @@ fn malformed_xml_is_an_error() {
         Err(Error::Xml(_))
     ));
 }
+
+#[test]
+fn rejects_excessive_xml_nesting_depth() {
+    let mut xml = String::from(r#"<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA86/3.3">"#);
+    for _ in 0..256 {
+        xml.push_str("<vendor>");
+    }
+    for _ in 0..256 {
+        xml.push_str("</vendor>");
+    }
+    xml.push_str("</GAEB>");
+
+    let error = Document::parse(xml).unwrap_err();
+    assert!(matches!(error, Error::Xml(message) if message.contains("nesting depth")));
+}
