@@ -21,10 +21,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-- Reject empty/multiple-root XML, declarations after prolog content, trailing
-  non-whitespace, and all DTDs before XSD instance validation; fail schema
-  loading when include/import directives fail.
-- Bound lossless XML parsing to 256 nested elements and reject `NoUPComps`
+- Reject empty/multiple-root XML, malformed qualified names, comments, and
+  processing-instruction targets, XML 1.0-forbidden characters, invalid or
+  misordered XML declarations (including declarations after leading
+  whitespace), trailing non-whitespace, and all DTDs before XSD instance
+  validation; fail schema loading when include/import directives are unresolved
+  or report composition errors.
+- Bound lossless XML parsing to 256 nested elements, cap XSD preflight at 1,024
+  attributes per element and retained schema diagnostics at 4,096 with explicit
+  truncation reporting, confine caller-provided schema graphs to private snapshots
+  of at most 256 documents, 64 levels, and 8 MiB, and reject `NoUPComps`
   declarations above the six GAEB unit-price component fields before traversal.
 
 ### Changed
@@ -35,14 +41,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Enforce Namespaces in XML 1.0 reserved-prefix bindings and prefix declaration
+  requirements before XSD validation, and remove Unix and Windows host paths plus
+  self-stale commit identity from packaged support-manifest provenance.
 - Emit `xml:space` in the XML namespace from generated bindings and require every
-  claimed official typed output to pass its exact official XSD.
+  claimed official typed output to pass its exact official XSD and preserve
+  decimal values in both text nodes and attributes.
 - Preserve GAEB decimal fields with an exact decimal type rather than binary64;
-  official typed round trips now compare numeric leaf values as well as reparsing.
+  official typed round trips now compare numeric leaf values as well as reparsing,
+  while business arithmetic uses bounded arbitrary precision and fails closed when
+  its explicit resource budget is exceeded.
 - Scope conformance errors and pairwise lints to coherent evidence-backed release
   tuples; include description IDs and breakdown policy in pair signatures.
-- Apply item discounts in commercial price arithmetic and resolve `NoUPComps`
-  from each item's containing BoQ instead of a document-wide declaration.
+- Apply item discounts in commercial price arithmetic, require X84 text complements
+  to use baseline-designated `MarkLbl` slots, and resolve arbitrarily large
+  `NoUPComps` only from the nearest containing BoQ's `BoQInfo`.
 - Treat explicit-empty and XML-whitespace-only `Qty` elements as existing but
   not safely editable rather than reporting them as missing.
 - Accept only XML 1.0 `S` characters outside the document element.

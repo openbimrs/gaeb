@@ -68,8 +68,10 @@ X61, X84P, X98, and X99.
 
 ## Validation and typed boundaries
 
-`openbim-gaeb` compiles caller-provided schema roots with the pinned
-`xsd-schema` revision. Strict schema-derivation validation is the default; the
+`openbim-gaeb` preflights caller-provided schema roots, confines every local
+directive to the root schema's directory, and stages the bounded graph into a
+private snapshot before compiling it with the pinned `xsd-schema` revision.
+Strict schema-derivation validation is the default; the
 trusted-corpus opt-out skips only that consistency stage. Directive resolution,
 nested redefine/include traversal, reference resolution, and streaming instance
 validation remain enabled. `support-matrix.csv` dispatches by declared version,
@@ -89,7 +91,13 @@ Parsing is streaming over the source bytes. Memory is the owned source plus the
 extracted item/category summaries; there is no second general-purpose XML tree
 in the lossless document. Business validation builds a short-lived `roxmltree`
 view on demand and drops it with the validation call. XSD validation streams the
-instance through the precompiled schema set. Generated typed bindings are opt-in.
+instance through the precompiled schema set. The lexical preflight rejects more
+than 1,024 attributes on one element before invoking schema validation, avoiding
+pathological attribute-fanout behavior in the schema engine. Validation retains
+at most 4,096 schema diagnostics and appends an explicit truncation error when
+additional diagnostics are omitted. Schema preflight permits at most 256
+documents, 64 include/import levels, and 8 MiB across the graph; non-local,
+escaping, and non-regular graph members fail closed. Generated typed bindings are opt-in.
 Description text is normalized only in the summary view. Raw XML remains exact.
 
 ## Security posture
@@ -100,7 +108,8 @@ Description text is normalized only in the summary view. Raw XML remains exact.
   matrix, and namespaced descendants are interpreted only when bound to that
   exact root namespace.
 - The complete source must be UTF-8 and contain only XML 1.0 characters;
-  undeclared attribute prefixes, unknown entities, duplicate attributes,
+  reserved `xml`/`xmlns` bindings, XML 1.0 prefix undeclarations, undeclared
+  prefixes, unknown entities, duplicate expanded attributes,
   misplaced/repeated XML declarations, extra roots, and non-whitespace trailing
   content are rejected.
 - DTD/DOCTYPE documents are rejected; no external entities are loaded.

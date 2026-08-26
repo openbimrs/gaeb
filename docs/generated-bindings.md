@@ -50,4 +50,4 @@ the checked-in corrected artifact SHA-256 is
 
 ## Supported boundary
 
-Only GAEB 3.1 X81, X83, and X86 are claimed. The official X84 fixture does not decode through this generated family and remains unclaimed. GAEB 3.2 generated families do not compile and are not shipped. See `openbim-gaeb/schema-support-matrix.json` for the machine-readable claim boundary.
+Only GAEB 3.1 X81, X83, and X86 are claimed. The official X84 fixture does not decode through this generated family and remains unclaimed. GAEB 3.2 generated families do not compile and are not shipped. See the `typed_module` column in `openbim-gaeb/support-matrix.csv` for the machine-readable typed claim boundary; `schema-support-matrix.json` describes schema/fixture support rather than generated modules.

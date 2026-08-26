@@ -2031,12 +2031,11 @@
       }
     ],
     "sources": {
-      "audited_repo": "/mnt/backup/build-cache/openbim-gaeb-bindings",
-      "fixture_root": "/home/friedrich/projects/openbim/packages/gaeb/tests/fixtures",
+      "audited_repository": "https://github.com/openbimrs/gaeb",
+      "fixture_source": "official GAEB fixture corpus; repository:references/SOURCE-MANIFEST.json",
       "parser_policy": "openbim-gaeb/src/parser.rs:1067-1191",
-      "repo_head": "7bbed85166e46c9177fe120c28080a553cf04e81",
-      "schema_root": "/home/friedrich/projects/openbim/packages/gaeb/references/specs",
-      "source_manifest": "/mnt/backup/build-cache/openbim-gaeb-bindings/references/SOURCE-MANIFEST.json",
+      "schema_source": "official GAEB XSD corpus; repository:references/SOURCE-MANIFEST.json",
+      "source_manifest": "repository:references/SOURCE-MANIFEST.json",
       "source_manifest_sha256": "6a7baa4446c45e08834a880848f524ce7bbb1440eaf49606dda0e9e652f0aae7"
     },
     "support_rows": [

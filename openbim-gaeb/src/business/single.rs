@@ -96,21 +96,27 @@ fn validate_prices(tree: &Tree<'_>, report: &mut ValidationReport) {
 
     for item in tree.all_named("Item") {
         if let (Some(qty), Some(up), Some(total)) = (
-            decimal_child(tree, item, "Qty"),
-            decimal_child(tree, item, "UP"),
-            decimal_child(tree, item, "IT"),
+            tree.child_text(item, "Qty"),
+            tree.child_text(item, "UP"),
+            tree.child_text(item, "IT"),
         ) {
-            let expected = decimal_child(tree, item, "DiscountPcnt").map_or_else(
-                || qty.multiply_rounded(up, 2),
-                |discount| qty.multiply_discounted_rounded(up, discount, 2),
-            );
-            if !expected.is_some_and(|expected| expected.equals_at(total, 2)) {
+            let expected = Decimal::parse(&qty)
+                .zip(Decimal::parse(&up))
+                .and_then(|(qty, up)| match tree.child_text(item, "DiscountPcnt") {
+                    Some(discount) => Decimal::parse(&discount)
+                        .and_then(|discount| qty.multiply_discounted_rounded(&up, &discount, 2)),
+                    None => qty.multiply_rounded(&up, 2),
+                });
+            let matches_total = Decimal::parse(&total)
+                .zip(expected)
+                .is_some_and(|(total, expected)| expected.equals_at(&total, 2));
+            if !matches_total {
                 emit(
                     report,
                     tree,
                     "GAEB-LINT-PRICE-001",
                     tree.first_child(item, "IT").unwrap_or(item),
-                    "item total differs from commercially rounded Qty × UP after item discount",
+                    "item total differs from commercially rounded Qty × UP after item discount, or exact arithmetic exceeded its resource budget",
                 );
             }
         }
@@ -147,19 +153,20 @@ fn validate_prices(tree: &Tree<'_>, report: &mut ValidationReport) {
             }
             if !missing.is_empty() {
                 emit(report, tree, "GAEB-LINT-PRICE-002", item, format!("unit-price component declaration is incomplete or non-contiguous at indices {missing:?}"));
-            } else if let (Some(up), Some(sum)) = (
-                decimal_child(tree, item, "UP"),
-                components
+            } else {
+                let sum = components
                     .into_iter()
-                    .try_fold(Decimal::parse("0").unwrap(), |sum, value| sum.add(value)),
-            ) {
-                if !sum.equals_at(up, up.scale().max(sum.scale())) {
+                    .try_fold(Decimal::parse("0").unwrap(), |sum, value| sum.add(&value));
+                let matches_up = decimal_child(tree, item, "UP")
+                    .zip(sum)
+                    .is_some_and(|(up, sum)| sum.equals_at(&up, up.scale().max(sum.scale())));
+                if !matches_up {
                     emit(
                         report,
                         tree,
                         "GAEB-LINT-PRICE-003",
                         tree.first_child(item, "UP").unwrap_or(item),
-                        "unit-price components do not sum to UP",
+                        "unit-price components do not sum to UP, or exact arithmetic exceeded its resource budget",
                     );
                 }
             }
@@ -170,24 +177,23 @@ fn validate_prices(tree: &Tree<'_>, report: &mut ValidationReport) {
 fn nearest_declared_component_count(tree: &Tree<'_>, node: NodeId) -> Option<usize> {
     let mut current = Some(node);
     while let Some(id) = current {
-        if let Some(value) = tree.child_text(id, "NoUPComps") {
-            return value.parse().ok();
-        }
         if tree.is(id, "BoQ") {
-            if let Some(value) = tree
+            return tree
                 .first_child(id, "BoQInfo")
                 .and_then(|info| tree.child_text(info, "NoUPComps"))
-            {
-                return value.parse().ok();
-            }
+                .and_then(|value| parse_component_count(&value));
         }
         current = tree.parent(id);
     }
-    let declared = tree.all_named("NoUPComps");
-    if declared.len() == 1 {
-        return tree.text(declared[0]).parse().ok();
-    }
     None
+}
+
+fn parse_component_count(value: &str) -> Option<usize> {
+    let value = value.trim();
+    if value.is_empty() || !value.bytes().all(|byte| byte.is_ascii_digit()) {
+        return None;
+    }
+    Some(value.parse().unwrap_or(usize::MAX))
 }
 
 fn decimal_child(tree: &Tree<'_>, node: NodeId, name: &str) -> Option<Decimal> {
@@ -220,13 +226,13 @@ fn validate_totals(tree: &Tree<'_>, report: &mut ValidationReport) {
             if let Some(value) =
                 direct_decimal_any(tree, child, &["IT", "Total", "TotalNet", "TotalAmount"])
             {
-                if let Some(next) = sum.add(value) {
+                if let Some(next) = sum.add(&value) {
                     sum = next;
                     found = true;
                 }
             }
         }
-        if found && !sum.equals_at(declared, 2) {
+        if found && !sum.equals_at(&declared, 2) {
             emit(
                 report,
                 tree,
@@ -241,7 +247,10 @@ fn validate_totals(tree: &Tree<'_>, report: &mut ValidationReport) {
             direct_decimal_any(tree, totals, &["VATAmount", "VAT"]),
             direct_decimal_any(tree, totals, &["TotalGross", "GrossTotal"]),
         ) {
-            if !net.add(vat).is_some_and(|value| value.equals_at(gross, 2)) {
+            if !net
+                .add(&vat)
+                .is_some_and(|value| value.equals_at(&gross, 2))
+            {
                 emit(
                     report,
                     tree,
@@ -310,6 +319,7 @@ fn validate_cost_elements(document: &Document, tree: &Tree<'_>, report: &mut Val
     let phase_code = metadata.phase_code.as_deref();
     let phase_family = phase_code.and_then(|phase| phase.split('.').next());
     let applicable = metadata.version_text.as_deref() == Some("3.3")
+        && metadata.version_date.as_deref() == Some("2021-05")
         && metadata.namespace.ends_with("/3.3")
         && phase_from_namespace == phase_family
         && matches!(phase_code, Some("50.1" | "50.2" | "51.1" | "51.2"));

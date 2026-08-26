@@ -86,7 +86,10 @@ fn total_rules_have_positive_and_negative_cases() {
 
 #[test]
 fn x83_x84_vat_and_text_complement_rules_are_pairwise() {
-    let baseline = v33("83", r#"<Award><VAT>19</VAT></Award>"#);
+    let baseline = v33(
+        "83",
+        r#"<Award><VAT>19</VAT><TextComplement MarkLbl="1"/></Award>"#,
+    );
     let valid = v33(
         "84",
         r#"<Award><VAT>19</VAT><TextComplement MarkLbl="1">filled</TextComplement></Award>"#,
@@ -107,6 +110,14 @@ fn x83_x84_vat_and_text_complement_rules_are_pairwise() {
         .diagnostics()
         .iter()
         .all(|diagnostic| diagnostic.severity() == ValidationSeverity::Warning));
+
+    let undesignated = v33(
+        "84",
+        r#"<Award><VAT>19</VAT><TextComplement MarkLbl="999">filled</TextComplement></Award>"#,
+    );
+    assert!(BusinessValidator::new()
+        .validate_pair(&baseline, &undesignated)
+        .has_code("GAEB-LINT-TEXT-001"));
 }
 
 #[test]
@@ -160,6 +171,18 @@ fn pair_lints_require_a_coherent_release_tuple() {
     let candidate = v33("84", r#"<Award><VAT>20</VAT></Award>"#);
     assert!(BusinessValidator::new()
         .validate_pair(&baseline, &candidate)
+        .diagnostics()
+        .is_empty());
+
+    let contradictory_phase = doc(
+        "http://www.gaeb.de/GAEB_DA_XML/DA84/3.3",
+        "3.3",
+        "2023-01",
+        "83",
+        r#"<Award><VAT>19</VAT></Award>"#,
+    );
+    assert!(BusinessValidator::new()
+        .validate_pair(&contradictory_phase, &candidate)
         .diagnostics()
         .is_empty());
 }

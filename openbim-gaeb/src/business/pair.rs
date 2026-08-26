@@ -1,7 +1,7 @@
 use super::{decimal::Decimal, severity_for, tree::Tree};
 use crate::{Document, ValidationDiagnostic, ValidationReport, ValidationSeverity};
 use roxmltree::NodeId;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 pub(super) fn validate(baseline: &Document, candidate: &Document) -> ValidationReport {
     let mut report = ValidationReport::default();
@@ -40,11 +40,40 @@ pub(super) fn validate(baseline: &Document, candidate: &Document) -> ValidationR
 fn same_release(baseline: &Document, candidate: &Document) -> bool {
     let before = baseline.metadata();
     let after = candidate.metadata();
-    before.version_text.is_some()
+    let before_coherent =
+        before.namespace_version == before.declared_version && phase_matches_namespace(baseline);
+    let after_coherent =
+        after.namespace_version == after.declared_version && phase_matches_namespace(candidate);
+    before_coherent
+        && after_coherent
+        && before.version_text.is_some()
         && before.version_text == after.version_text
         && before.version_date.is_some()
         && before.version_date == after.version_date
         && before.namespace.rsplit('/').next() == after.namespace.rsplit('/').next()
+}
+
+fn phase_matches_namespace(document: &Document) -> bool {
+    let metadata = document.metadata();
+    let Some(rest) = metadata
+        .namespace
+        .strip_prefix("http://www.gaeb.de/GAEB_DA_XML/DA")
+    else {
+        return true;
+    };
+    let Some((namespace_phase, _)) = rest.split_once('/') else {
+        return false;
+    };
+    let Some(declared) = metadata.phase_code.as_deref() else {
+        return false;
+    };
+    match namespace_phase {
+        "50" | "51" => {
+            declared.starts_with(namespace_phase) && declared.as_bytes().get(2) == Some(&b'.')
+        }
+        "84" => matches!(declared, "84" | "84Z"),
+        phase => declared == phase,
+    }
 }
 
 fn emit(
@@ -169,14 +198,22 @@ fn validate_x83_x84(
         );
     }
 
+    let designated_complements: HashSet<&str> = before
+        .all_named("TextComplement")
+        .into_iter()
+        .filter_map(|complement| before.attribute(complement, "MarkLbl"))
+        .collect();
     for complement in after.all_named("TextComplement") {
-        if after.attribute(complement, "MarkLbl").is_none() {
+        if !after
+            .attribute(complement, "MarkLbl")
+            .is_some_and(|marker| designated_complements.contains(marker))
+        {
             emit(
                 report,
                 after,
                 "GAEB-LINT-TEXT-001",
                 complement,
-                "text complement was changed or supplied without a designated completion slot",
+                "text complement was changed or supplied without a baseline-designated completion slot",
             );
         }
     }
@@ -263,7 +300,8 @@ fn validate_quantity_links(
             (Some(reference), Some(result))
                 if lv_quantities
                     .get(&reference)
-                    .is_some_and(|qty| qty.equals_at(result, qty.scale().max(result.scale()))) => {}
+                    .is_some_and(|qty| qty.equals_at(&result, qty.scale().max(result.scale()))) => {
+            }
             (Some(reference), Some(_)) if lv_quantities.contains_key(&reference) => emit(
                 report,
                 x31,

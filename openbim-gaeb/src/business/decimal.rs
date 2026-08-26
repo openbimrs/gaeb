@@ -1,6 +1,10 @@
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+use num_bigint::{BigInt, Sign};
+
+const MAX_DECIMAL_DIGITS: usize = 4_096;
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub(super) struct Decimal {
-    units: i128,
+    units: BigInt,
     scale: u32,
 }
 
@@ -27,7 +31,10 @@ impl Decimal {
             return None;
         }
         let digits = format!("{whole}{fraction}");
-        let mut units = digits.parse::<i128>().ok()?;
+        if digits.len() > MAX_DECIMAL_DIGITS {
+            return None;
+        }
+        let mut units = BigInt::parse_bytes(digits.as_bytes(), 10)?;
         if negative {
             units = -units;
         }
@@ -37,42 +44,38 @@ impl Decimal {
         })
     }
 
-    pub(super) fn add(self, other: Self) -> Option<Self> {
+    pub(super) fn add(&self, other: &Self) -> Option<Self> {
         let scale = self.scale.max(other.scale);
         let left = self.rescale_exact(scale)?;
         let right = other.rescale_exact(scale)?;
         Some(Self {
-            units: left.checked_add(right)?,
+            units: left + right,
             scale,
         })
     }
 
-    pub(super) fn multiply_rounded(self, other: Self, scale: u32) -> Option<Self> {
-        let units = self.units.checked_mul(other.units)?;
+    pub(super) fn multiply_rounded(&self, other: &Self, scale: u32) -> Option<Self> {
         Self {
-            units,
+            units: &self.units * &other.units,
             scale: self.scale.checked_add(other.scale)?,
         }
         .round(scale)
     }
 
     pub(super) fn multiply_discounted_rounded(
-        self,
-        other: Self,
-        discount_percent: Self,
+        &self,
+        other: &Self,
+        discount_percent: &Self,
         scale: u32,
     ) -> Option<Self> {
         let percent_scale = discount_percent.scale;
-        let hundred = 100_i128.checked_mul(pow10(percent_scale)?)?;
-        let complement = hundred.checked_sub(discount_percent.units)?;
-        if complement < 0 {
+        let hundred = BigInt::from(100_u8) * pow10(percent_scale)?;
+        let complement = hundred - &discount_percent.units;
+        if complement.sign() == Sign::Minus {
             return None;
         }
         Self {
-            units: self
-                .units
-                .checked_mul(other.units)?
-                .checked_mul(complement)?,
+            units: &self.units * &other.units * complement,
             scale: self
                 .scale
                 .checked_add(other.scale)?
@@ -82,24 +85,24 @@ impl Decimal {
         .round(scale)
     }
 
-    pub(super) fn equals_at(self, other: Self, scale: u32) -> bool {
+    pub(super) fn equals_at(&self, other: &Self, scale: u32) -> bool {
         self.round(scale)
             .zip(other.round(scale))
             .is_some_and(|(left, right)| left == right)
     }
 
-    pub(super) fn scale(self) -> u32 {
+    pub(super) fn scale(&self) -> u32 {
         self.scale
     }
 
-    fn rescale_exact(self, scale: u32) -> Option<i128> {
+    fn rescale_exact(&self, scale: u32) -> Option<BigInt> {
         if scale < self.scale {
             return None;
         }
-        self.units.checked_mul(pow10(scale - self.scale)?)
+        Some(&self.units * pow10(scale - self.scale)?)
     }
 
-    fn round(self, scale: u32) -> Option<Self> {
+    fn round(&self, scale: u32) -> Option<Self> {
         if self.scale <= scale {
             return Some(Self {
                 units: self.rescale_exact(scale)?,
@@ -107,20 +110,32 @@ impl Decimal {
             });
         }
         let divisor = pow10(self.scale - scale)?;
-        let quotient = self.units / divisor;
-        let remainder = self.units % divisor;
-        let increment = if remainder.abs().checked_mul(2)? >= divisor {
-            self.units.signum()
+        let quotient = &self.units / &divisor;
+        let remainder = &self.units % &divisor;
+        let magnitude = if remainder.sign() == Sign::Minus {
+            -remainder
         } else {
-            0
+            remainder
+        };
+        let increment = if magnitude * 2_u8 >= divisor {
+            match self.units.sign() {
+                Sign::Minus => BigInt::from(-1_i8),
+                Sign::NoSign => BigInt::from(0_u8),
+                Sign::Plus => BigInt::from(1_u8),
+            }
+        } else {
+            BigInt::from(0_u8)
         };
         Some(Self {
-            units: quotient.checked_add(increment)?,
+            units: quotient + increment,
             scale,
         })
     }
 }
 
-fn pow10(power: u32) -> Option<i128> {
-    10_i128.checked_pow(power)
+fn pow10(power: u32) -> Option<BigInt> {
+    if usize::try_from(power).ok()? > MAX_DECIMAL_DIGITS * 3 + 2 {
+        return None;
+    }
+    Some(BigInt::from(10_u8).pow(power))
 }

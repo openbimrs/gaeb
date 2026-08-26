@@ -7,6 +7,46 @@ fn manifest() -> Value {
         .expect("schema support matrix must be valid JSON")
 }
 
+fn is_host_absolute_path(value: &str) -> bool {
+    let bytes = value.as_bytes();
+    value.starts_with('/')
+        || value.starts_with('\\')
+        || value.starts_with("file:")
+        || matches!(
+            bytes,
+            [drive, b':', separator, ..]
+                if drive.is_ascii_alphabetic() && matches!(separator, b'/' | b'\\')
+        )
+}
+
+#[test]
+fn host_absolute_provenance_detection_is_platform_independent() {
+    for value in [
+        "/home/reviewer/schema",
+        r"C:\Users\reviewer\schema",
+        "C:/Users/reviewer/schema",
+        r"\\server\share\schema",
+        r"\rooted\schema",
+        "file:///home/reviewer/schema",
+    ] {
+        assert!(
+            is_host_absolute_path(value),
+            "absolute path accepted: {value}"
+        );
+    }
+
+    for value in [
+        "https://github.com/openbimrs/gaeb",
+        "repository:references/SOURCE-MANIFEST.json",
+        "references/specs/schema.xsd",
+    ] {
+        assert!(
+            !is_host_absolute_path(value),
+            "portable source rejected: {value}"
+        );
+    }
+}
+
 #[test]
 fn comprehensive_manifest_has_reviewed_cardinality_and_unique_rows() {
     let root = manifest();
@@ -31,6 +71,21 @@ fn comprehensive_manifest_has_reviewed_cardinality_and_unique_rows() {
             .count(),
         8
     );
+}
+
+#[test]
+fn packaged_manifest_provenance_is_portable_and_not_self_stale() {
+    let root = manifest();
+    let sources = root["manifest"]["sources"].as_object().unwrap();
+    assert!(!sources.contains_key("repo_head"));
+    for (key, value) in sources {
+        if let Some(value) = value.as_str() {
+            assert!(
+                !is_host_absolute_path(value),
+                "host-specific provenance at {key}: {value}"
+            );
+        }
+    }
 }
 
 #[test]

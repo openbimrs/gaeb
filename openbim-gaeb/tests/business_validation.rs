@@ -91,6 +91,101 @@ fn absurd_component_count_is_bounded_and_reported_once() {
 }
 
 #[test]
+fn component_limit_accepts_six_and_rejects_seven() {
+    let validate = |count: usize| {
+        let (up, seventh) = if count == 7 {
+            ("28", "<UPComp7>7</UPComp7>")
+        } else {
+            ("21", "")
+        };
+        let body = format!(
+            r#"<Award><BoQ><BoQInfo><NoUPComps>{count}</NoUPComps></BoQInfo><BoQBody><Itemlist><Item ID="i1"><UP>{up}</UP><UPComp1>1</UPComp1><UPComp2>2</UPComp2><UPComp3>3</UPComp3><UPComp4>4</UPComp4><UPComp5>5</UPComp5><UPComp6>6</UPComp6>{seventh}</Item></Itemlist></BoQBody></BoQ></Award>"#
+        );
+        BusinessValidator::new().validate(&doc(NS33_84, "3.3", "2023-01", "84", &body))
+    };
+
+    assert!(!validate(6).has_code("GAEB-LINT-PRICE-002"));
+    let rejected = validate(7);
+    assert!(rejected.has_code("GAEB-LINT-PRICE-002"));
+    assert_eq!(
+        rejected
+            .diagnostics()
+            .iter()
+            .filter(|diagnostic| diagnostic.code() == "GAEB-LINT-PRICE-002")
+            .count(),
+        1
+    );
+}
+
+#[test]
+fn component_count_is_bounded_and_owned_only_by_the_nearest_boq() {
+    let huge = doc(
+        NS33_84,
+        "3.3",
+        "2023-01",
+        "84",
+        r#"<Award><BoQ><BoQInfo><NoUPComps>999999999999999999999999999999999999999999999</NoUPComps></BoQInfo><BoQBody><Itemlist><Item ID="i1"><UP>1</UP></Item></Itemlist></BoQBody></BoQ></Award>"#,
+    );
+    assert!(BusinessValidator::new()
+        .validate(&huge)
+        .has_code("GAEB-LINT-PRICE-002"));
+
+    let item_local = doc(
+        NS33_84,
+        "3.3",
+        "2023-01",
+        "84",
+        r#"<Award><BoQ><BoQInfo/><BoQBody><Itemlist><Item ID="i1"><NoUPComps>1</NoUPComps><UP>1</UP></Item></Itemlist></BoQBody></BoQ></Award>"#,
+    );
+    assert!(!BusinessValidator::new()
+        .validate(&item_local)
+        .has_code("GAEB-LINT-PRICE-002"));
+}
+
+#[test]
+fn price_arithmetic_does_not_skip_xsd_valid_values_beyond_i128() {
+    let qty = format!("1{}", "0".repeat(40));
+    let total = format!("2{}", "0".repeat(40));
+    let document = doc(
+        NS33_84,
+        "3.3",
+        "2023-01",
+        "84",
+        &format!(
+            r#"<Award><Item ID="i1"><Qty>{qty}</Qty><UP>2</UP><IT>{total}</IT></Item></Award>"#
+        ),
+    );
+    assert!(!BusinessValidator::new()
+        .validate(&document)
+        .has_code("GAEB-LINT-PRICE-001"));
+
+    let document = doc(
+        NS33_84,
+        "3.3",
+        "2023-01",
+        "84",
+        &format!(r#"<Award><Item ID="i1"><Qty>{qty}</Qty><UP>2</UP><IT>1</IT></Item></Award>"#),
+    );
+    assert!(BusinessValidator::new()
+        .validate(&document)
+        .has_code("GAEB-LINT-PRICE-001"));
+
+    let beyond_budget = "1".repeat(4_097);
+    let document = doc(
+        NS33_84,
+        "3.3",
+        "2023-01",
+        "84",
+        &format!(
+            r#"<Award><Item ID="i1"><Qty>{beyond_budget}</Qty><UP>2</UP><IT>2</IT></Item></Award>"#
+        ),
+    );
+    assert!(BusinessValidator::new()
+        .validate(&document)
+        .has_code("GAEB-LINT-PRICE-001"));
+}
+
+#[test]
 fn x84_31_rules_are_exactly_version_date_scoped() {
     let missing = doc(
         NS31,
@@ -118,7 +213,7 @@ fn cost_rule_rejects_references_to_billing_elements() {
     let document = doc(
         "http://www.gaeb.de/GAEB_DA_XML/DA50/3.3",
         "3.3",
-        "2023-01",
+        "2021-05",
         "50.1",
         r#"<ElementalCosting><CostElement ID="bill"><BillElement>Yes</BillElement></CostElement><CostElement ID="child"><CostElementRef IDRef="bill"/></CostElement></ElementalCosting>"#,
     );
@@ -195,15 +290,27 @@ fn conformance_errors_require_coherent_evidence_backed_releases() {
     let contradictory_cost = doc(
         "http://www.gaeb.de/GAEB_DA_XML/DA51/3.3",
         "3.3",
-        "2023-01",
+        "2021-05",
         "50.1",
         r#"<ElementalCosting><CostElement ID="bill"><BillElement>Yes</BillElement></CostElement><CostElement><CostElementRef IDRef="bill"/></CostElement></ElementalCosting>"#,
     );
     assert!(!BusinessValidator::new()
         .validate(&contradictory_cost)
         .has_code("GAEB-BR-COST-001"));
-}
 
+    for date in ["1900-01", "2023-01"] {
+        let unsupported_date = doc(
+            "http://www.gaeb.de/GAEB_DA_XML/DA50/3.3",
+            "3.3",
+            date,
+            "50.1",
+            r#"<ElementalCosting><CostElement ID="bill"><BillElement>Yes</BillElement></CostElement><CostElement><CostElementRef IDRef="bill"/></CostElement></ElementalCosting>"#,
+        );
+        assert!(!BusinessValidator::new()
+            .validate(&unsupported_date)
+            .has_code("GAEB-BR-COST-001"));
+    }
+}
 #[test]
 fn unit_price_component_counts_are_scoped_to_each_boq() {
     let document = doc(
@@ -228,6 +335,30 @@ fn unit_price_component_counts_are_scoped_to_each_boq() {
     );
     assert!(
         report.has_code("GAEB-LINT-PRICE-002"),
+        "{:#?}",
+        report.diagnostics()
+    );
+
+    let no_cross_boq_fallback = doc(
+        NS33_84,
+        "3.3",
+        "2023-01",
+        "84",
+        r#"<Award>
+          <BoQ><BoQInfo><NoUPComps>1</NoUPComps></BoQInfo><BoQBody><Itemlist>
+            <Item ID="a"><UP>1</UP><UPComp1>1</UPComp1></Item>
+          </Itemlist></BoQBody>
+            <BoQ><BoQBody><Itemlist><Item ID="nested"><UP>10</UP><UPComp1>5</UPComp1></Item></Itemlist></BoQBody></BoQ>
+          </BoQ>
+          <BoQ><BoQBody><Itemlist>
+            <Item ID="b"><UP>10</UP><UPComp1>5</UPComp1></Item>
+          </Itemlist></BoQBody></BoQ>
+        </Award>"#,
+    );
+    let report = BusinessValidator::new().validate(&no_cross_boq_fallback);
+    assert!(!report.has_code("GAEB-LINT-PRICE-002"));
+    assert!(
+        !report.has_code("GAEB-LINT-PRICE-003"),
         "{:#?}",
         report.diagnostics()
     );

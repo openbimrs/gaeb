@@ -2,9 +2,28 @@ use std::{env, fs, path::Path};
 
 use openbim_gaeb::{support::SUPPORT_MATRIX, Document, GaebSchemaSet};
 use openbim_gaeb_bindings::{Error, TypedDocument};
-use quick_xml::{events::Event, Reader};
+use quick_xml::{
+    events::{BytesStart, Event},
+    Decoder, Reader,
+};
 use rust_decimal::Decimal;
 use std::str::FromStr;
+
+fn record_numeric_attributes(
+    start: &BytesStart<'_>,
+    decoder: Decoder,
+    path: &[String],
+    values: &mut Vec<(String, Decimal)>,
+) {
+    for attribute in start.attributes() {
+        let attribute = attribute.unwrap();
+        let value = attribute.decode_and_unescape_value(decoder).unwrap();
+        if let Ok(decimal) = Decimal::from_str(value.trim()) {
+            let name = String::from_utf8_lossy(attribute.key.as_ref());
+            values.push((format!("{}/@{name}", path.join("/")), decimal));
+        }
+    }
+}
 
 fn numeric_leaf_values(xml: &[u8]) -> Vec<(String, Decimal)> {
     let mut reader = Reader::from_reader(xml);
@@ -15,8 +34,13 @@ fn numeric_leaf_values(xml: &[u8]) -> Vec<(String, Decimal)> {
         match reader.read_event_into(&mut buffer).unwrap() {
             Event::Start(start) => {
                 path.push(String::from_utf8_lossy(start.name().as_ref()).into_owned());
+                record_numeric_attributes(&start, reader.decoder(), &path, &mut values);
             }
-            Event::Empty(_) => {}
+            Event::Empty(start) => {
+                path.push(String::from_utf8_lossy(start.name().as_ref()).into_owned());
+                record_numeric_attributes(&start, reader.decoder(), &path, &mut values);
+                path.pop();
+            }
             Event::End(_) => {
                 path.pop();
             }
@@ -31,7 +55,20 @@ fn numeric_leaf_values(xml: &[u8]) -> Vec<(String, Decimal)> {
         }
         buffer.clear();
     }
+    values.sort();
     values
+}
+
+#[test]
+fn numeric_leaf_values_include_attributes() {
+    let values = numeric_leaf_values(br#"<Root Rate="1.25"><Value>2.5</Value></Root>"#);
+    assert_eq!(
+        values,
+        vec![
+            ("Root/@Rate".to_owned(), Decimal::from_str("1.25").unwrap()),
+            ("Root/Value".to_owned(), Decimal::from_str("2.5").unwrap()),
+        ]
+    );
 }
 
 #[test]

@@ -17,9 +17,9 @@ The catalog and severity lookup are centralized in `openbim-gaeb/src/business/mo
 |---|---|---|
 | `GAEB-BR-X84-31-001` | namespace `http://www.gaeb.de/GAEB_DA_XML/200407`, declared version `3.1`, date `2009-12`, phase `84` | `Award/CTR` is required. |
 | `GAEB-BR-X84-31-002` | same exact tuple | every `MarkupItem` requires `ITMarkup`. |
-| `GAEB-BR-COST-001` | GAEB 3.3 DA50/DA51 namespace coherent with declared phase `50.1`, `50.2`, `51.1`, or `51.2` | a cost element used as a billing element must be terminal and may not be referenced as a component. |
+| `GAEB-BR-COST-001` | GAEB 3.3 date `2021-05`, with a DA50/DA51 namespace coherent with declared phase `50.1`, `50.2`, `51.1`, or `51.2` | a cost element used as a billing element must be terminal and may not be referenced as a component. |
 
-Contradictory namespace/declaration tuples and GAEB 3.4 beta documents do not trigger these errors. Regression tests pin both fail-closed applicability conditions.
+Contradictory namespace/declaration tuples, unsupported version dates, and GAEB 3.4 beta documents do not trigger these errors. Regression tests pin these fail-closed applicability conditions.
 
 ## Advisory rules
 
@@ -37,18 +37,18 @@ Contradictory namespace/declaration tuples and GAEB 3.4 beta documents do not tr
 | `GAEB-LINT-X84-002` | compares project VAT for a coherent X83→X84 pair. |
 | `GAEB-LINT-QTY-001` | compares X31 quantity-calculation results with referenced LV item quantities for a coherent release pair. |
 | `GAEB-LINT-TRADE-001` | compares order-item numbering for a coherent customer/contractor order pair. |
-| `GAEB-LINT-PRICECHAR-001` | checks dependent trade-price characteristic fields. |
-| `GAEB-LINT-TEXT-001` | requires a `MarkLbl` designation when an X84 `TextComplement` is supplied. |
+| `GAEB-LINT-TRADE-002` | checks dependent trade-price characteristic fields. |
+| `GAEB-LINT-TEXT-001` | requires every supplied X84 `TextComplement` to reference a `MarkLbl` completion slot designated by the baseline X83 document. |
 | `GAEB-LINT-DESCR-001` | compares description identity and content for a coherent X83→X84 pair. |
 
-Pair validation first requires matching declared version, version date, and namespace release segment. Cross-release pairs intentionally produce no pair lints rather than false evidence.
+Pair validation first requires matching declared version and version date, matching namespace release segments, and a phase coherent with each document's namespace. Cross-release or internally contradictory pairs intentionally produce no pair lints rather than false evidence.
 
 ## Resource bounds
 
 - XML nesting is rejected above 256 elements by the lossless parser and by the XSD document-shape preflight.
-- `NoUPComps` is bounded to the six GAEB `UPComp1`…`UPComp6` fields before any component traversal. Larger declarations produce one warning instead of caller-controlled work.
-- component declarations are resolved per containing BoQ; a document-global fallback is used only when exactly one declaration exists.
-- decimal arithmetic uses the internal exact fixed-scale decimal type and explicit commercial rounding. Item discounts are applied before the final two-decimal comparison.
+- `NoUPComps` is parsed as a bounded unsigned count and compared with the six GAEB `UPComp1`…`UPComp6` fields before any component traversal. Arbitrarily large declarations produce one warning instead of caller-controlled work.
+- component declarations are resolved only from `BoQInfo` in the nearest containing BoQ; item-local, outer, sibling, and document-global declarations are never reused.
+- decimal arithmetic uses bounded arbitrary-precision integers with exact fixed scales and explicit commercial rounding. Up to 4,096 decimal digits are computed exactly; values or intermediate scales beyond that resource budget fail closed with the applicable advisory instead of skipping validation. Item discounts are applied before the final two-decimal comparison.
 
 ## Executable evidence
 
@@ -66,8 +66,8 @@ Coverage includes:
 - exact namespace/version/date/phase applicability for error rules;
 - contradictory and cross-release tuples;
 - multiple BoQs with different unit-price-component declarations;
-- item discounts and commercial rounding;
-- description IDs, official `MarkLbl`, and BoQ-breakdown changes;
-- the six-component work bound.
+- item discounts, arbitrary-precision values, and commercial rounding;
+- description IDs, baseline-designated `MarkLbl` completion slots, and BoQ-breakdown changes;
+- the exact six-component boundary: six is accepted, seven and larger declarations are rejected before traversal.
 
 Retained mutation probes demonstrate that removing text filtering, component lookup, component budgeting, and warning-severity dispatch causes focused gates to fail. Business checks remain advisory unless the catalog explicitly identifies one of the three evidence-backed errors above.

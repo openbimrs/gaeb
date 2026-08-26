@@ -203,16 +203,114 @@ PROBES = (
     Probe(
         'xsd-document-shape',
         'openbim-gaeb/src/xsd/single.rs',
-        '        if let Err(message) = validate_xml_document_shape(xml) {\n            return Ok(ValidationReport::new(vec![ValidationDiagnostic::new(\n                Severity::Error,\n                "XSD-XML-PARSE",\n                message,\n            )]));\n        }\n\n',
-        '',
+        '        if let Err(message) = validate_xml_document_shape(xml) {',
+        '        if let Err(message) = validate_xml_document_shape(b"<Root/>") {',
         ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'xsd_rejects_every_document_level_well_formedness_violation'),
     ),
     Probe(
-        'xsd-directive-fail-closed',
+        'xsd-comment-lexical-validation',
         'openbim-gaeb/src/xsd/single.rs',
-        '.is_some_and(|directives| directives.error_count > 0)',
-        '.is_some_and(|directives| directives.error_count > usize::MAX)',
-        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'schema_loading_fails_closed_when_an_include_is_missing'),
+        'reader.config_mut().check_comments = true;',
+        'reader.config_mut().check_comments = false;',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'xsd_rejects_every_document_level_well_formedness_violation'),
+    ),
+    Probe(
+        'xsd-declaration-lexical-validation',
+        'openbim-gaeb/src/xsd/single.rs',
+        'validate_xml_declaration(&declaration)?;',
+        'let _ = &declaration;',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'xsd_rejects_every_document_level_well_formedness_violation'),
+    ),
+    Probe(
+        'xsd-pi-target-validation',
+        'openbim-gaeb/src/xsd/single.rs',
+        'if !is_valid_pi_target(&target) {',
+        'if false && !is_valid_pi_target(&target) {',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'xsd_rejects_every_document_level_well_formedness_violation'),
+    ),
+    Probe(
+        'xsd-qname-lexical-validation',
+        'openbim-gaeb/src/xsd/single.rs',
+        'is_valid_ncname(first) && second.is_none_or(is_valid_ncname)',
+        'true',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'xsd_rejects_every_document_level_well_formedness_violation'),
+    ),
+    Probe(
+        'xsd-leading-whitespace-before-declaration',
+        'openbim-gaeb/src/xsd/single.rs',
+        '                    if !saw_root {\n                        saw_prolog_content = true;\n                    }',
+        '                    if !saw_root {\n                        saw_prolog_content = false;\n                    }',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'xsd_rejects_every_document_level_well_formedness_violation'),
+    ),
+    Probe(
+        'xsd-xml10-content-character-validation',
+        'openbim-gaeb/src/xsd/single.rs',
+        'unescaped.chars().all(is_xml10_char)',
+        'true',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'xsd_rejects_every_document_level_well_formedness_violation'),
+    ),
+    Probe(
+        'xsd-xml10-raw-character-validation',
+        'openbim-gaeb/src/xsd/single.rs',
+        'decoded.chars().all(is_xml10_char)',
+        'true',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'xsd_rejects_every_document_level_well_formedness_violation'),
+    ),
+    Probe(
+        'xsd-attribute-fanout-budget',
+        'openbim-gaeb/src/xsd/single.rs',
+        'const MAX_ATTRIBUTES_PER_ELEMENT: usize = 1_024;',
+        'const MAX_ATTRIBUTES_PER_ELEMENT: usize = usize::MAX;',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'xsd_bounds_pathological_attribute_and_diagnostic_fanout'),
+    ),
+    Probe(
+        'xsd-diagnostic-fanout-budget',
+        'openbim-gaeb/src/xsd/single.rs',
+        'const MAX_XSD_DIAGNOSTICS: usize = 4_096;',
+        'const MAX_XSD_DIAGNOSTICS: usize = usize::MAX;',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'xsd_bounds_pathological_attribute_and_diagnostic_fanout'),
+    ),
+    Probe(
+        'xsd-unresolved-namespace-import',
+        'openbim-gaeb/src/xsd/single.rs',
+        '.imports\n                    .iter()\n                    .any(|directive| directive.resolved_doc_id.is_none())',
+        '.imports\n                    .iter()\n                    .any(|_| false)',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'schema_loading_fails_closed_for_namespace_only_imports'),
+    ),
+    Probe(
+        'xsd-namespace-binding-constraints',
+        'openbim-gaeb/src/xsd/single.rs',
+        '    if prefix == "xmlns" {',
+        '    if false && prefix == "xmlns" {',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'xsd_rejects_every_document_level_well_formedness_violation'),
+    ),
+    Probe(
+        'xsd-schema-root-confinement',
+        'openbim-gaeb/src/xsd/single.rs',
+        '                Component::ParentDir | Component::RootDir | Component::Prefix(_)',
+        '                Component::RootDir | Component::Prefix(_)',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'schema_loading_confines_directives_to_the_root_directory'),
+    ),
+    Probe(
+        'xsd-schema-graph-depth-budget',
+        'openbim-gaeb/src/xsd/single.rs',
+        'const MAX_SCHEMA_GRAPH_DEPTH: usize = 64;',
+        'const MAX_SCHEMA_GRAPH_DEPTH: usize = usize::MAX;',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'schema_loading_bounds_graph_depth'),
+    ),
+    Probe(
+        'xsd-schema-graph-document-budget',
+        'openbim-gaeb/src/xsd/single.rs',
+        'const MAX_SCHEMA_DOCUMENTS: usize = 256;',
+        'const MAX_SCHEMA_DOCUMENTS: usize = usize::MAX;',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'schema_loading_bounds_graph_cardinality'),
+    ),
+    Probe(
+        'xsd-schema-graph-byte-budget',
+        'openbim-gaeb/src/xsd/single.rs',
+        'const MAX_SCHEMA_GRAPH_BYTES: usize = 8 * 1024 * 1024;',
+        'const MAX_SCHEMA_GRAPH_BYTES: usize = usize::MAX;',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'xsd_validation', 'schema_loading_bounds_total_graph_bytes'),
     ),
     Probe(
         'typed-exact-decimal',
@@ -222,11 +320,25 @@ PROBES = (
         ('cargo', 'test', '-p', 'openbim-gaeb-bindings', '--test', 'exact_decimal', 'all_gaeb_decimal_aliases_preserve_values_beyond_binary64_integer_precision'),
     ),
     Probe(
+        'typed-numeric-attribute-retention',
+        'openbim-gaeb-bindings/tests/official_roundtrip.rs',
+        'values.push((format!("{}/@{name}", path.join("/")), decimal));',
+        'drop((name, decimal));',
+        ('cargo', 'test', '-p', 'openbim-gaeb-bindings', '--test', 'official_roundtrip', 'numeric_leaf_values_include_attributes'),
+    ),
+    Probe(
         'typed-xml-space-namespace',
         'openbim-gaeb-bindings/src/generated/v3_1_2007_11.rs',
         'helper.write_attrib(&mut bytes, "xml:space", &self.value.space)?;',
         'helper.write_attrib(&mut bytes, "space", &self.value.space)?;',
         ('cargo', 'test', '-p', 'openbim-gaeb-bindings', '--test', 'exact_decimal', 'generated_serializer_qualifies_xml_space'),
+    ),
+    Probe(
+        'business-warning-severity',
+        'openbim-gaeb/src/business/mod.rs',
+        '        severity: ValidationSeverity::Warning,',
+        '        severity: ValidationSeverity::Error,',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_validation', 'catalog_distinguishes_evidence_backed_rules_from_interoperability_lints'),
     ),
     Probe(
         'pair-release-coherence',
@@ -238,8 +350,8 @@ PROBES = (
     Probe(
         'discount-arithmetic',
         'openbim-gaeb/src/business/single.rs',
-        '                |discount| qty.multiply_discounted_rounded(up, discount, 2),',
-        '                |_| qty.multiply_rounded(up, 2),',
+        '                        .and_then(|discount| qty.multiply_discounted_rounded(&up, &discount, 2)),',
+        '                        .and_then(|_| qty.multiply_rounded(&up, 2)),',
         ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_validation', 'item_total_accounts_for_item_discount_percentage'),
     ),
     Probe(
@@ -250,17 +362,38 @@ PROBES = (
         ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_validation', 'unit_price_component_counts_are_scoped_to_each_boq'),
     ),
     Probe(
+        'component-count-overflow',
+        'openbim-gaeb/src/business/single.rs',
+        '    Some(value.parse().unwrap_or(usize::MAX))',
+        '    value.parse().ok()',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_validation', 'component_count_is_bounded_and_owned_only_by_the_nearest_boq'),
+    ),
+    Probe(
+        'business-arbitrary-decimal',
+        'openbim-gaeb/src/business/decimal.rs',
+        '        let mut units = BigInt::parse_bytes(digits.as_bytes(), 10)?;',
+        '        let mut units = BigInt::from(digits.parse::<i128>().ok()?);',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_validation', 'price_arithmetic_does_not_skip_xsd_valid_values_beyond_i128'),
+    ),
+    Probe(
         'text-complement-marker',
         'openbim-gaeb/src/business/pair.rs',
-        'after.attribute(complement, "MarkLbl")',
-        'after.attribute(complement, "Designation")',
+        '            .attribute(complement, "MarkLbl")',
+        '            .attribute(complement, "Designation")',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_rule_pairs', 'x83_x84_vat_and_text_complement_rules_are_pairwise'),
+    ),
+    Probe(
+        'text-complement-baseline-designation',
+        'openbim-gaeb/src/business/pair.rs',
+        '            .is_some_and(|marker| designated_complements.contains(marker))',
+        '            .is_some()',
         ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_rule_pairs', 'x83_x84_vat_and_text_complement_rules_are_pairwise'),
     ),
     Probe(
         'description-id-signature',
         'openbim-gaeb/src/business/pair.rs',
-        'tree.attribute(description, "ID").unwrap_or_default(),',
-        '"",',
+        'tree.attribute(description, "ID").unwrap_or("")',
+        '""',
         ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_rule_pairs', 'x83_x84_detects_description_id_and_breakdown_changes'),
     ),
     Probe(
@@ -280,9 +413,37 @@ PROBES = (
     Probe(
         'error-cost-phase-coherence',
         'openbim-gaeb/src/business/single.rs',
-        '        && phase_family == phase_from_namespace',
+        '        && phase_from_namespace == phase_family',
         '        && true',
         ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_validation', 'conformance_errors_require_coherent_evidence_backed_releases'),
+    ),
+    Probe(
+        'error-cost-date-coherence',
+        'openbim-gaeb/src/business/single.rs',
+        '        && metadata.version_date.as_deref() == Some("2021-05")',
+        '        && true',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_validation', 'conformance_errors_require_coherent_evidence_backed_releases'),
+    ),
+    Probe(
+        'component-budget-exact-boundary',
+        'openbim-gaeb/src/business/single.rs',
+        'const MAX_UNIT_PRICE_COMPONENTS: usize = 6;',
+        'const MAX_UNIT_PRICE_COMPONENTS: usize = 7;',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_validation', 'component_limit_accepts_six_and_rejects_seven'),
+    ),
+    Probe(
+        'pair-phase-namespace-coherence',
+        'openbim-gaeb/src/business/pair.rs',
+        'before.namespace_version == before.declared_version && phase_matches_namespace(baseline);',
+        'before.namespace_version == before.declared_version;',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'business_rule_pairs', 'pair_lints_require_a_coherent_release_tuple'),
+    ),
+    Probe(
+        'provenance-windows-forward-slash-path',
+        'openbim-gaeb/schema-support-matrix.json',
+        '"audited_repository": "https://github.com/openbimrs/gaeb"',
+        '"audited_repository": "C:/Users/reviewer/schema"',
+        ('cargo', 'test', '-p', 'openbim-gaeb', '--test', 'support_matrix', 'packaged_manifest_provenance_is_portable_and_not_self_stale'),
     ),
 )
 
@@ -315,12 +476,13 @@ def main() -> int:
     temporary = Path(tempfile.mkdtemp(prefix="gaeb-mutation-", dir=CACHE if CACHE.is_dir() else None))
     survived: list[str] = []
     try:
-        for index, probe in enumerate(PROBES):
-            worktree = temporary / f"probe-{index}"
-            added = run("git", "worktree", "add", "--quiet", "--detach", str(worktree), "HEAD", cwd=ROOT)
-            if added.returncode != 0:
-                print(f"{probe.name}: setup failed")
-                return 2
+        worktree = temporary / "worktree"
+        target = temporary / "target"
+        added = run("git", "worktree", "add", "--quiet", "--detach", str(worktree), "HEAD", cwd=ROOT)
+        if added.returncode != 0:
+            print("mutation worktree setup failed")
+            return 2
+        for probe in PROBES:
             try:
                 path = worktree / probe.relative_path
                 source = path.read_text()
@@ -328,7 +490,6 @@ def main() -> int:
                     print(f"{probe.name}: mutation anchor drifted")
                     return 2
                 path.write_text(source.replace(probe.old, probe.new))
-                target = temporary / f"target-{index}"
                 compile_result = run(
                     "cargo",
                     "test",
@@ -355,9 +516,14 @@ def main() -> int:
                     print(result.stdout)
                     return 2
             finally:
-                run("git", "worktree", "remove", "--force", str(worktree), cwd=ROOT)
-        run("git", "worktree", "prune", cwd=ROOT)
+                path.write_text(source)
+        if run("git", "diff", "--quiet", "HEAD", "--", cwd=worktree).returncode != 0:
+            print("mutation worktree was not restored")
+            return 2
     finally:
+        if worktree.exists():
+            run("git", "worktree", "remove", "--force", str(worktree), cwd=ROOT)
+        run("git", "worktree", "prune", cwd=ROOT)
         shutil.rmtree(temporary, ignore_errors=True)
 
     if survived:
