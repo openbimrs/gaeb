@@ -2,6 +2,11 @@
 __pycache__/
 *.py[cod]
 
+# Scratch worktrees and disposable review/gate trees for this repo live here so
+# they sit beside the checkout instead of polluting ~/projects or /mnt/backup.
+# Never commit them; they are throwaway by construction.
+/worktrees/
+
 # Official GAEB reference payloads are downloaded locally. Their public
 # redistribution terms are not explicit enough to vendor them in this MIT repo.
 /references/schema/

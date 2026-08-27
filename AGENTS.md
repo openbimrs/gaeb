@@ -11,6 +11,33 @@ This is the canonical standalone repository for OpenBIM.rs GAEB support.
 - `docs/` — architecture and format support documentation.
 - `references/` — provenance plus locally downloaded official corpus.
 - `scripts/` — authoritative gate and corpus-fetch tooling.
+- `worktrees/` — gitignored scratch area for disposable worktrees and review
+  trees (see "Scratch worktrees" below). Never committed.
+
+## Scratch worktrees
+
+Disposable worktrees, immutable-review trees, and fresh-clone gate runs belong
+under `worktrees/` inside this checkout — **not** in `~/projects/` (which is
+reserved for real concerns per the root `HERMES.md`) and not scattered across
+`/mnt/backup/` with `mktemp` suffixes.
+
+```bash
+# from the repo root
+git worktree add --detach worktrees/review-<short-sha> <commit>
+# ... run gates, mutations, packaging checks ...
+git worktree remove worktrees/review-<short-sha>
+```
+
+Rules:
+
+- Name them `worktrees/<purpose>-<short-sha>` so an abandoned tree is
+  self-identifying.
+- Point `CARGO_TARGET_DIR` at `/mnt/backup/build-cache/` — build artifacts are
+  large and must not live inside the checkout.
+- Remove with `git worktree remove` (falls back to `git worktree prune`), so the
+  parent repo's worktree registry never accumulates stale entries.
+- Before deleting any scratch tree, confirm `git status --porcelain` is empty;
+  if not, snapshot it to a `refs/wip/*` ref first rather than discarding it.
 
 ## Invariants
 
