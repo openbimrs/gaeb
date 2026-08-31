@@ -30,3 +30,10 @@ confirmed redistribution license and an explicit repository decision.
 
 Run `./scripts/gate.sh` and `./scripts/mutation-probes.py`. Keep commits focused
 and include the commands that prove the changed behavior.
+
+## Licensing contributions
+
+Unless an explicitly signed agreement says otherwise, every contribution
+submitted to this repository is licensed under `AGPL-3.0-or-later`. Submit only
+work that you have the right to license. Identify third-party material and
+preserve its license, attribution, and provenance.

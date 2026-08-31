@@ -4,14 +4,14 @@ version = "0.1.3"
 edition = "2021"
 rust-version = "1.85"
 publish = false
-license = "MIT"
+license = "AGPL-3.0-or-later"
 authors = ["point-grey"]
 repository = "https://github.com/openbimrs/gaeb"
 readme = "README.md"
 description = "Pure-Rust GAEB DA XML reading, inspection, and lossless editing."
 keywords = ["gaeb", "bim", "openbim", "construction", "xml"]
 categories = ["parser-implementations", "data-structures"]
-include = ["src/**", "tests/**", "examples/**", "build.rs", "support-matrix.csv", "schema-support-matrix.json", "Cargo.toml", "README.md", "LICENSE"]
+include = ["src/**", "tests/**", "examples/**", "build.rs", "support-matrix.csv", "schema-support-matrix.json", "Cargo.toml", "README.md", "LICENSE", "LICENSES/MIT.txt"]
 
 [dependencies]
 iri-string = { version = "0.7", default-features = false }

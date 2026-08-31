@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 EXPECTED = {
     "openbim-gaeb": [
         ".cargo_vcs_info.json", "Cargo.lock", "Cargo.toml", "Cargo.toml.orig",
-        "LICENSE", "README.md", "build.rs", "examples/inspect.rs",
+        "LICENSE", "LICENSES/MIT.txt", "README.md", "build.rs", "examples/inspect.rs",
         "schema-support-matrix.json", "src/business/decimal.rs",
         "src/business/mod.rs", "src/business/pair.rs", "src/business/single.rs",
         "src/business/tree.rs", "src/diagnostic.rs", "src/document.rs",
@@ -26,11 +26,11 @@ EXPECTED = {
     ],
     "openbim-gaeb-bindings": [
         ".cargo_vcs_info.json", "Cargo.lock", "Cargo.toml", "Cargo.toml.orig",
-        "LICENSE", "README.md", "src/generated/v3_1_2007_11.rs", "src/lib.rs",
+        "LICENSE", "LICENSES/MIT.txt", "README.md", "src/generated/v3_1_2007_11.rs", "src/lib.rs",
     ],
     "gaeb": [
         ".cargo_vcs_info.json", "Cargo.lock", "Cargo.toml", "Cargo.toml.orig",
-        "LICENSE", "README.md", "src/lib.rs",
+        "LICENSE", "LICENSES/MIT.txt", "README.md", "src/lib.rs",
     ],
 }
 

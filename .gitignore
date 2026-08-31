@@ -8,6 +8,6 @@ __pycache__/
 /worktrees/
 
 # Official GAEB reference payloads are downloaded locally. Their public
-# redistribution terms are not explicit enough to vendor them in this MIT repo.
+# redistribution terms are not explicit enough to vendor them in this AGPL-3.0-or-later repo.
 /references/schema/
 /references/examples/

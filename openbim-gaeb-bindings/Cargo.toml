@@ -4,13 +4,13 @@ version = "0.1.0"
 edition = "2021"
 rust-version = "1.85"
 publish = false
-license = "MIT"
+license = "AGPL-3.0-or-later"
 authors = ["point-grey"]
 repository = "https://github.com/openbimrs/gaeb"
 description = "Opt-in generated typed bindings for fixture-proven GAEB DA XML profiles."
 keywords = ["gaeb", "bim", "openbim", "xml"]
 categories = ["parser-implementations", "data-structures"]
-include = ["src/**", "Cargo.toml", "README.md", "LICENSE"]
+include = ["src/**", "Cargo.toml", "README.md", "LICENSE", "LICENSES/MIT.txt"]
 
 [dependencies]
 openbim-gaeb = { version = "0.1.3", path = "../openbim-gaeb" }

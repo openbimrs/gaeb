@@ -16,4 +16,4 @@ assert_eq!(document.metadata().phase.unwrap().as_code(), "83");
 
 ## License
 
-MIT
+AGPL-3.0-or-later

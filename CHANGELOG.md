@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Relicensed repository-authored work from MIT to `AGPL-3.0-or-later`; historical releases remain under their published MIT terms, and third-party material retains its own terms.
 - Disable publication of all three packages while the required `xsd-schema`
   implementation remains an immutable Git dependency; extracted package checks
   continue to patch and compile that exact revision.

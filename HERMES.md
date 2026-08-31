@@ -15,7 +15,7 @@ success from command exit codes.
 
 ## Project conventions
 
-- Rust 2021, MSRV 1.85, MIT.
+- Rust 2021, MSRV 1.85, AGPL-3.0-or-later.
 - Pure Rust and `#![forbid(unsafe_code)]`.
 - Use dedicated upstream XML/ZIP libraries rather than a project-owned generic
   codec abstraction. XML mechanics use `quick-xml` directly; BOM/content

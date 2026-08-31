@@ -90,7 +90,7 @@ See [`docs/architecture.md`](docs/architecture.md).
 
 Official GAEB schemas and examples are useful verification oracles, but their
 public redistribution license is not explicit. They are therefore downloaded
-locally and checksum-verified rather than committed to this MIT repository:
+locally and checksum-verified rather than committed to this AGPL-3.0-or-later repository:
 
 ```bash
 ./scripts/fetch-official-references.py
@@ -119,4 +119,4 @@ quantity handling remain enforced; CI runs both.
 
 ## License
 
-MIT — see [`LICENSE`](LICENSE).
+AGPL-3.0-or-later — see [`LICENSE`](LICENSE).
