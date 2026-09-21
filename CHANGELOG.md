@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Relicensed repository-authored work from `AGPL-3.0-or-later` back to `MIT`.
+  No version was ever published under the AGPL — the relicense landed after
+  `0.1.2` and is reverted before any release carried it, so every published
+  version of `openbim-gaeb` and `gaeb` is MIT. `LICENSING.md` records the
+  version boundaries.
+
 ### Added
 
 - Add caller-provided GAEB XSD graph loading and real streaming instance

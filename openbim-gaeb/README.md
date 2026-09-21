@@ -90,4 +90,4 @@ The canonical repository is <https://github.com/openbimrs/gaeb>.
 
 ## License
 
-AGPL-3.0-or-later
+MIT
