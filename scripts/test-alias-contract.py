@@ -146,7 +146,7 @@ try:
     reject("package-edition", lambda: assert_true(alias_package()["edition"] == "2018", "edition mutation inactive"))
 
     text = MANIFEST.read_text()
-    marker = 'rust-version = "1.85"\n'
+    marker = 'rust-version = "1.99"\n'
     assert_true(text.count(marker) == 1, "rust-version marker is not unique")
     MANIFEST.write_text(text.replace(marker, ""))
     reject("package-rust-version", lambda: assert_true(alias_package()["rust_version"] is None, "rust-version mutation inactive"))

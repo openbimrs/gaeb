@@ -9,7 +9,7 @@ cd gaeb
 ./scripts/mutation-probes.py
 ```
 
-Use Rust 1.85 or newer. Keep the workspace independently buildable from
+Use Rust 1.99 or newer. Keep the workspace independently buildable from
 `openbimrs/openbim`.
 
 ## Capability changes

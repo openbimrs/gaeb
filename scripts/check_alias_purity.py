@@ -103,8 +103,8 @@ if alias["version"] != version:
     fail(f"alias version must match canonical version {version}")
 if alias.get("edition") != "2021":
     fail("alias package edition must be 2021")
-if alias.get("rust_version") != "1.85":
-    fail("alias package rust-version must be 1.85")
+if alias.get("rust_version") != "1.99":
+    fail("alias package rust-version must be 1.99")
 if alias.get("publish") != []:
     fail("alias package publishing must remain disabled while canonical dependencies are Git-pinned")
 if alias.get("features"):

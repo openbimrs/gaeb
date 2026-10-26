@@ -1,6 +1,9 @@
 //! Opt-in generated GAEB bindings for fixture-proven profiles.
 
 #![forbid(unsafe_code)]
+// rustdoc evaluates auto traits over the recursive generated types; the default
+// limit overflows on Rust 1.99.
+#![recursion_limit = "256"]
 #![allow(dead_code, unused_mut, unused_variables)]
 
 use openbim_gaeb::{support, Document};

@@ -40,7 +40,7 @@ The checked-in artifact deliberately differs from raw generator output in two lo
 1. the serializer writes the expanded XML attribute as `xml:space`, matching what its generated deserializer accepts and what the official XSD requires;
 2. XSD decimal aliases use the local `ExactDecimal` wrapper over `rust_decimal::Decimal`, not binary `f64`. The wrapper implements the generated runtime's byte serialization/deserialization contracts without losing commercial decimal values.
 
-These corrections are executable release requirements. After Rust 1.85 formatting,
+These corrections are executable release requirements. After Rust 1.99 formatting,
 the checked-in corrected artifact SHA-256 is
 `6d12926d7dd0ce539bce25b831e803217acc593ee399b7a16e8977267dfe78ec`.
 

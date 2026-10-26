@@ -4,7 +4,7 @@
 [![openbim-gaeb](https://img.shields.io/crates/v/openbim-gaeb.svg)](https://crates.io/crates/openbim-gaeb)
 [![gaeb](https://img.shields.io/crates/v/gaeb.svg)](https://crates.io/crates/gaeb)
 [![docs.rs](https://docs.rs/openbim-gaeb/badge.svg)](https://docs.rs/openbim-gaeb)
-[![MSRV](https://img.shields.io/badge/MSRV-1.85-blue)](https://www.rust-lang.org)
+[![MSRV](https://img.shields.io/badge/MSRV-1.99-blue)](https://www.rust-lang.org)
 
 Pure-Rust, lossless tools for working with GAEB DA XML bills of quantities.
 
@@ -103,7 +103,7 @@ The pinned URLs, archive hashes, and extracted-file hashes are recorded in
 
 ## Development
 
-Requires Rust `1.85` or newer.
+Requires Rust `1.99` or newer.
 
 ```bash
 ./scripts/gate.sh

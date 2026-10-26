@@ -55,8 +55,8 @@ Pair validation first requires matching declared version and version date, match
 Focused suites:
 
 ```sh
-cargo +1.85.0 test -p openbim-gaeb --test business_validation
-cargo +1.85.0 test -p openbim-gaeb --test business_rule_pairs
+cargo +1.99.1 test -p openbim-gaeb --test business_validation
+cargo +1.99.1 test -p openbim-gaeb --test business_rule_pairs
 ```
 
 Coverage includes:

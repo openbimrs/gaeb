@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Raise MSRV to Rust 1.99.
 - Relicensed repository-authored work from `AGPL-3.0-or-later` back to `MIT`.
   No version was ever published under the AGPL — the relicense landed after
   `0.1.2` and is reverted before any release carried it, so every published
